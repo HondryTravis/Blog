@@ -32,6 +32,13 @@ module.exports = {
     sidebar:{
       '/blog/':[
         {
+          title: 'python 安装以及使用',
+          collapsable: false,
+          children:[
+            'python爬虫'
+          ]
+        },
+        {
           title: 'nginx 安装以及使用',
           collapsable: false,
           children:[
