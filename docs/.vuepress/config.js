@@ -32,6 +32,13 @@ module.exports = {
     sidebar:{
       '/blog/':[
         {
+          title: 'nginx 安装以及使用',
+          collapsable: false,
+          children:[
+            'nginx'
+          ]
+        },
+        {
           title: '数据库知识',
           collapsable: false,
           children:[
