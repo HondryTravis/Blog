@@ -1,9 +1,9 @@
 {
   "name": "hondrytravis-blog",
   "version": "1.0.0",
-  "description": "",
+  "description": "blog",
   "directories": {
-    "doc": "doc"
+    "docs": "docs"
   },
   "scripts": {
     "docs:dev": "vuepress dev docs",
@@ -15,7 +15,7 @@
     "url": "git+https://github.com/HondryTravis/HondryTravis.github.io.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "travis",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/HondryTravis/HondryTravis.github.io/issues"
