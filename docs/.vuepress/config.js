@@ -32,10 +32,20 @@ module.exports = {
     sidebar:{
       '/blog/':[
         {
-          title: 'nvm 常用命令',
+          title: '数据库知识',
           collapsable: false,
           children:[
-            'nvm'
+            'mysql'
+          ]
+        },
+        {
+          title: '常用工具，命令行必备',
+          collapsable: false,
+          children:[
+            'nvm',
+            'nrm',
+            'mac',
+            'brew'
           ]
         }
       ],
