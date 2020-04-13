@@ -2,7 +2,7 @@ module.exports = {
   title: 'travis的开发日志',
   description: '只要开始，永远不晚',
   themeConfig: {
-    repo: 'HondryTravis/HondryTravis.github.io',
+    repo: 'HondryTravis/Blog',
     nav: [
       { 
         text: '博客', 
@@ -25,7 +25,8 @@ module.exports = {
             ]
           }
         ]
-      }
+      },
+
       
     ],
     sidebar:{
