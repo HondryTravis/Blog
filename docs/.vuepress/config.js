@@ -1,7 +1,8 @@
 module.exports = {
-  title: 'travis的开发日志',
+  title: '笔记(travis)',
   description: '只要开始，永远不晚',
   themeConfig: {
+    sidebarDepth: 2,
     repo: 'HondryTravis/Blog',
     nav: [
       { 
@@ -13,15 +14,21 @@ module.exports = {
         ariaLabel: '菜单',
         items: [
           {
-            text: '关于我',
+            text: '开源贡献',
             items: [
-              {text: '联系方式', link: '/work/'}
+              {text: '快速浏览', link: '/open_source/'}
             ]
           },
           {
             text: '学习相关',
             items: [
               {text: '阅读', link: '/books/'}
+            ]
+          },
+          {
+            text: '关于我',
+            items: [
+              {text: '联系方式', link: '/work/'}
             ]
           }
         ]
@@ -63,10 +70,34 @@ module.exports = {
           ]
         }
       ],
+      '/open_source/':[
+        {
+          title: 'TinyDB',
+          collapsable: false,
+          children:[
+            'indexeddb',
+            'tinydb_docapi'
+          ]
+        },
+        {
+          title: 'Simple-dark',
+          collapsable: false,
+          children:[
+            'Simple-dark'
+          ]
+        },
+        {
+          title: 'tscli',
+          collapsable: false,
+          children:[
+            'tscli'
+          ]
+        }
+      ],
     },
     docsDir: 'docs',
     editLinks: true,
-    editLinkText: '源码地址',
+    editLinkText: '在 Github 上编辑',
     lastUpdated: '更新时间',
   }
 }
