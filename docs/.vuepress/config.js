@@ -1,6 +1,9 @@
 module.exports = {
   title: '笔记(travis)',
   description: '只要开始，永远不晚',
+  markdown: {
+    lineNumbers: true
+  },
   themeConfig: {
     sidebarDepth: 2,
     repo: 'HondryTravis/Blog',
