@@ -6,11 +6,16 @@ module.exports = {
   },
   themeConfig: {
     sidebarDepth: 2,
+    smoothScroll: true,
     repo: 'HondryTravis/Blog',
     nav: [
       { 
         text: '博客', 
         link: '/blog/' 
+      },
+      { 
+        text: '算法', 
+        link: '/algorithm/' 
       },
       {
         text: '了解更多',
@@ -72,6 +77,23 @@ module.exports = {
             'brew'
           ]
         }
+      ],
+      '/algorithm/':[
+        {
+          title: '数组',
+          collapsable: false,
+          children:[
+            'array_count',
+            'array_bisection_method'
+          ]
+        },
+        {
+          title: '趣味算法',
+          collapsable: false,
+          children:[
+            'other_cards'
+          ]
+        },
       ],
       '/open_source/':[
         {
