@@ -10,6 +10,8 @@ mac 端的管理工具
 
 [brew 详细安装教程,以及修改源](https://www.jianshu.com/p/6523d3eee50d)
 
+如果速度过慢请参考[brew 安装过慢](https://blog.csdn.net/DiyHzp/article/details/90763558)
+
 ## 常用命令
 
 ```bash
