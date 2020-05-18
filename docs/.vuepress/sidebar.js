@@ -52,7 +52,8 @@ module.exports = {
       title: '趣味算法',
       collapsable: false,
       children:[
-        'other_cards'
+        'other_cards',
+        'range_of_motion'
       ]
     },
   ],
