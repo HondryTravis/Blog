@@ -12,7 +12,7 @@
 题目提到了数字的数位之和，这个利用取余运算即可，并将其单独封装函数。代码如下：
 
 ```js
-function bltSum(n) {
+function bitSum(n) {
   let res = 0;
   while (n) {
     res = res + (n % 10);
@@ -56,7 +56,7 @@ var movingCount = function(m, n, k) {
     const [x，y] = queue.shift();
     // (x, y)的数位之和不符合要求
     //题目要求节点每次只能走1格, 所以无法从当前坐标继续出发
-    if (bitSum(x) + bltSum(y) > k) {
+    if (bitSum(x) + bitSum(y) > k) {
       continue;
     }
 
@@ -104,7 +104,7 @@ var movingCount = function(m, n, k) {
 
 function dfs(x, y) {
   visited[`${x}-${y}`] = true;
-  if (bltSum(x) + bitSum(y) > k) {
+  if (bitSum(x) + bitSum(y) > k) {
     return;
   }
   ++res
