@@ -7,6 +7,10 @@ module.exports = {
   markdown: {
     lineNumbers: true
   },
+  extraWatchFiles: [
+    '.vuepress/nav.js', 
+    '.vuepress/sidebar.js'
+  ],
   themeConfig: {
     sidebarDepth: 2,
     smoothScroll: true,

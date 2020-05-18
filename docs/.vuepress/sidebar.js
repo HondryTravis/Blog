@@ -42,6 +42,13 @@ module.exports = {
       ]
     },
     {
+      title: '字符串',
+      collapsable: false,
+      children:[
+        'string_slide'
+      ]
+    },
+    {
       title: '趣味算法',
       collapsable: false,
       children:[
