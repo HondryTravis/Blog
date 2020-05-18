@@ -19,7 +19,7 @@ module.exports = {
     sidebar,
     docsDir: 'docs',
     editLinks: true,
-    editLinkText: '在 Github 上编辑',
+    editLinkText: '在 Github 上编辑此页',
     lastUpdated: '更新时间',
   }
 }
