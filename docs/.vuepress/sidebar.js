@@ -38,7 +38,8 @@ module.exports = {
       collapsable: false,
       children:[
         'array_count',
-        'array_bisection_method'
+        'array_bisection_method',
+        'array_find_min_number'
       ]
     },
     {
@@ -52,7 +53,8 @@ module.exports = {
       title: '栈、队列、链表',
       collapsable: false,
       children:[
-        'queue'
+        'queue',
+        'linked_list'
       ]
     },
     {
