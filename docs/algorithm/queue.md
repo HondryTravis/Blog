@@ -20,6 +20,7 @@ function queue() {
     this.outStack = []
 }
 queue.prototype = {
+  constructor: queue,
   push: function(v) {
     this.inStack.push(v)
   },
