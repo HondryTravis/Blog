@@ -49,6 +49,13 @@ module.exports = {
       ]
     },
     {
+      title: '栈、队列、链表',
+      collapsable: false,
+      children:[
+        'queue'
+      ]
+    },
+    {
       title: '趣味算法',
       collapsable: false,
       children:[
