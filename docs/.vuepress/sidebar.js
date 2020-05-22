@@ -56,7 +56,8 @@ const algorithm = [
     collapsable: false,
     children: [
       'sort/queue',
-      'sort/linked_list'
+      'sort/linked_list',
+      'linked_list/find_key'
     ]
   },
   {
