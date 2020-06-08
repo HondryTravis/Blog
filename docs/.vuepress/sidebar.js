@@ -1,6 +1,13 @@
 // blog
 const blog = [
   {
+    title: 'linux',
+    collapsable: false,
+    children: [
+      'linux/linux'
+    ]
+  },
+  {
     title: 'python',
     collapsable: false,
     children: [
