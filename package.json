@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/HondryTravis/HondryTravis.github.io#readme",
   "devDependencies": {
-    "vuepress": "^1.4.0"
+    "vuepress": "^1.5.0"
   }
 }
