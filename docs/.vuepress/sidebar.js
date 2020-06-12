@@ -1,6 +1,13 @@
 // blog
 const blog = [
   {
+    title: 'Java(Type)Script',
+    collapsable: false,
+    children: [
+      'java(type)script/recursive_optimization'
+    ]
+  },
+  {
     title: 'linux',
     collapsable: false,
     children: [
