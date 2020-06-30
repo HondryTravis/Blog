@@ -1,10 +1,16 @@
 // blog
 const blog = [
   {
-    title: 'Java(Type)Script',
+    title: 'TypeScript',
     collapsable: false,
     children: [
       'java(type)script/recursive_optimization'
+    ]
+  },{
+    title: 'HTTP',
+    collapsable: false,
+    children: [
+      'http/http_1'
     ]
   },
   {

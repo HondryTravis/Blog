@@ -31,7 +31,7 @@ Linux，全称GNU/Linux，是一套免费使用和自由传播的类UNIX操作�
 * 查看文件由哪个软件包提供： dpkg -S filename
 * 另外 dpkg还有 dselect和aptitude 两个frontend
 
-apt
+### apt
 
 * 安装： apt-get install packs
 * 更新源：apt-get update
@@ -54,7 +54,7 @@ apt
 * 安装软件包源码的同时， 安装其编译环境 ：apt-get build-dep packagename (有deb-src源)
 * 如何将本地光盘加入安装源列表： apt-cdrom add
 
-系统命令
+### 系统命令
 
 * 查看内核版本：uname -a
 * 查看ubuntu 版本：cat /etc/issue
@@ -69,7 +69,7 @@ apt
 * 杀掉进程：kill pid
 * 强制杀掉：killall -9 processname
 
-网络相关
+### 网络相关
 
 * 配置 ADSL： sudo pppoeconf
 * ADSL手工拨号： sudo pon dsl-provider
@@ -89,7 +89,7 @@ apt
 * 查找某个文件： whereis filename 或 find 目录 -name 文件名
 * 通过ssh传输文件
 
-压缩
+### 压缩
 
 * 解压缩 a、tar、gz： tar zxvf a、tar、gz
 * 解压缩 a、tar、bz2： tar jxvf a、tar、bz2
@@ -98,7 +98,7 @@ apt
 
 Nautilus
 
-特殊 URI 地址
+### 特殊 URI 地址
 
 * computer：/// - 全部挂载的设备和网络
 * network：/// - 浏览可用的网络
@@ -112,7 +112,7 @@ Nautilus
 * fonts：/// - 字体文件夹，可将字体文件拖到此处以完成安装
 * themes：/// - 系统主题文件夹
 
-补充部分
+### 补充部分
 
 * 查看本地所有的tpc，udp监听端口： netstat -tupln (t=tcp， u=udp， p=program， l=listen， n=numric)
 * 通过man搜说相关命令： man -k keyword 、 eg： man -k user
@@ -131,13 +131,13 @@ Nautilus
 * 快速重启X服务： 同时按下： Alt + Ctrl + Backspace 三个键、
 * 打开"运行"窗口： 同时按下 Alt + F2 键
 
-截屏
+### 截屏
 
 * 全屏：直接按下 PrtScr 键
 * 当前窗口：同时按下 Alt + PrtScr 键
 * 延时截屏：在 终端 或 "运行"窗口中输入命令： gnome-screenshot --delay 3 ，将延时 3 秒后截屏、
 
-ulimit
+### ulimit
 
 * ulimit：显示（或设置）用户可以使用的资源的限制（limit），这限制分为软限制（当前限制）和硬限制（上限），其中硬限制是软限制的上限值，应用程序在运行过程中使用的系统资源不超过相应的软限制，任何的超越都导致进程的终止
 * ulimited 不限制用户可以使用的资源，但本设置对可打开的最大文件数（max open files）和可同时运行的最大进程数（max user processes）无效
