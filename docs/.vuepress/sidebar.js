@@ -15,21 +15,21 @@ const blog = [
     ]
   },
   {
-    title: 'linux',
+    title: 'Linux',
     collapsable: false,
     children: [
       'linux/linux'
     ]
   },
   {
-    title: 'python',
+    title: 'Python',
     collapsable: false,
     children: [
       'python/python爬虫'
     ]
   },
   {
-    title: 'nginx',
+    title: 'Nginx',
     collapsable: false,
     children: [
       'nginx/nginx'
