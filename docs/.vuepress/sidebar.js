@@ -4,7 +4,8 @@ const blog = [
     title: 'TypeScript',
     collapsable: false,
     children: [
-      'java(type)script/recursive_optimization'
+      'typescript/recursive_optimization',
+      'typescript/functional_programming.md'
     ]
   },{
     title: 'HTTP',
