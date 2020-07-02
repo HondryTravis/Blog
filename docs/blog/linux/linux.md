@@ -2,158 +2,389 @@
 
 Linux，全称GNU/Linux，是一套免费使用和自由传播的类UNIX操作系统，其内核由林纳斯·本纳第克特·托瓦兹于1991年第一次释出，它主要受到Minix和Unix思想的启发，是一个基于POSIX和Unix的多用户、多任务、支持多线程和多CPU的操作系统。它能运行主要的Unix工具软件、应用程序和网络协议。它支持32位和64位硬件。Linux继承了Unix以网络为核心的设计思想，是一个性能稳定的多用户网络操作系统。Linux有上百种不同的发行版，如基于社区开发的debian、archlinux，和基于商业开发的Red Hat Enterprise Linux、SUSE、oracle linux等
 
-## 常用命令和技巧
+## 体系架构
 
-### 通用命令
+### 简要结构图
 
-1. date ：打印或者设置系统的日期和时间
-2. stty -a：可以查看或者打印控制字符(Ctrl-C、Ctrl-D、 Ctrl-Z等)
-3. passwd：用passwd -h查看
-4. logout，login： 登录shell的登录和注销命令
-5. more， less， head tail： 显示或部分显示文件内容
-6. lp/lpstat/cancel， lpr/lpq/lprm： 打印文件
-7. chmod u+x：更改文件权限
-8. rm -fr dir：删除非空目录
-9. cp -R dir：拷贝目录
-10. fg jobid ：可以将一个后台进程放到前台
-11. kill 的作用： send a signal to a process、 eg： `kill -9` 发送的是SIG_KILL信号，具体发送什么信号 可以通过 `man kill` 查看
-12. ps 的用法， `ps -e` 或 `ps -o pid,ppid,session,tpgid,comm` (其中session显示的sessionid， tpgid显示前台进程组id， comm显示命令名称)
+![linux](/linux/linux.png)
 
-## ubuntu常用命令
+### 完整结构图
 
-### dpkg： package manager for Debian
+![linux](/linux/linux_1.png)
 
-* 安装： dpkg -i package
-* 卸载： dpkg -r package
-* 卸载并删除配置文件： dpkg -P |--purge package
-* 如果安装一个包时、说依赖某些库、 可以先 apt-get install somelib
-* 查看软件包安装内容 ：dpkg -L package
-* 查看文件由哪个软件包提供： dpkg -S filename
-* 另外 dpkg还有 dselect和aptitude 两个frontend
+### 系统体系结构图
 
-### apt
+![linux](/linux/linux_system.png)
 
-* 安装： apt-get install packs
-* 更新源：apt-get update
-* 升级系统：apt-get upgrade
-* 智能升级、安装新软件包，删除废弃的软件包：apt-get dist-upgrade
-* f --fix broken 修复依赖：apt-get -f install
-* 自动删除无用的软件：apt-get autoremove
-* 删除软件：apt-get remove packages
-* 删除包并清除配置文件：apt-get remove package --purge
-* 清除所以删除包的残余配置文件： dpkg -l |grep ^rc|awk '{print $2}' |tr ["/n"] [" "]|sudo xargs dpkg -P
-* 安装软件时候包的临时存放目录 ： /var/cache/apt/archives
-* 清除该目录： apt-get clean
-* 清除该目录的旧版本的软件缓存： apt-get autoclean
-* 查询软件some的依赖包： apt-cache depends some
-* 查询软件some被哪些包依赖： apt-get rdepends some
-* 搜索软件： apt-cache search name|regexp
-* 查看软件包的作用：apt-cache show package
-* 查看一个软件的编译依赖库： apt-cache showsrc packagename|grep Build-Depends
-* 下载软件的源代码 ： apt-get source packagename (注： sources、list 中应该有 deb-src 源)
-* 安装软件包源码的同时， 安装其编译环境 ：apt-get build-dep packagename (有deb-src源)
-* 如何将本地光盘加入安装源列表： apt-cdrom add
+## 常见目录含义
 
-### 系统命令
+| 目录 | 概述 |
+|:-:|:-|
+| /bin | 存放⼆进制可执⾏⽂件(ls,cat,mkdir等)，常⽤命令⼀般都在这⾥。|
+| /etc | 存放系统管理和配置⽂件 |
+| /home | 存放所有⽤户⽂件的根⽬录，是⽤户主⽬录的基点，⽐如⽤户user的主⽬录就是/home/user，可以⽤~user表示|
+| /usr | ⽤于存放系统应⽤程序，⽐较重要的⽬录/usr/local 本地系统管理员软件安装⽬录（安装系统级的应⽤）。这是最庞⼤的⽬录，要⽤到的应⽤程序和⽂件⼏乎都在这个⽬录。/usr/x11r6 存放x window的⽬录/usr/bin 众多的应⽤程序/usr/sbin超级⽤户的⼀些管理程序/usr/doc linux⽂档/usr/include linux下开发和编译应⽤程序所需要的头⽂件/usr/lib 常⽤的动态链接库和软件包的配置⽂件/usr/man 帮助⽂档/usr/src 源代码，linux内核的源代码就放在/usr/src/linux⾥/usr/local/bin本地增加的命令/usr/local/lib 本地增加的库
+| /opt | 额外安装的可选应⽤程序包所放置的位置。⼀般情况下，我们可以把tomcat等都安装到这⾥。|
+| /proc | 虚拟⽂件系统⽬录，是系统内存的映射。可直接访问这个⽬录来获取系统信息。|
+| /root | 超级⽤户（系统管理员）的主⽬录（特权阶级^o^）|
+| /sbin | 存放⼆进制可执⾏⽂件，只有root才能访问。这⾥存放的是系统管理员使⽤的系统级别的管理命令和程序。如ifconfig等。|
+| /dev |  ⽤于存放设备⽂件。|
+| /mnt | 系统管理员安装临时⽂件系统的安装点，系统提供这个⽬录是让⽤户临时挂载其他的⽂件系统。|
+| /boot | 存放⽤于系统引导时使⽤的各种⽂件 |
+| /lib | 存放跟⽂件系统中的程序运⾏所需要的共享库及内核模块。共享库⼜叫动态链接共享库，作⽤类似windows⾥的.dll⽂件，存放了根⽂件系统程序运⾏所需的共享⽂件。 |
+| /tmp | ⽤于存放各种临时⽂件，是公⽤的临时⽂件存储点。|
+| /var | ⽤于存放运⾏时需要改变数据的⽂件，也是某些⼤⽂件的溢出区，⽐⽅说各种服务的⽇志⽂件（系统启动⽇志等。）等。|
+| /lost+found | 这个⽬录平时是空的，系统⾮正常关机⽽留下“⽆家可归”的⽂件（windows下叫什么.chk）就在这⾥ |
 
-* 查看内核版本：uname -a
-* 查看ubuntu 版本：cat /etc/issue
-* 查看网卡状态 ：ethtool eth0
-* 查看内存，cpu的信息：cat /proc/meminfo ; cat /proc/cpuinfo
-* 打印文件系统空间使用情况：df -h
-* 查看硬盘分区情况：fdisk
-* 产看文件大小：du -h filename;
-* 查看目录大小：du -hs dirname ; du -h dirname是查看目录下所有文件的大小
-* 查看内存的使用：free -m/-g/-k
-* 查看进程：ps -e 或ps -aux -->显示用户
-* 杀掉进程：kill pid
-* 强制杀掉：killall -9 processname
+## 通用命令
 
-### 网络相关
+### 认识终端
 
-* 配置 ADSL： sudo pppoeconf
-* ADSL手工拨号： sudo pon dsl-provider
-* 激活 ADSL ： sudo /etc/ppp/pppoe_on_boot
-* 断开 ADSL： sudo poff
-* 根据IP查网卡地址： arping IP地址
-* 产看本地网络信息（包括ip等）： ifconfig | ifconfig eth0
-* 查看路由信息： netstat -r
-* 关闭网卡： sudo ifconfig eth0 down
-* 启用网卡： sudo ifconfig eth0 up
-* 添加一个服务： sudo update-rc、d 服务名 defaults 99
-* 删除一个服务： sudo update-rc、d 服务名 remove
-* 临时重启一个服务： /etc/init、d/服务名 restart
-* 临时关闭一个服务： /etc/init、d/服务名 stop
-* 临时启动一个服务： /etc/init、d/服务名 start
-* 控制台下显示中文： sudo apt-get install zhcon
-* 查找某个文件： whereis filename 或 find 目录 -name 文件名
-* 通过ssh传输文件
+```sh
+  [root@travis ~]#
+```
 
-### 压缩
+| 名称 | 概述 |
+| :-: | :- |
+| root | 为当前登录用户 |
+| travis | 主机名 |
+| ~ | 当前⼯作⽬录,默认是当前⽤户的家⽬录，root就是/root,普通⽤户是 /home/⽤户名 |
+| #、$ | 提示符超级⽤户是 #,普通⽤户是$
 
-* 解压缩 a、tar、gz： tar zxvf a、tar、gz
-* 解压缩 a、tar、bz2： tar jxvf a、tar、bz2
-* 压缩aaa bbb目录为xxx、tar、gz： tar zcvf xxx、tar、gz aaa bbb
-* 压缩aaa bbb目录为xxx、tar、bz2： tar jcvf xxx、tar、bz2 aaa bbb
+### 一般命令格式
 
-Nautilus
+命令 [选项] [参数]
 
-### 特殊 URI 地址
+当有多个选项时，可以写在⼀起
 
-* computer：/// - 全部挂载的设备和网络
-* network：/// - 浏览可用的网络
-* burn：/// - 一个刻录 CDs/DVDs 的数据虚拟目录
-* smb：/// - 可用的 windows/samba 网络资源
-* x-nautilus-desktop：/// - 桌面项目和图标
-* file：/// - 本地文件
-* trash：/// - 本地回收站目录
-* ftp：// - FTP 文件夹
-* ssh：// - SSH 文件夹
-* fonts：/// - 字体文件夹，可将字体文件拖到此处以完成安装
-* themes：/// - 系统主题文件夹
+⼀般参数有简化和完整写法两种 -a 与 --all 等效
 
-### 补充部分
+### ls
 
-* 查看本地所有的tpc，udp监听端口： netstat -tupln (t=tcp， u=udp， p=program， l=listen， n=numric)
-* 通过man搜说相关命令： man -k keyword 、 eg： man -k user
-* 或者用 apropos
-* 统计文件所占用的实际磁盘空间： du (du - estimate file space usage)
-* 统计文件中的字符，字节数： wc -c/-l/-w (wc - print the number of newlines， words， and bytes in files)
-* 查看文件的内容： od -x/-c/ (od - dump files in octal and other formats)
-* 查看文件的 Ascii 码形式： od -t c filename (其中统计信息最左边的是： 字节数)
-* 查找命令所在文件的位置： which od 输出： /usr/bin/od
+查询⽬录中的内容
 
-  * 查看该文件由哪个包提供： dpkg -S /usr/bin/od 输出： coreutils： /usr/bin/od
-  * 再查看coreutils包的全部内容就知道了linux的核心命令： dpkg -L coreutils
+ls [选项] [⽂件或者⽬录]
 
-* 快速粘贴：先在一个地方选中文字，在欲粘贴的地方按鼠标 中键 即可、
-* 等效中键：a 、按下滑轮等效于中键、b、同时按下鼠标 左右键，等效于中键
-* 快速重启X服务： 同时按下： Alt + Ctrl + Backspace 三个键、
-* 打开"运行"窗口： 同时按下 Alt + F2 键
+选项
 
-### 截屏
+* -a 显示所有⽂件，包括隐藏⽂件
+* -l 显示详细信息
+* -d 查看⽬录本身的属性⽽⾮⼦⽂件 ls /etc/
+* -h ⼈性化的⽅式显示⽂件⼤⼩
+* -i 显示inode,也就是i节点
 
-* 全屏：直接按下 PrtScr 键
-* 当前窗口：同时按下 Alt + PrtScr 键
-* 延时截屏：在 终端 或 "运行"窗口中输入命令： gnome-screenshot --delay 3 ，将延时 3 秒后截屏、
+默认当前⽬录下的⽂件列表
 
-### ulimit
+-l 显示详细信息
 
-* ulimit：显示（或设置）用户可以使用的资源的限制（limit），这限制分为软限制（当前限制）和硬限制（上限），其中硬限制是软限制的上限值，应用程序在运行过程中使用的系统资源不超过相应的软限制，任何的超越都导致进程的终止
-* ulimited 不限制用户可以使用的资源，但本设置对可打开的最大文件数（max open files）和可同时运行的最大进程数（max user processes）无效
-  * -a 列出所有当前资源极限
-  * -c 设置core文件的最大值、单位：blocks*
-  * -d 设置一个进程的数据段的最大值、单位：kbytes*
-  * -f Shell 创建文件的文件大小的最大值，单位：blocks*
-  * -h 指定设置某个给定资源的硬极限、如果用户拥有 root 用户权限，可以增大硬极限、任何用户均可减少硬极限*
-  * -l 可以锁住的物理内存的最大值*
-  * -m 可以使用的常驻内存的最大值，单位：kbytes*
-  * -n 每个进程可以同时打开的最大文件数*
-  * -p 设置管道的最大值，单位为block，1block=512bytes*
-  * -s 指定堆栈的最大值：单位：kbytes*
-  * -S 指定为给定的资源设置软极限、软极限可增大到硬极限的值、如果 -H 和 -S 标志均未指定，极限适用于以上二者*
-  * -t 指定每个进程所使用的秒数，单位：seconds*
-  * -u 可以运行的最大并发进程数*
-  * -v Shell可使用的最大的虚拟内存，单位：kbytes*, eg： ulimit -c 1000(可以先通过ulimit -c 查看原来的值)
+```bash
+drwxr-xr-x . 1 root root 800 Sep 16 00:19 logs
+```
 
-systemctl disable lightdm 设置启动模式是字符还是图形
+| drwxr-xr-x | . | 1 | root | root | 800 | Sep 16 00:19 | logs |
+| :-: | :-: | :-: | :-: | :-: | :-: |:-: | :-: |
+| ⽂件类型和权限 | ACL 权限 | 硬链接引⽤计数 | 所有者 | 所属组 | 文件大小 | 最后修改时间 | 文件名 |
+
+#### ⽂件类型和权限
+
+`-rw-r--r--`
+
+* ⽂件类型 - ⽂件、d ⽬录、l 软链接⽂件
+* u(所有者)、g(所属组)、o(其他⼈)
+* r(read) 读取、w(write) 写⼊、x(execute) 执⾏
+
+## 文件处理命令
+
+### mkdir
+
+建⽴⽬录 mkdir
+
+* make directory
+
+* mkdir -p [⽬录名]
+  * -p 递归创建
+
+### cd
+
+切换所在⽬录 change directory
+
+* cd [⽬录]
+  * ~ 家⽬录
+  * 家⽬录
+  * -上次⽬录
+  * . 当前⽬录
+  * .. 上级⽬录
+* 相对路径是参照当前所在⽬录
+* 绝对路径是从根⽬录开始
+* 按TAB键可以补全命令和⽬录
+
+### pwd
+
+显示当前⽬录 pwd
+
+### rmdir
+
+删除目录 rmdir
+
+* 删除⽬录 remove empty directory
+* rmdir [⽬录名]
+
+### rm
+
+删除⽂件或者⽬录 remove
+
+* 删除⽂件或者⽬录 remove
+  * rm [⽂件或者⽬录]
+  * -r 删除⽬录
+  * -f 强制删除
+* rm -rf ⽂件或者⽬录] 递归强制删除所有⽬录
+
+### cp
+
+copy 复制命令
+
+* copy 复制命令
+* copy [源⽂件或者⽬录] [⽬标⽂件]
+  * -r 复制⽬录,默认是复制⽂件
+  * -p 连带⽂件属性复制
+  * -d 若源⽂件是链接⽂件，则复制连接属性
+  * -a 相当于 -rpd
+
+### mv
+
+* 移动⽂件或者改名 move
+* mv [源⽂件或者⽬录] [⽬标⽂件]
+
+### in
+
+链接命令,⽣成链接⽂件 link
+
+#### 硬连接特征
+
+* 拥有相同的i节点和存储block块，可以看作是同⼀个⽂件
+* 可以通过i节点访问
+* 不能跨分区
+* 不能针对⽬录使⽤
+* ⼀般不使⽤
+
+#### 软链接特征
+
+* ln -s [源⽂件] [⽬标⽂件]
+  * -s 创建软链接
+* 类似Windows快捷⽅式
+* 软链接拥有⾃⼰的i节点和Block块，但是数据块中只保存源⽂件的⽂件名和i节点号，并没有实际的⽂件数据
+* lrwxrwxrwx l 软链接 软链接的⽂件权限都是 777
+* 修改任意⼀个⽂件，另⼀个都会改变
+* 删除源⽂件，软链接不能使⽤
+* 软链接源⽂件必须写绝对路径
+
+## ⽂件搜索命令
+
+### locate
+
+* 在后台数据库中按⽂件名搜索，速度⽐较快
+* 数据保存在 /var/lib/mlocate 后台数据库，每天更新⼀次
+* 可以 updatedb 命令⽴刻更新数据库
+* 只能搜索⽂件名
+
+```bash
+/etc/updatedb.conf
+```
+
+建⽴索引的配置⽂件
+
+* PRUNE_BIND_MOUNTS = "yes" 全部⽣效，开启搜索限制
+* PRUNEFS 不搜索的⽂件系统
+* PRUNENAMES 忽略的⽂件类型
+* PRUNEPATHS 忽略的路径 /tmp
+
+### whereis
+
+* 搜索命令所在路径以及帮助⽂档所在位置
+* whereis 命令名
+
+```bash
+whereis ls
+```
+
+* -b 只查找可执⾏⽂件
+* -m 只查找帮助⽂件
+
+### which
+
+* 可以看到别名 `which ls`
+* 能看到的都是外部安装的命令
+* ⽆法查看Shell⾃带的命令，如 `which cd`
+
+### echo $PATH
+
+```bash
+/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+```
+
+* 定义的是系统搜索命令的路径
+* echo $PATH
+
+### find
+
+* ⽂件搜索命令
+* find [搜索范围] [搜索条件]
+
+#### 按名称搜索
+
+避免⼤范围的搜索，会⾮常消耗系统资源
+
+```bash
+find / -name aaa.log
+```
+
+#### 通配符
+
+* find是在系统当中搜索符合条件的⽂件名，如果需要匹配，使⽤通配符匹配，通配符是完全匹配
+* 通配符
+  * *匹配任意内容
+  * ? 匹配任意⼀个字符
+  * [] 匹配任意⼀个中括号内的字符
+
+```bash
+find . -name "ab[cdef]"
+```
+
+#### 不区分⼤⼩写 -i
+
+```bash
+find / -iname "ab[cdef]"
+```
+
+#### 按所有者进⾏搜索 -u
+
+```bash
+find /root -user root
+find /root -nouser
+```
+
+#### grep
+
+* 在⽂件当中匹配符合条件的字符串
+* grep "10" access.log
+  * -i 忽略⼤⼩写
+  * -v 排除指定字符串
+* find命令，在系统当中搜索符合条件的⽂件名，如果需要匹配，使⽤通配符匹配，通配符是完全匹配
+* grep命令 在⽂件当中搜索符合条件的字符串，如果需要匹配，使⽤正则表达式进⾏匹配，正则表达式时包含匹配
+
+## 压缩
+
+```bash
+.zip` `.gz` `.bz2` `.tar.gz` `.tar.bz2
+```
+
+### zip
+
+* 压缩⽂件 zip 压缩⽂件名 源⽂件
+* 压缩⽬录 zip -r 压缩⽂件名 源⽬录
+* 解压 unzip 压缩⽂件名
+
+```bash
+mkdir book
+touch book/1.txt
+touch book/2.txt
+zip -r book.zip book
+unzip book.zip
+```
+
+### gzip
+
+| 命令 | 示例 | 含义 |
+| :-: | :-: | :- |
+| gzip 源⽂件 | gzip a.txt | 压缩为.gz格式的压缩⽂件，源⽂件会消失 |
+| gzip -c 源⽂件 > 压缩⽂件 | gzip -c  yum.txt >yum.txt.gz | 压缩为.gz格式的压缩⽂件，源⽂件不会消失 |
+| gzip -r ⽬录 | gzip -r xx | 压缩⽬录下的所有⼦⽂件，但是不压缩⽬录 |
+| gzip -d 压缩⽂件名 | gzip -d yum.txt.gz  | 解压缩⽂件,不保留压缩包 |
+| gunzip 压缩⽂件 | gunzip yum.txt.gz | 解压缩⽂件,不保留压缩包 |
+
+* 压缩是压缩⽬录下的⽂件
+
+### bz2
+
+| 命令 | 示例 | 含义 |
+|:-:|:-:|:-|
+|bzip2 源⽂件 | bzip2 1.txt | 压缩为.bz2格式的⽂件，不保留源⽂件 |
+|bzip2 -k 源⽂件 | zip2 -k 1.txt | 压缩为.bz2格式的⽂件，保留源⽂件 |
+|bzip2 -d 压缩⽂件名 | bzip2 -d 1.txt.bz2 | 解压压缩包 |
+|bunzip2 压缩⽂件名 | bunzip2 1.txt.bz2 | 解压压缩包 |
+
+* bzip2 不能压缩⽬录
+
+### tar
+
+* 打包命令
+* tar -cvf 打包⽂件名 源⽂件
+  * -c 打包
+  * -v 显示过程
+  * -f 指定打包后的⽂件名
+
+```bash
+tar -cvf book.tar book
+gzip book.tar
+bzip2 book.tar
+```
+
+* x 解打包
+
+```bash
+tar -xvf book.tar
+```
+
+## 关机重启
+
+### w
+
+查看登录⽤户信息
+
+* USER 登录的⽤户名
+* TTY 登录的终端 tty1 本地终端 pts/0远程终端
+* FROM 登录的IP
+* LOGIN 登录时间
+* IDLE ⽤户闲置时间
+* JCPU 该终端所有进程占⽤的时间
+* PCPU 当前进程所占⽤的时间
+* WHAT 正在执⾏的命令
+
+### who
+
+查看登录⽤户信息
+
+* USER 登录的⽤户名
+* TTY 登录的终端 tty1 本地终端 pts/0远程终端
+* LOGIN 登录时间（登录的IP）
+
+### last
+
+查看当前登录和过去登录的⽤户信息 默认读取 /var/log/wtmp ⽂件
+
+* ⽤户名
+* 登录终端
+* 登录IP
+* 登录时间
+* 退出时间(在线时间)
+
+### lastlog
+
+查看所有⽤户的最后⼀次登录时间
+
+* ⽤户名
+* 登录终端
+* 登录IP
+* 最后⼀次登录时间
+
+## vi常用
+
+* :w 保存
+* :q 退出
+* :! 强制保存
+* :ls 列出所有的⽂件
+* :n 下⼀个
+* :N 上⼀个
+* :15 跳转到指定⾏
+* /xxx 从光标位置开始向后搜索 xxx 字符串
+* ?xxx 从光标位置开始向前搜索
