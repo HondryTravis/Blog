@@ -10,7 +10,8 @@ const blog = [
     title: 'HTTP',
     collapsable: false,
     children: [
-      'http/http_1'
+      'http/http_1',
+      'http/http_2'
     ]
   },
   {

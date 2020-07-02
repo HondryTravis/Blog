@@ -1,9 +1,4 @@
-# HTTP 1.0
-
-* 当我们输入网址后发生了什么
-* HTTP协议详解
-* Cookie与Session
-* HTTP缓存机制
+# HTTP 1.x
 
 ## HTTP 请求模型
 
