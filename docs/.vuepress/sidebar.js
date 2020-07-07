@@ -7,7 +7,15 @@ const blog = [
       'typescript/recursive_optimization',
       'typescript/functional_programming.md'
     ]
-  },{
+  },
+  {
+    title: 'Node',
+    collapsable: false,
+    children: [
+      'node/pm2',
+    ]
+  },
+  {
     title: 'HTTP',
     collapsable: false,
     children: [
@@ -19,7 +27,15 @@ const blog = [
     title: 'Linux',
     collapsable: false,
     children: [
-      'linux/linux'
+      'linux/linux',
+      'linux/linux_deploy'
+    ]
+  },
+  {
+    title: 'OS',
+    collapsable: false,
+    children: [
+      'os/os'
     ]
   },
   {
