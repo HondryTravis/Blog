@@ -4,12 +4,13 @@
 
 ## 博客会涉及, 陆续更新
 
-- type(java)script
+- typescript
+- HTTP 协议
 - NodeJS
 - deno
 - python(Django/flask/scrapy...)
 - c#
-- php 快速上手和实战(7)
+- php 快速上手和实战
 - webGL 深入浅出
 - three
 - nginx
