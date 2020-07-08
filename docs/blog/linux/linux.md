@@ -272,6 +272,30 @@ find /root -nouser
 * find命令，在系统当中搜索符合条件的⽂件名，如果需要匹配，使⽤通配符匹配，通配符是完全匹配
 * grep命令 在⽂件当中搜索符合条件的字符串，如果需要匹配，使⽤正则表达式进⾏匹配，正则表达式时包含匹配
 
+## 网络管理
+
+### ifconfig & ip
+
+查看和配置网络基本信息
+
+### tracerout
+
+排查网络故障
+
+### ss | netstat
+
+找到占用网络端口的进程
+
+```bash
+netstat -an | grep ':80'
+```
+
+### nslookup
+
+```bash
+nslookup www.baidu.com
+```
+
 ## 压缩
 
 ```bash

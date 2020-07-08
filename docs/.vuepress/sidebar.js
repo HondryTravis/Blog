@@ -12,6 +12,7 @@ const blog = [
     title: 'Node',
     collapsable: false,
     children: [
+      'node/node',
       'node/pm2'
     ]
   },

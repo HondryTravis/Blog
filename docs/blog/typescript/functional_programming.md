@@ -233,14 +233,245 @@ nothing(没有)、identity（照旧）、defaultTo(默许)、always（恒定）
 
 组合子变换 juxf
 
+### Of 方法
+
+你可能注意到了，上面生成新的函子的时候，用了 new 命令。这实在太不像函数式编程了，因为 new 命令是面向对象编程的标志。
+
+函数式编程一般约定，函子有一个 of 方法，用来生成新的容器。
+
+下面就用 of 方法替换掉 new。
+
+```js
+Functor.of = function(val) {
+  return new Functor(val);
+};
+```
+
+然后，前面的例子就可以改成下面这样。
+
+```js
+Functor.of(2).map(function(two) {
+  return two + 2;
+});
+// Functor(4)
+```
+
+这就更像函数式编程了。
+
+### Maybe 函子
+
+函子接受各种函数，处理容器内部的值。这里就有一个问题，容器内部的值可能是一个空值（比如 null），而外部函数未必有处理空值的机制，如果传入空值，很可能就会出错。
+
+Maybe 函子就是为了解决这一类问题而设计的。简单说，它的 map 方法里面设置了空值检查。
+
+```js
+class Maybe extends Functor {
+  constructor(value) {
+    super();
+    this.val = value;
+  }
+  isnothing() {
+    return !!!this.val;
+  }
+
+  map(f) {
+    if (this.isnothing()) {
+      // 如果没有值，不执行变形函数，直接返回一个新函子 null。
+      return Maybe.of(null);
+    } else {
+      return Maybe.of(f(this.val));
+    }
+  }
+}
+```
+
+### Either 函子
+
+条件运算 if...else 是最常见的运算之一，函数式编程里面，使用 Either 函子表达。
+
+Either 函子内部有两个值：左值（Left）和右值（Right）。右值是正常情况下使用的值，左值是右值不存在时使用的默认值。
+
+```js
+class Either extends Functor {
+  constructor(value) {
+    super();
+    this.val = value;
+  }
+  isnothing() {
+    return !!!this.val;
+  }
+  map(left, right) {
+    if (this.isnothing()) {
+      return Either.of(left(null));
+    } else {
+      return Either.of(right(this.val));
+    }
+  }
+}
+```
+
+### AP 函子
+
+函子里面包含的值，完全可能是函数。我们可以想象这样一种情况，一个函子的值是数值，另一个函子的值是函数。
+
+```js
+function addTwo(x) {
+  return x + 2;
+}
+
+const A = Functor.of(2);
+const B = Functor.of(addTwo);
+```
+
+上面代码中，函子 A 内部的值是 2，函子 B 内部的值是函数 addTwo。
+
+有时，我们想让函子 B 内部的函数，可以使用函子 A 内部的值进行运算。这时就需要用到 ap 函子。
+
+ap 是 applicative（应用）的缩写。凡是部署了 ap 方法的函子，就是 ap 函子。
+
+```js
+class Ap extends Functor {
+  constructor(value) {
+    super();
+    this.val = value;
+  }
+  ap(F) {
+    return Ap.of(this.val(F.val));
+  }
+}
+```
+
+注意，ap 方法的参数不是函数，而是另一个函子。
+
+因此，前面例子可以写成下面的形式。
+
+```js
+Ap.of(addTwo).ap(Functor.of(2));
+// Ap(4)
+```
+
+ap 函子的意义在于，对于那些多参数的函数，就可以从多个容器之中取值，**实现函子的链式操作**。
+
+```js
+function add(x) {
+  return function(y) {
+    return x + y;
+  };
+}
+
+Ap.of(add)
+  .ap(Maybe.of(2))
+  .ap(Maybe.of(3));
+// Ap(5)
+```
+
+上面代码中，函数 add 是柯里化以后的形式，一共需要两个参数。通过 ap 函子，我们就可以实现从两个容器之中取值。它还有另外一种写法。
+
+```js
+Ap.of(add(2)).ap(Maybe.of(3));
+```
+
+### Monad 函子
+
+函子是一个容器，可以包含任何值。函子之中再包含一个函子，也是完全合法的。但是，这样就会出现多层嵌套的函子。
+
+```js
+Maybe.of(Maybe.of(Maybe.of({ name: 'Mulburry', number: 8402 })));
+```
+
+上面这个函子，一共有三个 Maybe 嵌套。如果要取出内部的值，就要连续取三次 this.val。这当然很不方便，因此就出现了 Monad 函子。
+
+Monad 函子的作用是，总是返回一个单层的函子。它有一个 flatMap 方法，与 map 方法作用相同，唯一的区别是如果生成了一个嵌套函子，它会取出后者内部的值，保证返回的永远是一个单层的容器，不会出现嵌套的情况。
+
+```js
+class Monad extends Functor {
+  join() {
+    return this.val;
+  }
+  flatMap(f) {
+    return this.map(f).join();
+  }
+}
+```
+
+上面代码中，如果函数 f 返回的是一个函子，那么 this.map(f)就会生成一个嵌套的函子。所以，join 方法保证了 flatMap 方法总是返回一个单层的函子。这意味着嵌套的函子会被铺平（flatten）。
+
+### IO 函子
+
+Monad 函子的重要应用，就是实现 I/O （输入输出）操作。
+
+I/O 是不纯的操作，普通的函数式编程没法做，这时就需要把 IO 操作写成 Monad 函子，通过它来完成。
+
+```js
+var fs = require('fs');
+
+var readFile = function(filename) {
+  return new IO(function() {
+    return fs.readFileSync(filename, 'utf-8');
+  });
+};
+
+var print = function(x) {
+  return new IO(function() {
+    console.log(x);
+    return x;
+  });
+};
+```
+
+上面代码中，读取文件和打印本身都是不纯的操作，但是 readFile 和 print 却是纯函数，因为它们总是返回 IO 函子。
+
+如果 IO 函子是一个 Monad，具有 flatMap 方法，那么我们就可以像下面这样调用这两个函数。
+
+```js
+readFile('./user.txt').flatMap(print);
+```
+
+这就是神奇的地方，上面的代码完成了不纯的操作，但是因为 flatMap 返回的还是一个 IO 函子，所以这个表达式是纯的。我们通过一个纯的表达式，完成带有副作用的操作，这就是 Monad 的作用。
+
+由于返回还是 IO 函子，所以可以实现链式操作。因此，在大多数库里面，flatMap 方法被改名成 chain。
+
+```js
+var tail = function(x) {
+  return new IO(function() {
+    return x[x.length - 1];
+  });
+};
+
+readFile('./user.txt')
+  .flatMap(tail)
+  .flatMap(print);
+
+// 等同于
+readFile('./user.txt')
+  .chain(tail)
+  .chain(print);
+```
+
+上面代码读取了文件 user.txt，然后选取最后一行输出。
+
+## 总结
+
+- 面向过程编程：想到哪写到哪。
+- 函数式编程：提纯无关业务的纯函数，函数套函数产生神奇的效果。
+- 函数式编程里，同样的输入一定会有同样的输出，永远不依赖外部的状态。
+  - 纯函数可以记忆（同样的输入一定会有同样的输出），不跟外界有任何关系，抽象代码方便。
+- 函数式编程可以解决多线程死锁问题，在每一个函数式编程里面，根本不设计到外部的那个被几个线程争执的变量。
+- 函数式编程可以用来抽象业务逻辑，当系统里有很多可以复用，组合起来有更强大的功能的时候，可以考虑抽库，增加代码健壮性，方便单元测试。
+- 函数式编程会充盈着大量的闭包，闭包是 js 中常见的核心知识。
+- 函数柯里化：函数接收一堆参数，返回一个新函数，用来继续接收参数，处理业务逻辑。它可以记住参数，相当于是对参数的一种缓存。
+- 函数组合：是为了解决多个函数嵌套调用产生的洋葱式的代码。
+- 惰性函数：比较懒的函数，下一次就不想再求值了（将上一次的运行结果缓存起来了）。
+- 高阶函数：将函数传给函数，让函数具有更复杂的能力和功能。
+
 ## 流行函数式编程库<Badge type="tip" text="源码可读"/>
 
 - RxJS
-
 - cycleJS
-
-- lodash、lazy(惰性求值)
-
+- lodash
 - underscoreJS
-
 - ramdaJS
+
+## 参考链接
+
+[函数式编程入门教程](http://www.ruanyifeng.com/blog/2017/02/fp-tutorial.html)
