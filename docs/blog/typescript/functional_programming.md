@@ -232,3 +232,15 @@ nothing(没有)、identity（照旧）、defaultTo(默许)、always（恒定）
 - 其他
 
 组合子变换 juxf
+
+## 流行函数式编程库<Badge type="tip" text="源码可读"/>
+
+- RxJS
+
+- cycleJS
+
+- lodash、lazy(惰性求值)
+
+- underscoreJS
+
+- ramdaJS

@@ -22,4 +22,8 @@
 
 ### x-spreadsheet
 
-一个基于 web 的 excel 库，简单易于使用，易于快速开发，目前已经8k Star。[源码地址](https://github.com/myliang/x-spreadsheet)
+一个基于 web 的 excel 库，简单易于使用，易于快速开发，目前已经8k Star+。[源码地址](https://github.com/myliang/x-spreadsheet)
+
+### xs-docs
+
+基于已知的理解，为 x-spreadsheet 开源库写的文档库，简易上手教程，[查看](https://github.com/HondryTravis/xs-docs)

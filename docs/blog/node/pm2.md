@@ -4,12 +4,12 @@ PM2 是 node 进程管理工具，可以利用它来简化很多node应用管理
 
 [pm2 官网](https://pm2.io/)
 
-## Linux 创建进程的两种方式<Badge type="tip" text="了解即可"/>
+## 创建进程的两种方式<Badge type="tip" text="了解即可"/>
 
 1. fork
 2. exec
 
-## demo
+## 例子
 
 ```js
 // master

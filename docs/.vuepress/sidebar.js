@@ -12,7 +12,7 @@ const blog = [
     title: 'Node',
     collapsable: false,
     children: [
-      'node/pm2',
+      'node/pm2'
     ]
   },
   {
@@ -28,14 +28,15 @@ const blog = [
     collapsable: false,
     children: [
       'linux/linux',
-      'linux/linux_deploy'
+      'linux/linux_deploy',
+      'linux/linux_centos',
     ]
   },
   {
     title: 'OS',
     collapsable: false,
     children: [
-      'os/os'
+      'os/thread'
     ]
   },
   {
@@ -50,6 +51,13 @@ const blog = [
     collapsable: false,
     children: [
       'nginx/nginx'
+    ]
+  },
+  {
+    title: '项目工程化',
+    collapsable: false,
+    children: [
+      'engineering/ci_cd'
     ]
   },
   {
