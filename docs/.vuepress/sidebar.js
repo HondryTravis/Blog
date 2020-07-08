@@ -120,6 +120,13 @@ const algorithm = [
 // 开源相关
 const open_source = [
   {
+    title: '开源贡献',
+    collapsable: false,
+    children: [
+      '',
+    ]
+  },
+  {
     title: 'TinyDB',
     collapsable: false,
     children: [

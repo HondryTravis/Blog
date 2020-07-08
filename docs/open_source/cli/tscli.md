@@ -1,4 +1,4 @@
-# tscli 脚手架
+# Tscli 脚手架
 
 一个快速生成项目的脚手架，可以生成 gulp，webpack4.x，rollup 项目
 
