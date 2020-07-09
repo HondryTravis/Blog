@@ -460,3 +460,100 @@ rpm命令是RPM软件包的管理工具。rpm原本是Red Hat Linux发行版专�
 rpm -ivh your-package                # 直接安装
 rpmrpm --force -ivh your-package.rpm # 忽略报错，强制安装
 ```
+
+## 查看进程
+
+### ps
+
+* -e 显示所有进程
+* -f 全格式
+* -u 不显示标题
+* -l 长格式
+* -w 宽输出
+* a 显示终端上所有进程，包含其他用户的进程
+* r 只显示正在运行的进程
+* u 以用户为主的格式来显示程序的状况
+* x 显示所有程序，不以终端机来区分
+
+#### 查看进程: `ps -ef`
+
+ps -ef 是用标准的格式显示进程的、其格式如下
+
+* UID    //用户ID、但输出的是用户名
+* PID    //进程的ID
+* PPID    //父进程ID
+* C      //进程占用CPU的百分比
+* STIME  //进程启动到现在的时间
+* TTY    //该进程在那个终端上运行，若与终端无关，则显示? 若为pts/0等，则表示由网络连接主机进程
+* CMD    //命令的名称和参数
+
+#### 查看进程: `ps aux`
+
+ps aux 是用BSD的格式来显示、其格式如下
+
+同ps -ef 不同的有列有
+
+* USER      //用户名
+* %CPU      //进程占用的CPU百分比
+* %MEM      //占用内存的百分比
+* VSZ      //该进程使用的虚拟內存量（KB）
+* RSS      //该进程占用的固定內存量（KB）（驻留中页的数量）
+* STAT      //进程的状态
+* START    //该进程被触发启动时间
+* TIME      //该进程实际使用CPU运行的时间
+
+其中STAT状态位常见的状态字符有
+
+* D      //无法中断的休眠状态（通常 IO 的进程)
+* R      //正在运行可中在队列中可过行的
+* S      //处于休眠状态
+* T      //停止或被追踪
+* W      //进入内存交换 （从内核2.6开始无效
+* X      //死掉的进程 （基本很少见）
+* Z      //僵尸进程
+* <      //优先级高的进程
+* N      //优先级较低的进程
+* L      //有些页被锁进内存
+* s      //进程的领导者（在它之下有子进程）
+* l      //多线程，克隆线程（使用 CLONE_THREAD, 类似 NPTL pthreads）
+* [+]      //位于后台的进程组
+
+## 传输文件
+
+### scp
+
+可以简单用scp 命令来实现
+
+查看scp帮助：sup -h
+
+输出信息如下
+
+```bash
+scp: illegal option -- h
+usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file]
+            [-J destination] [-l limit] [-o ssh_option] [-P port]
+            [-S program] source ... target
+```
+
+option
+
+1. -v 显示进度
+2. -r 递归处理
+3. -C 压缩选项
+4. -P 选择端口
+
+### macos 上传
+
+```bash
+scp -r local_folder remote_username@remote_ip:remote_folder
+```
+
+### macos 下载
+
+```bash
+scp -r remote_username@remote_ip:remote_folder local_folder
+```
+
+### 更多参数
+
+更多参数可以通过命令 `man scp` 来查看
