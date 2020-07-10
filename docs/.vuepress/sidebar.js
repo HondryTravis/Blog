@@ -48,6 +48,13 @@ const blog = [
     ]
   },
   {
+    title: 'Java',
+    collapsable: false,
+    children: [
+      'java/java'
+    ]
+  },
+  {
     title: 'Nginx',
     collapsable: false,
     children: [
@@ -58,7 +65,8 @@ const blog = [
     title: '项目工程化',
     collapsable: false,
     children: [
-      'engineering/ci_cd'
+      'engineering/ci_cd',
+      'engineering/sonar'
     ]
   },
   {
