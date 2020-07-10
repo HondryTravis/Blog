@@ -34,6 +34,8 @@ Sonar (SonarQube)是一个开源平台，用于管理源代码的质量。Sonar 
 
 如何创建用户，[新建用户](/blog/linux/linux_centos.md#新建用户)，例：我用户名为 sonar
 
+#### 添加权限
+
 ```bash
 # root 用户登录 cd /etc/
 [root@localhost etc]#chmod u+w sudoers
