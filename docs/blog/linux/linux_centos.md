@@ -50,7 +50,8 @@ passwd testuser –u
 ### 永久性删除用户账号
 
 ```bash
-userdel testuser
+userdel testuser 不删除 home 目录
+userdel -r testuser 删除 home 目录
 groupdel testgroup
 # 强制删除该用户的主目录和主目录下的所有文件和子目录
 usermod –G testgroup testuser
