@@ -77,9 +77,9 @@ jdk-14.0.1_linux-x64_bin.rpm  rh  sonarqube  sonarqube-8.4.0.35506.zip
 [sonar@localhost opt]#cd /sonarqube/bin/linux-x86-64
 # linux
 # 首次需要使用 console 参数启动， 可能的参数: start | stop | restart | status
-[root@localhost linux-x86-64]#./sonar.sh console
+[sonar@localhost linux-x86-64]#./sonar.sh console
 # 第二次
-[root@localhost linux-x86-64]# ./sonar.sh start
+[sonar@localhost linux-x86-64]# ./sonar.sh start
 Starting SonarQube...
 Started SonarQube.
 ```
