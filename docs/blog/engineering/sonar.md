@@ -142,7 +142,8 @@ Started SonarQube.
 # export SCANNER_HOME="你下载的sonar-scanner地址"
 export SCANNER_HOME="/Users/hondry/opt/sonar-scanner"
 export PATH=$PATH:$SCANNER_HOME/bin
-
+# 然后退出编辑 source  .bash_profile 或者 zsh .zshrc 使更改生效 例：zsh shell 下
+zsh .zshrc
 # 然后在 shell 中 校验是否安装完成
 sonar-scanner -v
 ```
