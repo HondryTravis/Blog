@@ -10,6 +10,10 @@ mac 下安装 nvm
   brew install nvm
 ```
 
+根据终端提示 配置你的环境变量 `.zshrc` or `.bash_profile`, 使用 `sh .zshrc or .bash_profile` 让他生效
+
+如果终端没有提示： 请使用 `brew info nvm` 查看安装信息，配置环境变量
+
 ## 常用命令
 
 ### 查看当前版本
