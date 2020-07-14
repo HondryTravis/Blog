@@ -1,15 +1,11 @@
 # 联系方式
 
-## 邮箱
+## 联系我
 
 ::: tip 工作邮箱
 Email: work.travis@outlook.com
 :::
 
-::: tip QQ
+::: tip 社交
 QQ: 517941224
-:::
-
-::: tip twitter
-twitter: @HondryTravis
 :::
