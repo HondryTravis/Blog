@@ -66,7 +66,8 @@ const blog = [
     collapsable: false,
     children: [
       'engineering/ci_cd',
-      'engineering/sonar'
+      'engineering/sonar',
+      'engineering/jenkins',
     ]
   },
   {
