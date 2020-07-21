@@ -72,7 +72,7 @@ Starting jenkins (via systemctl):                          [  OK  ]
 
 请查看 **启动状态:** `service jenkins status`
 
-可能是 jdk 版本过高导致的，请安装指定默认范围内的 jdk
+可能是 jdk 版本过高导致的，请安装指定默认范围内的 jdk, [查看支持的 jdk](https://pkg.jenkins.io/redhat-stable/)
 
 :::
 
