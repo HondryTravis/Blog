@@ -122,6 +122,8 @@ Started SonarQube.
 
 ### 配置项目token
 
+点击创建之后，在点击继续
+
 ![创建token](/engineering/create_token.png)
 
 ### 配置开发机
