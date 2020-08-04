@@ -53,3 +53,27 @@ HTTP/2对同⼀域名下所有请求都是基于流，也就是说同⼀域名�
 通过分析工具，哪里大, 对那块进行压缩优化调优，尽量小
 
 ## 渲染中的性能优化
+
+详细流程参考 [DOM 渲染中的优化](/blog/performance/rendering_optimization.md)
+
+::: tip 结论
+
+尽量避免 DOM 大量的 重绘/重排
+
+:::
+
+## CSS阻塞问题
+
+详细流程参考 [CSS I/O 阻塞优化](/blog/css/css_io.md)
+
+::: tip 结论
+
+1. CSS 会堵塞 DOM 渲染<但不会影响 DOM 的解析>
+
+2. CSS 加载会阻塞后⾯的 js 语句的执⾏<已⾃⼰实际看到的为准>
+
+3. CSS 会堵塞 DOMContentLoaded<同时存在css和js的时候>
+
+:::
+
+## 页面加载性能优化

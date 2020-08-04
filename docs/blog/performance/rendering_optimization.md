@@ -1,4 +1,4 @@
-# 渲染中的性能优化
+# 渲染中的优化
 
 ## 熟悉 Chrome 调试工具
 
@@ -122,7 +122,7 @@ Layout 重排
 
 > 根元素、position分层、transform、半透明、CSS滤镜、canvas、video、overflow
 
-GPU参与进来(css gpu 加速)
+GPU参与进来(css 3d硬件加速)
 
 > CSS3D、Video、webgl、transform、css滤镜、willl-change:transfrom
 
@@ -146,3 +146,21 @@ cpu主要负责操作系统和程序，gpu负责显式 数据处理 效率更高
 [fastdom 控制读写分离的插件](https://www.npmjs.com/package/fastdom)
 
 [csstriggers 可查看是否引起重排重绘](https://csstriggers.com/)
+
+### 参考流程
+
+样式流程
+
+![rendering_process_summary_1](/performance/rendering_process_summary_1.png)
+
+![rendering_process_summary_2](/performance/rendering_process_summary_2.png)
+
+![rendering_process_summary_3](/performance/rendering_process_summary_3.png)
+
+渲染进程
+
+![rendering_process_summary_4](/performance/rendering_process_summary_4.png)
+
+## 结论
+
+需要能在使用 css 3d硬件加速的地方尽量使用，以此优化 dom 的性能，极大的减少 dom 的重绘重排
