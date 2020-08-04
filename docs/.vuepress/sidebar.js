@@ -13,7 +13,8 @@ const blog = [
     collapsable: false,
     children: [
       'node/node',
-      'node/pm2'
+      'node/pm2',
+      'node/node_optimization'
     ]
   },
   {
@@ -21,7 +22,9 @@ const blog = [
     collapsable: false,
     children: [
       'http/http_1',
-      'http/http_2'
+      'http/http_2',
+      'http/tcp',
+      'http/cdn'
     ]
   },
   {
@@ -59,6 +62,18 @@ const blog = [
     collapsable: false,
     children: [
       'nginx/nginx'
+    ]
+  },
+  {
+    title: '性能优化',
+    collapsable: false,
+    children: [
+      'performance/performance',
+      'performance/browser_rendering_process',
+      'performance/performance_base',
+      'performance/test_network_speed',
+      'performance/rendering_optimization'
+      
     ]
   },
   {

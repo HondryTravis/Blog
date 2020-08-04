@@ -43,6 +43,8 @@ HTTP协议进行传输的。
 
 左边是 **ISO/OSI标准协议**，右图是**事实协议**， **ISO/OSI 标准协议** 是对**事实协议**的一个补充，最初设计的不完整
 
+更为详细流程，参考 [TCP 协议](/blog/http/tcp)
+
 **应用层**:
 
 为用户提供所需要的各种服务，例如：HTTP、FTP、DNS、SMTP等
@@ -229,12 +231,87 @@ OPTIONS： 请求查询服务器的性能，或者查询与资源相关的选项
 
 ## 两种缓存策略
 
-* 强制缓存与对比缓存
+浏览器缓存主要有两类
 
-  * 强制缓存，服务器通知浏览器一个缓存时间，在缓存时间内，下次请求，直接用缓存，不在时间内，执行比较缓存策略
+* 强制缓存
+* 协商缓存
 
-  * 比较缓存，将缓存信息中的Etag和Last-Modified通过请求发送给服务器，由服务器校验，返回304状态码时，浏览器直接使用缓存
+HTTP 1.0: 基于Pragma & Expires的缓存实现
 
-* Etag/If-None-Match策略
+* Pragma
+* Expire
 
-* Last-Modified/If-Modified-Since策略
+这三者的优先级顺序为:Pragma -> Cache-Control -> Expires）
+
+HTTP 1.1 Cache-Control:相对过期时间
+
+强缓存
+
+利用http头中的Expires和Cache-Control两个字段来控制的，用来表示资源的缓存时间
+
+普通刷新会忽略它，但不会清除它，需要强制刷新。浏览器强制刷新，请求会带上Cache-Control:no-cache和Pragma:no-cache
+
+* Expires （http 1.0）
+* Cache-Control
+
+协商缓存
+
+协商缓存就是由服务器来确定缓存资源是否可用，所以客户端与服务器端要通过某种标识来进行通信，从而让服务器判断请求资源是否可以缓存访问。
+
+* Etag 和 If-None-Match
+* Last-Modify / If-Modify-Since
+
+### 缓存优先级
+
+**Cache-Control > Expires > Etag > Last-modify**.
+
+Request/Response Headers
+
+Web页面设计中，建少HTTP请求可以提高页面响应速度。浏览器在第一次访问页面时下载的资源会缓存起来，第二次访问时会判断在缓存中是否已有该资源并且有没有更新过，如果已有该资源且没有更新过，则去缓存去取，这样减少了下载资源的时间。原理上是通过HTTP Rquest Header中的 if-modified-since 和Response Headers中的last-modified来实现（还有一对组合If-None-Match和Etag，类似），HTTP请求把if-modified-sincede 时间传给服务端，服务端把last-modified时间与之对比，如果相同，则意味着文件没有改动，则返回304，浏览器则从缓存中获取资源，无需下载。
+
+**协商缓存 `last-modified / if-modified-since`**
+
+Response Headers
+
+> last-modified: Wed, 16 May 2020 12:57:16 GMT
+
+Request Headers
+
+> if-modified-since: Wed, 16 May 2020 12:55:38 GMT
+
+**原理：** 服务器端返回资源时，如果头部带上了 last-modified，那么资源下次请求时就会把值加⼊到请求头 if-modified-since中，服务器可以对⽐这个值，确定资源是否发⽣变化，如果没有发⽣变化，则返回 304
+
+**协商缓存 `etag / if-none-match`**
+
+Response Headers
+
+> etag: "D5FC8B85A045FF720547BC36FC872550"
+
+Request Headers
+
+> if-none-match: "D5FC8B85A045FF720547BC36FC872550"
+
+**原理：** 服务器端返回资源时，如果头部带上了 etag，那么资源下次请求时就会把值加⼊到请求头 if-none-match 中，服务器可以对⽐这个值，确定资源是否发⽣变化，如果没有发⽣变化，则返回 304
+
+Response Headers
+
+**强缓存 `Expires`**
+> expires: Thu, 16 May 2020 03:05:59 GMT
+
+**原理：** 在 http 头中设置⼀个过期时间，在这个过期时间之前，浏览器的请求都不会发出，⽽是⾃动从缓存中读取⽂件，除⾮缓存被清空，或者强制刷新。缺陷在于，服务器时间和⽤户端时间可能存在不⼀致，所以 HTTP/1.1 加⼊了 cache-control 头来改进这个问题
+
+**强缓存 `cache-control`**
+
+**原理：** 设置过期的时间⻓度（秒），在这个时间范围内，浏览器请求都会直接读缓存。当 expires 和 cache-control 都存在时，cache-control 的优先级更⾼
+
+::: tip 小结
+
+expires也是需要在服务端配置（具体配置也根据服务器而定），expires添加的是该资源过期的日期，浏览器会根据该过期日期与客户端时间对比，如果过期时间还没到，则会去缓存中读取该资源，如果已经到期了，则浏览器判断为该资源已经不新鲜要重新从服务端获取。通过这种方式，可以实现直接从浏览器缓存中读取，而不需要去服务端判断是否已经缓存，避免了这次http请求。值得注意的是expires时间可能存在客户端时间跟服务端时间不一致的问题。所以，建议expires结合Cache-Control一起使用，大型网站中一起使用的情况比较多见
+
+:::
+
+参考链接
+
+[HTTP强缓存和协商缓存](https://www.dazhuanlan.com/2019/12/17/5df8273d1d9aa/)
+
+[彻底弄懂HTTP缓存机制及原理](https://www.cnblogs.com/chenqf/p/6386163.html)  
