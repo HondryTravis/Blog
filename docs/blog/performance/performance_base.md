@@ -1,4 +1,4 @@
-# 服务器相关知识<Badge type="tip" text="必要了解"/>
+# 基础必备<Badge type="tip" text="必要了解"/>
 
 ## 浏览器渲染过程
 

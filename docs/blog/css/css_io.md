@@ -1,14 +1,14 @@
-# CSS 阻塞 I/O
+# CSS 阻塞 I/O 初探
 
-::: tip 疑问？
+::: tip 疑问 🤔️
 css 会阻塞 js 加载么？
 :::
 
-## SCRIPT 脚本影响 DOM 渲染<Badge type="tip" text="会么?"/>
+## SCRIPT 脚本影响 DOM 解析<Badge type="tip" text="会么?"/>
 
 打脸代码
 
-```html {12}
+```html {11}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,7 +25,7 @@ css 会阻塞 js 加载么？
 </html>
 ```
 
-::: tip 结论
+::: tip 结论 🍺
 
 script 内嵌脚本/src 放在 dom 底部会阻塞 dom 渲染，不会影响解析
 
@@ -65,7 +65,7 @@ DOM解析不影响 渲染依旧等待
 </html>
 ```
 
-::: tip 结论
+::: tip 结论 🍺
 
 需要弱网 调整 chrome 中 network 调试 custom 自定义网速 10kb
 
@@ -106,7 +106,7 @@ DOM解析不影响 渲染依旧等待
 
 ```
 
-::: tip 结论
+::: tip 结论 🍺
 
 需要弱网环境
 
@@ -144,7 +144,7 @@ css 加载会阻塞后面JS脚本/语句
 </html>
 ```
 
-::: tip 结论
+::: tip 结论 🍺
 
 会影响DOMLoading
 

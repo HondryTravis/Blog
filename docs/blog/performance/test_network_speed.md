@@ -19,7 +19,7 @@ console.log(speed)
 
 在服务器放个 1KB 的图片，并请求，看返回Timer差分区间
 
-bandwidth = speed/Timer
+bandwidth = file_size/Timer
 
 ## 多普勒测速
 

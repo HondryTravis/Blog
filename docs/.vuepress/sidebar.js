@@ -9,7 +9,7 @@ const blog = [
     ]
   },
   {
-    title: 'CSS',
+    title: 'HTML/CSS',
     collapsable: false,
     children: [
       'css/css_io',
@@ -79,8 +79,8 @@ const blog = [
       'performance/browser_rendering_process',
       'performance/performance_base',
       'performance/test_network_speed',
-      'performance/rendering_optimization'
-      
+      'performance/rendering_process',
+      'performance/page_performance_index'
     ]
   },
   {
