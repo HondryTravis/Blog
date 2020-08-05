@@ -1,6 +1,12 @@
 # 认识渲染过程
 
+::: tip 思考 🤔
+可以直观的通过手段查看 dom 的重绘重排么？
+:::
+
 ## 熟悉 Chrome 调试工具
+
+Chrome 控制台远比你想象中的强大
 
 ![chrome_performance_test](/performance/chrome_performance_test.png)
 

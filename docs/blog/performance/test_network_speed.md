@@ -1,8 +1,12 @@
 # 如何测试网络速度
 
+::: tip 疑问 🤔
+能用 js 测试获得相近的网速么？
+:::
+
 ## Navigator
 
-通过 HTML 5 自带属性 `navigator` Api, 参考 [MDN Navigator](https://developer.mozilla.org/zh-CN/docs/Web/API/Navigator)
+通过 HTML 5 自带属性 `navigator.connection` Api, 参考 [MDN Navigator](https://developer.mozilla.org/zh-CN/docs/Web/API/Navigator)
 
 ```js
 
