@@ -84,6 +84,13 @@ const blog = [
     ]
   },
   {
+    title: '编程思想',
+    collapsable: false,
+    children: [
+      'design_ideas/aop',
+    ]
+  },
+  {
     title: '项目工程化',
     collapsable: false,
     children: [
