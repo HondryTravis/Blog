@@ -13,6 +13,11 @@ const blog = [
     collapsable: false,
     children: [
       'css/css_io',
+      'css/css_split',
+      'css/css_houdini',
+      'css/css_workflow', 
+      'css/css_matrix',
+      'css/css_plugin'
     ]
   },
   {

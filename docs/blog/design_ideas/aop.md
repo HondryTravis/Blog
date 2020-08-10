@@ -677,7 +677,6 @@ inventoryTracker.requestItems();
 
 |![no_use_ioc](/design_ideas/no_use_ioc.png)|![use_ioc](/design_ideas/use_ioc.png)|
 |:-:|:-:|
-|未使用 ioc| 使用 ioc|
 
 ### 控制反转方式
 
