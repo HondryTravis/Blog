@@ -34,7 +34,7 @@
 
 ## BEM
 
-[BEM](https://en.bem.info/) BEM 和 SMACCS ⾮常类似，主要⽤来如何给项⽬命名。⼀个简单命名更容易让别⼈⼀起⼯作。⽐如选项卡导航是⼀个块(Block)，这个块⾥的元素的是其中标签之⼀(Element)，⽽当前选项卡是⼀个修饰状态(Modifier)
+[BEM](https://en.bem.info/) 和 SMACCS ⾮常类似，主要⽤来如何给项⽬命名。⼀个简单命名更容易让别⼈⼀起⼯作。⽐如选项卡导航是⼀个块(Block)，这个块⾥的元素的是其中标签之⼀(Element)，⽽当前选项卡是⼀个修饰状态(Modifier)
 
 - `block` -代表了更⾼级别的抽象或组件
 - `block__element` -代表 `.block` 的后代，⽤于形成⼀个完整的.block的整体。
@@ -51,7 +51,7 @@
 
 ## SUIT
 
-[SUIT](https://suitcss.github.io/) Suit起源于BEM，但是它对组件名使⽤驼峰式和连字号把组件从他们的修饰和⼦孙后代中区分出来
+[SUIT](https://suitcss.github.io/) 起源于BEM，但是它对组件名使⽤驼峰式和连字号把组件从他们的修饰和⼦孙后代中区分出来
 
 - 修饰符使⽤的是 `—` ，⼦模块使⽤ `__` 符号。(不⽤⼀个-的原因是CSS单词连接)
 
