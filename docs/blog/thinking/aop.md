@@ -675,7 +675,7 @@ inventoryTracker.requestItems();
 
 控制反转（Inversion of Control，缩写为IoC），是⾯向对象编程中的⼀种设计原则，可以⽤来减低计算机代码之间的耦合度。其中最常⻅的⽅式叫做依赖注⼊（Dependency Injection，简称DI），还有⼀种⽅式叫“依赖查找”（Dependency Lookup）。通过控制反转，对象在被创建的时候，由⼀个调控系统内所有对象的外界实体，将其所依赖的对象的引⽤传递给它。也可以说，依赖被注⼊到对象中。
 
-|![no_use_ioc](/design_ideas/no_use_ioc.png)|![use_ioc](/design_ideas/use_ioc.png)|
+|![no_use_ioc](/thinking/no_use_ioc.png)|![use_ioc](/thinking/use_ioc.png)|
 |:-:|:-:|
 
 ### 控制反转方式

@@ -1,21 +1,19 @@
-// blog
-const blog = [
+const front_end = [
   {
-    title: 'TypeScript',
+    title: 'TypeScript | js',
     collapsable: false,
     children: [
       'typescript/recursive_optimization',
-      'typescript/functional_programming.md'
     ]
   },
   {
-    title: 'HTML/CSS',
+    title: 'HTML | CSS',
     collapsable: false,
     children: [
       'css/css_io',
       'css/css_split',
       'css/css_houdini',
-      'css/css_workflow', 
+      'css/css_workflow',
       'css/css_matrix',
       'css/css_plugin'
     ]
@@ -29,32 +27,10 @@ const blog = [
       'node/node_optimization'
     ]
   },
-  {
-    title: 'HTTP',
-    collapsable: false,
-    children: [
-      'http/http_1',
-      'http/http_2',
-      'http/tcp',
-      'http/cdn'
-    ]
-  },
-  {
-    title: 'Linux',
-    collapsable: false,
-    children: [
-      'linux/linux',
-      'linux/linux_deploy',
-      'linux/linux_centos',
-    ]
-  },
-  {
-    title: 'OS',
-    collapsable: false,
-    children: [
-      'os/thread'
-    ]
-  },
+
+]
+
+const back_end = [
   {
     title: 'Python',
     collapsable: false,
@@ -70,12 +46,62 @@ const blog = [
     ]
   },
   {
+    title: '数据库',
+    collapsable: false,
+    children: [
+      'mysql/mysql'
+    ]
+  },
+]
+const network = [
+  {
+    title: 'HTTP',
+    collapsable: false,
+    children: [
+      'http/http_1',
+      'http/http_2',
+      'http/tcp',
+      'http/cdn'
+    ]
+  },
+  {
     title: 'Nginx',
     collapsable: false,
     children: [
       'nginx/nginx'
     ]
   },
+]
+const framework = [
+  {
+    title: 'Framework',
+    collapsable: false,
+    children: [
+      'framework/vue/vue_1.md'
+    ]
+  },
+]
+
+const os = [
+  {
+    title: 'OS',
+    collapsable: false,
+    children: [
+      'os/thread'
+    ]
+  },
+  {
+    title: 'Linux',
+    collapsable: false,
+    children: [
+      'linux/linux',
+      'linux/linux_deploy',
+      'linux/linux_centos',
+    ]
+  },
+]
+
+const optimization = [
   {
     title: '性能优化',
     collapsable: false,
@@ -88,13 +114,20 @@ const blog = [
       'performance/page_performance_index'
     ]
   },
+]
+
+const thinking = [
   {
     title: '编程思想',
     collapsable: false,
     children: [
-      'design_ideas/aop',
+      'thinking/aop',
+      'thinking/functional_programming.md'
     ]
   },
+]
+
+const ci_cd = [
   {
     title: '项目工程化',
     collapsable: false,
@@ -104,13 +137,9 @@ const blog = [
       'engineering/jenkins',
     ]
   },
-  {
-    title: '数据库',
-    collapsable: false,
-    children: [
-      'mysql/mysql'
-    ]
-  },
+]
+
+const other = [
   {
     title: '常用工具',
     collapsable: false,
@@ -121,6 +150,19 @@ const blog = [
       'node/nrm'
     ]
   }
+]
+
+// blog
+const blog = [
+  ...front_end,
+  ...framework,
+  ...optimization,
+  ...ci_cd,
+  ...thinking,
+  ...network,
+  ...back_end,
+  ...os,
+  ...other
 ]
 
 // 算法
