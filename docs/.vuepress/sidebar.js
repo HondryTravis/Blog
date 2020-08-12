@@ -102,9 +102,9 @@ const os = [
   },
 ]
 
-const optimization = [
+const performance = [
   {
-    title: '性能优化',
+    title: '性能初探',
     collapsable: false,
     children: [
       'performance/performance',
@@ -113,6 +113,16 @@ const optimization = [
       'performance/test_network_speed',
       'performance/rendering_process',
       'performance/page_performance_index'
+    ]
+  },
+]
+
+const optimization = [
+  {
+    title: '性能优化',
+    collapsable: false,
+    children: [
+      'optimization/webpack_until_v4.md',
     ]
   },
 ]
@@ -157,6 +167,7 @@ const other = [
 const blog = [
   ...front_end,
   ...framework,
+  ...performance,
   ...optimization,
   ...ci_cd,
   ...thinking,
