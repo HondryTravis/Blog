@@ -4,6 +4,9 @@ const sidebar = require('./sidebar')
 module.exports = {
   title: 'Better late than never',
   description: '只要开始，虽晚不迟',
+  head: [
+    ['link', { rel: 'icon', href: '/logo.png' }]
+  ],
   markdown: {
     lineNumbers: true
   },
