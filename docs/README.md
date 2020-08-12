@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /hero.jpg
+heroImage: /hero.png
 heroText: travis
 # tagline: '联系方式: work.travis@outlook.com'
 actionText: 快速阅读 →
