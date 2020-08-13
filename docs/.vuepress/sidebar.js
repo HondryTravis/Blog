@@ -119,7 +119,7 @@ const performance = [
 
 const optimization = [
   {
-    title: '性能优化',
+    title: '优化相关',
     collapsable: false,
     children: [
       'optimization/webpack_until_v4.md',
