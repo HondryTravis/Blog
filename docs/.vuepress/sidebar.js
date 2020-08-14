@@ -122,7 +122,7 @@ const optimization = [
     title: '优化相关',
     collapsable: false,
     children: [
-      'optimization/webpack_until_v4.md',
+      'optimization/webpack_until_v4',
     ]
   },
 ]
@@ -133,7 +133,8 @@ const thinking = [
     collapsable: false,
     children: [
       'thinking/aop',
-      'thinking/functional_programming.md'
+      'thinking/functional_programming',
+      'thinking/design_patterns'
     ]
   },
 ]
