@@ -4,7 +4,8 @@ const front_end = [
     collapsable: false,
     children: [
       'typescript/recursive_optimization',
-      'typescript/implement_list'
+      'typescript/implement_list',
+      'typescript/javascript_high'
     ]
   },
   {
