@@ -1,7 +1,7 @@
 const front_end = [
   {
     title: 'TypeScript | js',
-    collapsable: false,
+    collapsable: true,
     children: [
       'typescript/recursive_optimization',
       'typescript/implement_list',
@@ -10,7 +10,7 @@ const front_end = [
   },
   {
     title: 'HTML | CSS',
-    collapsable: false,
+    collapsable: true,
     children: [
       'css/css_io',
       'css/css_split',
@@ -22,7 +22,7 @@ const front_end = [
   },
   {
     title: 'Node',
-    collapsable: false,
+    collapsable: true,
     children: [
       'node/node',
       'node/pm2',
@@ -35,21 +35,21 @@ const front_end = [
 const back_end = [
   {
     title: 'Python',
-    collapsable: false,
+    collapsable: true,
     children: [
       'python/python爬虫'
     ]
   },
   {
     title: 'Java',
-    collapsable: false,
+    collapsable: true,
     children: [
       'java/java'
     ]
   },
   {
     title: '数据库',
-    collapsable: false,
+    collapsable: true,
     children: [
       'mysql/mysql'
     ]
@@ -58,7 +58,7 @@ const back_end = [
 const network = [
   {
     title: 'HTTP',
-    collapsable: false,
+    collapsable: true,
     children: [
       'http/http_1',
       'http/http_2',
@@ -68,7 +68,7 @@ const network = [
   },
   {
     title: 'Nginx',
-    collapsable: false,
+    collapsable: true,
     children: [
       'nginx/nginx'
     ]
@@ -77,7 +77,7 @@ const network = [
 const framework = [
   {
     title: 'Framework',
-    collapsable: false,
+    collapsable: true,
     children: [
       'framework/vue/vue_1.md'
     ]
@@ -87,14 +87,14 @@ const framework = [
 const os = [
   {
     title: 'OS',
-    collapsable: false,
+    collapsable: true,
     children: [
       'os/thread'
     ]
   },
   {
     title: 'Linux',
-    collapsable: false,
+    collapsable: true,
     children: [
       'linux/linux',
       'linux/linux_deploy',
@@ -106,7 +106,7 @@ const os = [
 const performance = [
   {
     title: '性能初探',
-    collapsable: false,
+    collapsable: true,
     children: [
       'performance/performance',
       'performance/browser_rendering_process',
@@ -121,7 +121,7 @@ const performance = [
 const optimization = [
   {
     title: '优化相关',
-    collapsable: false,
+    collapsable: true,
     children: [
       'optimization/webpack_until_v4',
     ]
@@ -131,7 +131,7 @@ const optimization = [
 const thinking = [
   {
     title: '编程思想',
-    collapsable: false,
+    collapsable: true,
     children: [
       'thinking/aop',
       'thinking/functional_programming',
@@ -143,7 +143,7 @@ const thinking = [
 const ci_cd = [
   {
     title: '项目工程化',
-    collapsable: false,
+    collapsable: true,
     children: [
       'engineering/ci_cd',
       'engineering/sonar',
@@ -155,7 +155,7 @@ const ci_cd = [
 const other = [
   {
     title: '常用工具',
-    collapsable: false,
+    collapsable: true,
     children: [
       'mac/command_line',
       'mac/homebrew',

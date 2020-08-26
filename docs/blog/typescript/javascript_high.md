@@ -15,12 +15,12 @@
 |名称|含义|默认值|
 |:-:|:-:|:-:|
 |enumerable|可枚举，就是可以遍历|false|
-|configurable|可配置，就是对象的 key 可以被删除|
+|configurable|可配置，就是对象的 key 可以被删除|false|
 |value|结果值|undefined|
 |writable|可写，可以赋值|false|
-|get|在获取值时被调用|undefined|
-|set|在设置值时被调用|undefined|
-> descriptor 中同时有访问器(getter/setter) 与 value/writable 属性 会报错
+|get 方法|在获取值时被调用|undefined|
+|set 方法|在设置值时被调用|undefined|
+> descriptor 如果一个描述符同时拥有 value 或 writable 和 get 或 set 键，则会产生一个异常(会报错)
 
 简单创建一个劫持对象方法试试，🍺
 
@@ -60,6 +60,10 @@ console.log(o.a) // get
 o.a = 2 // set
 o.c = 2 // 2 对新增的无法监听
 ```
+
+::: tip 结论🍺
+也就是说，可以监听已有的变化，但是不能监听新增的
+:::
 
 ### 劫持数组
 
@@ -103,3 +107,7 @@ function def (obj, key, val, enumerable) {
   })
 }
 ```
+
+## Proxy
+
+[Proxy](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy) 对象用于定义基本操作的自定义行为（如属性查找、赋值、枚举、函数调用等）
