@@ -79,7 +79,8 @@ const framework = [
     title: 'Framework',
     collapsable: true,
     children: [
-      'framework/vue/vue_1.md'
+      'framework/vue/vue_1',
+      'framework/redux/redux_start'
     ]
   },
 ]
