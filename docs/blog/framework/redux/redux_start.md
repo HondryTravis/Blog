@@ -8,7 +8,7 @@ Redux是一个用来管理管理数据状态和UI状态的JavaScript应用工具
 
 ![redux 工作流](/framework/redux_flow.png)
 
-用 react 来讲
+举个🌰
 
 借书者(Components)要去借书。那要先去找管理员(ActionCreator)借书，管理员先去图书馆柜台机上(Store) 用图书管理软件(Reducers)找,找到了就给这个借阅者(Components)告诉正确的位置，和图书的信息，没找到或者已经借阅出去了，给反馈信息，还书也是一样
 
