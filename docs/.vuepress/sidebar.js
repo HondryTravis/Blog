@@ -136,7 +136,8 @@ const thinking = [
     children: [
       'thinking/aop',
       'thinking/functional_programming',
-      'thinking/design_patterns'
+      'thinking/design_patterns',
+      'thinking/ioc'
     ]
   },
 ]
