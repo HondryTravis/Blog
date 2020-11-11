@@ -1,29 +1,35 @@
 {
   "name": "hondrytravis-blog",
   "version": "1.0.0",
-  "description": "blog",
-  "directories": {
-    "docs": "docs"
-  },
+  "author": "travis",
   "scripts": {
-    "start": "yarn docs:dev",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "serve": "docusaurus serve"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/HondryTravis/HondryTravis.github.io.git"
+  "dependencies": {
+    "@docusaurus/core": "2.0.0-alpha.66",
+    "@docusaurus/preset-classic": "2.0.0-alpha.66",
+    "@mdx-js/react": "^1.5.8",
+    "clsx": "^1.1.1",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
   },
   "keywords": [],
-  "author": "travis",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/HondryTravis/HondryTravis.github.io/issues"
-  },
-  "homepage": "https://github.com/HondryTravis/HondryTravis.github.io#readme",
-  "devDependencies": {
-    "@vuepress/plugin-back-to-top": "^1.5.3",
-    "@vuepress/plugin-medium-zoom": "^1.5.3",
-    "vuepress": "^1.5.2"
+  "license": "MIT",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

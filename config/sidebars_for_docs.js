@@ -1,0 +1,176 @@
+const font_end = [
+  {
+    type: 'category',
+    label: 'Typescript',
+    items: [
+      'typescript/implement_list',
+      'typescript/javascript_high',
+      'typescript/recursive_optimization',
+    ]
+  },
+  {
+    type: 'category',
+    label: 'HTML | CSS',
+    items: [
+      'css/css_io',
+      'css/css_split',
+      'css/css_houdini',
+      'css/css_workflow',
+      'css/css_matrix',
+      'css/css_plugin'
+    ]
+  },
+  {
+    type: 'category',
+    label: 'Webpack 优化',
+    items: [
+      'tools/webpack_until_v4',
+    ]
+  },
+  {
+    type: 'category',
+    label: 'Node',
+    items: [
+      'node/node',
+      'node/pm2',
+      'node/node_optimization'
+    ]
+  },
+  {
+    type: 'category',
+    label: '前端工程化',
+    items: [
+      'engineering/ci_cd',
+      'engineering/sonar',
+      'engineering/jenkins',
+    ]
+  },
+  {
+    type: 'category',
+    label: '性能优化',
+    items: [
+      'performance/performance',
+      'performance/browser_rendering_process',
+      'performance/performance_base',
+      'performance/test_network_speed',
+      'performance/rendering_process',
+      'performance/page_performance_index'
+    ]
+  },
+]
+
+const framework = [
+  {
+    type: 'category',
+    label: 'Framework',
+    items: [
+      'framework/vue/vue_1',
+      'framework/redux/redux_start'
+    ]
+  },
+]
+
+const back_end = [
+  // network
+  {
+    type: 'category',
+    label: 'HTTP',
+    items: [
+      'http/http_1',
+      'http/http_2',
+      'http/tcp',
+      'http/cdn'
+    ]
+  },
+  // nginx
+  {
+    type: 'category',
+    label: 'Nginx',
+    items: [
+      'nginx/nginx'
+    ]
+  },
+  // java
+  {
+    type: 'category',
+    label: 'Java',
+    items: [
+      'java/java',
+    ]
+  },
+  // python
+  {
+    type: 'category',
+    label: 'Python',
+    items: [
+      'python/python爬虫'
+    ]
+  },
+  // 数据库
+  {
+    type: 'category',
+    label: '数据库',
+    items: [
+      'mysql/mysql'
+    ]
+  },
+]
+const other = [
+  {
+    type: 'category',
+    label: '其他常用工具',
+    items: [
+      'mac/command_line',
+      'mac/homebrew',
+      'mac/nvm',
+      'node/nrm'
+    ]
+  }
+]
+const thinking = [
+  {
+    type: 'category',
+    label: '编程思想',
+    items: [
+      'thinking/aop',
+      'thinking/functional_programming',
+      'thinking/design_patterns',
+      'thinking/ioc'
+    ]
+  },
+]
+
+const os = [
+  // os
+  {
+    type: 'category',
+    label: 'OS',
+    items: [
+      'os/thread'
+    ]
+  },
+  // linux
+  {
+    type: 'category',
+    label: 'Linux',
+    items: [
+      'linux/linux',
+      'linux/linux_deploy',
+      'linux/linux_centos',
+    ]
+  },
+]
+module.exports = {
+  docs: [
+    'summary',
+    ...font_end,
+    ...framework,
+    ...os,
+    ...thinking,
+    ...back_end,
+    ...other,
+  ],
+
+};
+
+
