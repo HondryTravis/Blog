@@ -1,4 +1,4 @@
-var default_editUrl = `https://github.com/HondryTravis/Blog/`
+var default_editUrl = `https://github.com/HondryTravis/Blog/tree/master/`
 module.exports = {
   title: 'TRAVIS',
   tagline: '只要开始，虽晚不迟',
@@ -17,8 +17,8 @@ module.exports = {
         routeBasePath: 'algorithm',
         sidebarPath: require.resolve('./config/sidebars_for_algorithm.js'),
         editUrl: default_editUrl,
-        showLastUpdateAuthor: true,
-        showLastUpdateTime: true,
+        showLastUpdateAuthor: false,
+        showLastUpdateTime: false,
       },
     ],
     [
@@ -29,8 +29,8 @@ module.exports = {
         routeBasePath: 'open_source',
         sidebarPath: require.resolve('./config/sidebars_for_open_source.js'),
         editUrl: default_editUrl,
-        showLastUpdateAuthor: true,
-        showLastUpdateTime: true,
+        showLastUpdateAuthor: false,
+        showLastUpdateTime: false,
       },
     ]
   ],
@@ -45,8 +45,8 @@ module.exports = {
           path: 'docs',
           editUrl: default_editUrl,
           sidebarPath: require.resolve('./config/sidebars_for_docs.js'),
-          showLastUpdateAuthor: true,
-          showLastUpdateTime: true,
+          showLastUpdateAuthor: false,
+          showLastUpdateTime: false,
         },
         blog: {
           path: 'blog',
@@ -121,7 +121,7 @@ module.exports = {
           items: [
             {
               label: '算法',
-              to: '/algorithm/index',
+              to: '/algorithm/',
             }
           ],
         },
