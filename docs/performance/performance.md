@@ -94,7 +94,7 @@ HTTP/2对同⼀域名下所有请求都是基于流，也就是说同⼀域名�
 
 ## 页面加载
 
-各项指标信息，移步至 [页面性能指标](performance/page_performance_index)
+各项指标信息，移步至 [页面性能指标](./page_performance_index)
 
 根据不同的情况做调优
 
@@ -146,7 +146,3 @@ update 阶段 为 FMP 阶段 挂载数据，视图更新
 :::
 
 几种对比
-<!-- 
-<ClientOnly>
-  <PerformanceResult />
-</ClientOnly> -->

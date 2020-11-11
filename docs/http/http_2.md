@@ -2,7 +2,7 @@
 title: HTTP 2/3 & HTTPS
 ---
 
-## 密码学<Badge type="tip" text="了解即可"/>
+## 密码学
 
 密码学的处理对象是数字和字符串
 

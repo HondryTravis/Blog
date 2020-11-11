@@ -6,7 +6,7 @@ title: CSS 阻塞 I/O 初探
 css 会阻塞 js 加载么？
 :::
 
-## SCRIPT 脚本影响 DOM 解析<Badge type="tip" text="会么?"/>
+## SCRIPT 脚本影响 DOM 解析
 
 打脸代码
 
@@ -34,7 +34,7 @@ script 内嵌脚本/src 放在 dom 底部会阻塞 dom 渲染，不会影响解�
 DOM解析不影响 渲染依旧等待
 :::
 
-## CSS 影响 DOM 渲染<Badge type="tip" text="会么?"/>
+## CSS 影响 DOM 渲染
 
 打脸代码
 
@@ -77,7 +77,7 @@ DOM解析不影响 渲染依旧等待
 
 :::
 
-## CSS 阻塞 Scirpt 加载<Badge type="tip" text="会么?"/>
+## CSS 阻塞 Scirpt 加载
 
 打脸代码
 
@@ -116,7 +116,7 @@ css 加载会阻塞后面JS脚本/语句
 
 :::
 
-## CSS 阻塞 DOMLoading<Badge type="tip" text="会么?"/>
+## CSS 阻塞 DOMLoading
 
 打脸代码
 

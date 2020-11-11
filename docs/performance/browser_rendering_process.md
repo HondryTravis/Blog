@@ -141,6 +141,6 @@ Blink 是未来
 
 Blink官方文档：<http://www.chromium.org/blink>
 
-### webkit 架构<Badge type="tip" text="了解即可"/>
+### webkit 架构
 
 ![webkit_core](/images/performance/webkit_core.png)

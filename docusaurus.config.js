@@ -104,15 +104,15 @@ module.exports = {
           items: [
             {
               label: '如何监控页面性能指标',
-              to: 'docs/performance/page_performance_index',
+              to: '/docs/performance/page_performance_index',
             },
             {
               label: '设计模式',
-              to: 'docs/thinking/design_patterns',
+              to: '/docs/thinking/design_patterns',
             },
             {
               label: '函数式编程',
-              to: 'docs/thinking/functional_programming',
+              to: '/docs/thinking/functional_programming',
             }
           ],
         },
@@ -121,7 +121,7 @@ module.exports = {
           items: [
             {
               label: '算法',
-              to: '/algorithm/main',
+              to: '/algorithm/index',
             }
           ],
         },
@@ -159,7 +159,7 @@ module.exports = {
           items: [
             {
               label: '邮箱 | 社交方式',
-              to: 'docs/contact',
+              to: '/docs/contact',
             },
           ]
         },
