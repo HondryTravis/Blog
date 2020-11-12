@@ -64,7 +64,7 @@ module.exports = {
       title: 'Better late than never',
       logo: {
         alt: 'logo',
-        src: 'images/default/logo.png',
+        src: 'images/default/Logo.png',
       },
       items: [
         {
@@ -129,27 +129,27 @@ module.exports = {
           title: '开源贡献',
           items: [
             {
-              label: 'tscli 脚手架',
+              label: 'tscli',
               to: '/open_source/cli/tscli',
             },
             {
-              label: 'Indexeddb 前端中的数据库',
+              label: 'Indexeddb',
               to: '/open_source/github/indexeddb',
             },
             {
-              label: 'TinyDB 文档',
+              label: 'TinyDB',
               to: '/open_source/github/tinydb_docapi',
             },
             {
-              label: 'Simple dark 主题',
+              label: 'Simple dark',
               to: '/open_source/vscode/Simple-dark',
             },
             {
-              label: 'xs-doc 开源 excel 表格文档',
+              label: 'xs-doc',
               href: 'https://github.com/HondryTravis/xs-docs',
             },
             {
-              label: 'x-spreadsheet 开源表格',
+              label: 'x-spreadsheet',
               href: 'https://github.com/myliang/x-spreadsheet',
             }
           ],
@@ -158,7 +158,7 @@ module.exports = {
           title: '联系方式',
           items: [
             {
-              label: '邮箱 | 社交方式',
+              label: '邮箱 | 联系方式',
               to: '/docs/contact',
             },
           ]
