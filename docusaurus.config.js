@@ -6,8 +6,8 @@ module.exports = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   favicon: 'images/default/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'HondryTravis', // Usually your GitHub org/user name.
+  projectName: 'hondrytravis.github.io', // Usually your repo name.
   plugins: [
     [
       '@docusaurus/plugin-content-docs',
