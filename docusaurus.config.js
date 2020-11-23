@@ -90,7 +90,7 @@ module.exports = {
           position: 'left',
         },
         {
-          href: 'https://hondrytravis.github.io/',
+          href: 'https://github.com/HondryTravis',
           label: 'GitHub',
           position: 'right',
         },
