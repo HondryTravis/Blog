@@ -15,7 +15,7 @@ deploy:
   provider: pages
   target-branch: master
   cleanup: true
-  local-dir: ./build
+  local-dir: ./build/
   repo: HondryTravis/HondryTravis.github.io
   github-token: $GITHUB_TOKEN
   keep-history: true
