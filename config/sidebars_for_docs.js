@@ -10,6 +10,13 @@ const font_end = [
   },
   {
     type: 'category',
+    label: 'Wasm',
+    items: [
+      'wasm/wasm',
+    ]
+  },
+  {
+    type: 'category',
     label: 'HTML | CSS',
     items: [
       'css/css_io',
