@@ -32,8 +32,8 @@ var colors = {
 
 module.exports = {
     plain: {
-        color: "#dddddd",
-        backgroundColor: "#24272a"
+        color: colors['mediumWhite'],
+        backgroundColor: colors['lightBlack']
     },
     styles: [
         {

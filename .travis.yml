@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - '11'
+  - lts/*
 branches:
   only:
     - master
@@ -14,10 +14,10 @@ script:
 deploy:
   provider: pages
   target-branch: master
-  cleanup: true
-  local-dir: build/
+  skip_cleanup: true
+  local-dir: build
   repo: HondryTravis/HondryTravis.github.io
   github-token: $GITHUB_TOKEN
-  keep-history: true
+  keep_history: true
   on:
     branch: master
