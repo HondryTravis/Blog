@@ -1,6 +1,6 @@
 ---
 # slug: hola
-title: 简述
+title: 减压
 author: travis
 author_title: A TypeScript/C#/Python developer who likes open source
 author_url: https://github.com/HondryTravis
@@ -22,4 +22,4 @@ tags: [start]
 
 After the night I burned all memory, my dream becomes transparent, as I trashed all yesterdays, my step becomes lighter.
 
-有一来个夜晚我烧毁了所有的记忆，从此我的梦就透明了。有一个早晨我扔掉了所有的昨天，从此我的脚步就轻盈了。 ——《源烧毁记忆》泰戈尔
+有一来个夜晚我烧毁了所有的记忆，从此我的梦就透明了。有一个早晨我扔掉了所有的昨天，从此我的脚步就轻盈了。 ——《烧毁记忆》泰戈尔
