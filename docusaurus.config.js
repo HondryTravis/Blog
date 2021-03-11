@@ -164,7 +164,7 @@ module.exports = {
           ]
         },
       ],
-      copyright: `MIT Licensed | Copyright © 2020-present HondryTravis, Inc. Built with Docusaurus.`,
+      copyright: `MIT Licensed | Copyright © 2020-present HondryTravis, Inc. Build with Docusaurus.`,
     },
     prism: {
       theme: require('./code/dark/simple-dark'),

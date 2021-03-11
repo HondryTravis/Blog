@@ -5,8 +5,8 @@ slug: /contact
 
 ## 联系我
 
-:::note 工作邮箱
-Email: work.travis@outlook.com
+:::note 邮箱
+Email: hondry.travis@outlook.com
 :::
 
 :::note 社交
