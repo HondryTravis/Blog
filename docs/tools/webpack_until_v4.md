@@ -14,17 +14,17 @@ webpack 是一款项目模块打包器
 
 ## 思路
 
-使用 [打包分析](tools/webpack_until_v4.md#打包分析) 得出结果，
+使用 [打包分析](#打包分析) 得出结果，
 
-对 loader 慢处理 [缓存加速](tools/webpack_until_v4.md#缓存加速)
+对 loader 慢处理 [缓存加速](#缓存加速)
 
-对静态代码处理 [代码分析](tools/webpack_until_v4.md#代码分析)
+对静态代码处理 [代码分析](#代码分析)
 
-多线程加速压缩 [多核优化](tools/webpack_until_v4.md#多核优化压缩)
+多线程加速压缩 [多核优化](#多核优化压缩)
 
-对 html 处理 [html](tools/webpack_until_v4.md#html)
+对 html 处理 [html](#html)
 
-对图片处理 [image](tools/webpack_until_v4.md#图片)
+对图片处理 [image](#图片)
 
 ...(忘了？往下看)
 
