@@ -29,11 +29,11 @@ title: 最长子字符串
 var lengthOfLongestSubstring = function(s) {
   const length = s.length;
   const map = {};// char => boolean 代表着char是否在目前的窗口内
-  let 1 = 0,
+  let i = 0,
   j = 0;
   let ans = 0;
 
-  while (1 < length && j < length) {
+  while (i < length && j < length) {
     if (!map[s[j]]) {
       ans = Math.max(j - i + 1, ans);
       map[s[j]] = true;
@@ -41,11 +41,11 @@ var lengthOfLongestSubstring = function(s) {
   } else {
     //如果char重复，那么缩小滑动窗口，并更新对应的map
     map[s[i]] = false;
-    ++i；
+    ++i;
   }
   }
 
-  return ans；
+  return ans;
 };
 ```
 
@@ -66,19 +66,37 @@ var lengthOfLongestSubstring = function(s) {
 var lengthOfLongestSubstring = functlon(s) {
     const length = s.length;
     const map = new Map();
-    let 1 = 0,
+    let i = 0,
         j = 0;
     let ans = 0;
-    while ( 1  < length && j < length) {
+    while ( i  < length && j < length) {
     //容易理解：检查s[j]是否出现过，并且s[j]重复的字符是否在当前的滑动窗口中
       if (map.has(s[j]) && map.get(s[j]) >= i) {
         i = map.get(s[j]) + 1;
       }
       ans = Math.max(j - i + 1, ans);
       map.set(s[j], j);
-      ++j；
+      ++j;
     }
 
     return ans;
+};
+```
+
+:::note 解法3: 还是滑动窗口的思路 直接替换
+
+```js
+var lengthOfLongestSubstring = function (s) {
+    let map = new Map();
+    let index = -1
+    let last = 0
+    for (let j = 0, n = s.length; j < n; j++) {
+        if (map.has(s[j])) {
+            index = Math.max(index, map.get(s[j]))
+        }
+        last = Math.max(last, j - index)
+        map.set(s[j], j)
+    }
+    return last
 };
 ```
