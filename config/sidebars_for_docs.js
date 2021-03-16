@@ -146,7 +146,15 @@ const thinking = [
     ]
   },
 ]
-
+const ci_cd = [
+  {
+    type: 'category',
+    label: '构建工具',
+    items: [
+      'ci_cd/workspace'
+    ]
+  },
+]
 const os = [
   // os
   {
@@ -171,6 +179,7 @@ module.exports = {
   docs: [
     'summary',
     ...font_end,
+    ...ci_cd,
     ...framework,
     ...os,
     ...thinking,

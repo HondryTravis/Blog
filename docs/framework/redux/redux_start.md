@@ -40,4 +40,4 @@ Redux 就是 Flux 的升级版本，早期使用 React 都要配合 Flux 进行�
 
 ## 具体实现流程
 
-[Blog-example redux](https://github.com/HondryTravis/Blog-example/tree/master/packages/implements/redux)
+[Blog-example redux](https://github.com/HondryTravis/Blog-example/tree/master/packages/redux)
