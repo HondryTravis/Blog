@@ -4,6 +4,10 @@ module.exports = {
   tagline: '只要开始，虽晚不迟',
   url: 'https://hondrytravis.github.io/',
   baseUrl: '/',
+  i18n: {
+    defaultLocale: 'zh-Hans',
+    locales: ['zh-Hans']
+  },
   onBrokenLinks: 'throw',
   favicon: 'images/default/favicon.ico',
   organizationName: 'HondryTravis', // Usually your GitHub org/user name.
@@ -167,8 +171,8 @@ module.exports = {
       copyright: `MIT Licensed | Copyright © 2020-present HondryTravis, Inc. Built with Docusaurus.`,
     },
     prism: {
-      theme: require('./code/dark/simple-dark'),
-      darkTheme: require('./code/dark/simple-dark'),
+      theme: require('./code/dark/simple-dark.js'),
+      darkTheme: require('./code/dark/simple-dark.js'),
     },
   },
 };
