@@ -9,7 +9,10 @@ Workspace 能更好的统一管理有多个项目的仓库，既可在每个项�
 ## 根目录配置
 
 - private 不作为根目录发，最好是 true
+  - 当组件库开发完毕后，要发布到 NPM。工作区的根目录一般是脚手架，不需要发布。private 是为了防止意外把内容暴露出去
 - workspaces  表示工作空间
+  - 一个数组，存储要管理的所有包的路径（也可以成为工作区 workspace），支持 [Glob 通配符](https://github.com/isaacs/node-glob)。
+  - **注意**：由于使用通配符，如果这样使用./packages/*将会有问题，详细参考 [Dots](https://github.com/isaacs/node-glob#dots)
 
 ```json
 {
@@ -24,7 +27,15 @@ Workspace 能更好的统一管理有多个项目的仓库，既可在每个项�
 
 ## 同一个 workspace 相互引用安装
 
-最好指定版本, 注意 package_name 是 package.json 中的 name 不是文件夹目录名
+### 安装根目录包
+
+- -D: 作为开发依赖安装
+- -W: `--ignore-workspace-root-check` 表示安装到工作区的根目录
+
+```bash
+yarn add [package_name] -D -W
+yarn remove [package_name] -W
+```
 
 ### 安装 dependencies
 
@@ -52,6 +63,36 @@ yarn workspace [package_name] remove [package_name]
 yarn workspaces info --json
 ```
 
+### 启动
+
+**yarn workspaces**: 表示没个项目下执行
+
+```bash
+yarn workspaces run test
+```
+
+```bash
+yarn workspaces vx.x.x
+{ "create-subscription": {
+    "location": "packages/create-subscription",
+    "workspaceDependencies": [],
+    "mismatchedWorkspaceDependencies": []
+  },
+  ...
+  "react-noop-renderer": {
+    "location": "packages/react-noop-renderer",
+    "workspaceDependencies": [
+      "react-reconciler"
+    ],
+    "mismatchedWorkspaceDependencies": []
+  },
+  "react-reconciler": {
+    "location": "packages/react-reconciler",
+    "workspaceDependencies": [],
+    "mismatchedWorkspaceDependencies": []
+  }, ... }
+```
+
 ### 其他
 
 yarn 的命令大都可以直接使用
@@ -66,3 +107,13 @@ yarn 的命令大都可以直接使用
 # 控制台会打印如下结果
 我是 demo！
 ```
+
+## 参考连接
+
+[Workspaces](https://classic.yarnpkg.com/en/docs/cli/workspaces)
+
+[Workspaces in Yarn](https://classic.yarnpkg.com/blog/2017/08/02/introducing-workspaces/)
+
+[Workspaces](https://classic.yarnpkg.com/en/docs/workspaces)
+
+[Yarn workspaces - 皮蛋很白](https://blog.csdn.net/u012961419/article/details/108704826)
