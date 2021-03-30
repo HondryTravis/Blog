@@ -70,7 +70,7 @@ fun1();
 
 ```js
 function fun3() {
-  console.log('fun3') 
+  console.log('fun3')
 }
 function fun2() {
   fun3();
@@ -128,16 +128,6 @@ Javascript引擎首次运行到你的脚本时，它会创建一个全局执行�
 变量对象VO是与执⾏上下⽂相关的特殊对象,⽤来存储上下⽂的函数声明，函数形参和变量。
 
 ```js
-// 变量对象VO存储上下⽂中声明的以下内容
-{
-  // 1-1 函数声明FD(如果在函数上下⽂中),—-不包含函数表达式
-  // 1-2 函数形参function arguments,
-  // 1-3 变量声明–注意b=10不是变量，但是var b = 10;是变量，有变量声明提升
-  // alert(a); // undefined
-  // alert(b); // “b” 没有声明
-  // b = 10;
-  // var a = 20;
-}
 var a = 10;
 
 function test(x) {
@@ -146,34 +136,46 @@ function test(x) {
 
 test(30);
 
+```
+
+全局上下⽂的变量对象 VO
+
+```js
 // 全局上下⽂的变量对象
 VO(globalContext) = {
   a: 10,
   test: <reference to function>
 };
+```
 
+test函数上下⽂的变量对象 VO
+
+```js
 // test函数上下⽂的变量对象
 VO(test functionContext) = {
   x: 30,
   b: 20
 };
 
-//VO分为 全局上下⽂的变量对象VO，函数上下⽂的变量对象VO
 VO(globalContext) === global;
 ```
 
+
+<Red color="red">VO分为 全局上下⽂的变量对象VO，函数上下⽂的变量对象VO</Red>
+
 ## 活动对象
 
-在函数上下⽂中，变量对象被表示为活动对象 AO, 当函数被调⽤后，这个特殊的活动对象就被创建了。它包含普通参数与特殊参数对象（具有索引属性的参数映射表）。活动对象在函数上下⽂中作为变量对象使⽤
+在函数上下⽂中，变量对象被表示为活动对象 AO, 当函数被调⽤后，这个特殊的活动对象就被创建了。它包含普通参数与特殊参数对象（具有索引属性的参数映射表）。活动对象在函数上下⽂中作为变量对象使⽤, 此阶段也将发生预编译
+
+1. 在函数执⾏上下⽂中，VO是不能直接访问的，此时由活动对象扮演VO的⻆⾊。
+2. Arguments对象它包括如下属性：callee 、length
+3. 内部定义的函数
+4. 以及绑定上对应的变量环境；
+5. 内部定义的变量
+
+<Red color="red">VO(functionContext) === AO</Red>
 
 ```js
-// 1. 在函数执⾏上下⽂中，VO是不能直接访问的，此时由活动对象扮演VO的⻆⾊。
-// 2. Arguments对象它包括如下属性：callee 、length
-// 3. 内部定义的函数
-// 4. 以及绑定上对应的变量环境；
-// 5. 内部定义的变量
-
-VO(functionContext) === AO;
 function test(a, b) {
   var c = 10;
   function d() {}
@@ -181,9 +183,10 @@ function test(a, b) {
   (function x() {});
 }
 test(10); // call
-// 当进⼊带有参数10的test函数上下⽂时，AO表现为如下：
-// AO⾥并不包含函数“x”。这是因为“x” 是⼀个函数表达式(FunctionExpression, 缩写为 FE) ⽽不是
-// 函数声明，函数表达式不会影响VO
+```
+当进⼊带有参数10的test函数上下⽂时，AO表现为如下
+
+```js
 AO(test) = {
   a: 10,
   b: undefined,
@@ -192,20 +195,31 @@ AO(test) = {
   e: undefined
 };
 ```
+> AO⾥并不包含函数“x”。这是因为“x” 是⼀个函数表达式(FunctionExpression, 缩写为 FE) ⽽不是函数声明,函数表达式不会影响VO
 
-### 深度活动对象
+活动对象和变量对象的区别:
+- 变量对象（VO）是规范上或者是 JS 引擎上实现的,并不能在 JS 环境中直接访问
+- 当进入到一个执行上下文后,这个变量对象才会被激活,所以叫活动对象(AO),这时候活动对象上的各种属性才能被访问,因为被激活了
+
+
+## 深度活动对象
+
+深度活动对象(Activation Object) 分为 **创建阶段** 和 **执⾏阶段**
 
 ```js
-// Activation Object 分为创建阶段和执⾏阶段
 function foo(i) {
   var a = 'hello';
   var b = function privateB() {};
   function c() {}
 }
-
 foo(22);
+```
+当我们执⾏foo(22)的时候，EC创建阶段会类似⽣成下⾯这样的对象：
 
-// 当我们执⾏foo(22)的时候，EC创建阶段会类似⽣成下⾯这样的对象：
+```js
+/* 创建阶段 */
+
+// 在创建阶段，会发⽣属性名称的定义，但是并没有赋值(变量提升阶段)。
 fooExecutionContext = {
   scopeChain: { Scope },
   AO: {
@@ -215,17 +229,20 @@ fooExecutionContext = {
     },
     i: 22,
     c: pointer to function c()
-    a: undefined, 
+    a: undefined,
     b: undefined
   },
   VO:{..}
   Scope: [AO, globalContext.VO],
 }
 
-// 在创建阶段，会发⽣属性名称的定义，但是并没有赋值(变量提升阶段)。
-// ⼀旦创建阶段（creationstage）结束，变进⼊了激活 / 执⾏阶段，那么 fooExecutionContext 便会完成赋值，变成这样：
-//【 运⾏函数内部的代码，对变量复制，代码⼀⾏⼀⾏的被解释执⾏ 】
+// 形参 i 这时候已经有赋值了，但是变量还是 undefined, 只是初始化
 
+/* 执行阶段 */
+
+// ⼀旦创建阶段（creationstage）结束，变进⼊了激活 / 执⾏阶段
+// 那么 fooExecutionContext 便会完成赋值，变成这样：
+//【 运⾏函数内部的代码，对变量复制，代码⼀⾏⼀⾏的被解释执⾏ 】
 fooExecutionContext = {
   scopeChain: { ... },
   AO: {
@@ -244,7 +261,11 @@ fooExecutionContext = {
 }
 ```
 
-### 补充活动对象
+看个图
+
+[通过动图了解JS中的ECStack、EC、VO 和 AO](https://www.zhihu.com/zvideo/1314911698281725952)
+
+## 补充活动对象
 
 ```js
 var x = 10;
@@ -253,13 +274,18 @@ function foo() {
   barFn(); // 10, "y" is not defined
 }
 foo();
-// 1.通过函构造函数创建的函数的[[scope]]属性总是唯⼀的全局对象（LexicalEnvironment）。
-// 2.Eval code - eval 函数包含的代码块也有同样的效果
 ```
+>
+- 通过函构造函数创建的函数的[[scope]]属性总是唯⼀的全局对象（LexicalEnvironment）。
+- Eval code - eval 函数包含的代码块也有同样的效果
+
+
+<Red color="red">VO 函数上下⽂的链接 AO 是函数⾃身的</Red>
+
 
 ```js
 // 所以关于 fun 那个例子
-// VO函数上下⽂的链接 AO是函数⾃身的
+
 ECStack = [
   fun3
   fun2,
@@ -291,40 +317,59 @@ let r = test()
 r.forEach(fn => {
   console.log('fn',fn())
 })
-// 1.函数test执⾏完出栈 留下AO(test)有个i的指向
-// 2.函数在执⾏的时候，函数的执⾏环境才会⽣成。所以fn执⾏的时候⽣成作⽤域链条指向如下
-// 3.AO(result[i]) --> AO(fn) --> VO(G) 加个闭包就⽴⻢创建了执⾏环境
 
-<ul>
-  <li>1</li>
-  <li>2</li>
-  <li>3</li>
-  <li>4</li>
-  <li>5</li>
-  <li>6</li>
-</ul>
-var list_li = document.getElementsByTagName("li");
-for (var i = 0; i < list_li.length; i++) {
-  list_li[i].onclick = function () {
-    console.log(i);
-  }
-}
 ```
 
-那么其实⼀切也就迎刃⽽解了。闭包的原理是 Scope (堆空间中存储 closure(foo))，this 的原理是动态绑定，作⽤域链的原理是Scope: [AO, globalContext.VO], eval 不能回收的原理是推不进AO, 变量提升的原理是 AO 的准备阶段，异步队列的原理是 ECS
+1. 函数test执⾏完出栈 留下AO(test)有个i的指向
+2. 函数在执⾏的时候，函数的执⾏环境才会⽣成。所以fn执⾏的时候⽣成作⽤域链条指向如下
+3. AO(result[i]) --> AO(fn) --> VO(G) 加个闭包就⽴⻢创建了执⾏环境
 
+:::note 闭包 | this | 作用域连 | eval不能回收 | 异步队列
+那么其实⼀切也就迎刃⽽解了。
+
+**闭包**: 原理是 Scope (堆空间中存储 closure(foo))
+
+**this**: 动态绑定，也指向当前执行栈 ECS(Execution Context Stack) 顶的执行上下文 EC(Execution Context)
+
+**作用域连**: 原理是Scope: [AO, globalContext.VO]
+
+**eval不能回收**: 原理是推不进AO, 变量提升的原理是 AO 的准备阶段
+
+**异步队列**: 原理是 ECS
+
+:::
 ## 新版本 ES5+
 
+JS执行上下文的创建阶段主要负责三件事:
+
+1. this 值的决定，也被称为 This Binding。（即 this 绑定）
+
+2. LexicalEnvironment（词法环境）
+
+3. VariableEnvironment（变量环境）
+
 ```js
-// this 值的决定，也被称为 This Binding。（即 this 绑定）
-// LexicalEnvironment（词法环境）
-// VariableEnvironment（变量环境）
+
 ExecutionContext = {
   ThisBinding = <this value>,
   LexicalEnvironment = { ... },
   VariableEnvironment = { ... },
 }
+```
+### 确定ThisBinding
+官方的称呼为 This Binding,在全局执行上下文中，this 总是指向全局对象，例如浏览器环境下 this 指向 window 对象。而在 nodejs 中指向这个文件的 module 对象。
 
+在函数执行上下文中,this的值取决于函数的调用方式，this 的值取决于函数的调用方式。具体有：默认绑定、隐式绑定、显式绑定（硬绑定）、new绑定、箭头函数
+
+### 词法环境
+
+[具体词法环境参考 9.1 Environment Records](https://tc39.es/ecma262)
+
+词法环境就是描述环境的对象，主要包含两个部分:
+- 环境记录(Environment Record) 记录相应环境中的形参，函数声明，变量声明等
+- 对外部环境的引用(out reference)
+
+```js
 // 全局执⾏上下⽂
 GlobalExectionContext = {
   // 词法环境
@@ -350,9 +395,9 @@ FunctionExectionContext = {
 }
 ```
 
-为了继续去适配早期的JS的var等，新的规范增加了变量环境（VariableEnvironment）。变量环境也是⼀个词法环境，其环境记录器包含了由变量声明语句
+为了继续去适配早期的 JS 的 var 等，新的规范增加了变量环境（VariableEnvironment）。变量环境也是⼀个词法环境，其环境记录器包含了由变量声明语句
 
-在ES6 中，词法环境组件和变量环境组件的区别在与前者⽤于存储函数声明和变量（ let 和 const ）绑定，⽽后者仅⽤与存储变量（ var ）绑定。
+在ES6 中，词法环境组件和变量环境组件的区别在与前者⽤于存储函数声明和变量<RedInline color="red">（ let 和 const ）</RedInline>绑定，⽽后者仅⽤与存储变量<RedInline color="red">（ var ）</RedInline>绑定。
 
 ```js
 let a = 20;
@@ -360,10 +405,14 @@ const b = 30;
 var c;
 function multiply(e, f){
   var g = 20;
-  return e*f*g; 
+  return e*f*g;
 }
 c = multiply(20, 30);
+```
 
+词法组成
+
+```js
 // 全局执⾏上下⽂
 GlobalExectionContext = {
   ThisBinding: < Global Object > ,
@@ -416,15 +465,11 @@ FunctionExectionContext = {
 
 ```
 
-以上 let 和 const 定义的变量并没有关联任何值 uninitialized(未初始化) ，但 var 定义的变量被初始化成 undefined 。这也就是造成 TDZ(临时性死区 Temporal Dead Zone) 的原因了。
+以上 let 和 const 定义的变量并没有关联任何值 uninitialized(未初始化) ，但 var 定义的变量被初始化成 undefined 。这也就是造成<RedInline color="red"> TDZ(临时性死区 Temporal Dead Zone) </RedInline>的原因了。
 
 接下来就是执⾏阶段，完成对所有变量的分配，最后执⾏代码。⽆论是 ES3 还是 ES5,上下⽂的⽣命周期包括三个阶段：创建阶段 -> 执⾏阶段 -> 回收阶段。
 
-:::note 所以关于面试最多测试 this 指向问题
-  指向当前执行栈 ECS(Execution Context Stack) 顶的执行上下文 EC(Execution Context)
-:::
-
-:::note js 作用域
+:::info js 作用域
   函数级词法作用域
 :::
 
@@ -436,6 +481,16 @@ FunctionExectionContext = {
 
 [ecma262](https://tc39.es/ecma262/#sec-environment-records)
 
-## 感谢
+[xikun's blog](https://lilixikun.github.io/blog/js/执行过程.html#执行堆栈)
 
-感谢: 老袁
+export const Red = ({children, color}) => (
+  <p style={{color: color}}>
+    {children}
+  </p>
+);
+
+export const RedInline = ({children, color}) => (
+  <span style={{color: color}}>
+    {children}
+  </span>
+);
