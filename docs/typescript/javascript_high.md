@@ -1,5 +1,5 @@
 ---
-title: 高阶方法 | js
+title: JS | 高阶方法
 ---
 
 ## defineProperty

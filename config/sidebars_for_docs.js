@@ -6,6 +6,7 @@ const font_end = [
       'typescript/implement_list',
       'typescript/javascript_high',
       'typescript/recursive_optimization',
+      'typescript/javascript_workflow',
     ]
   },
   {
