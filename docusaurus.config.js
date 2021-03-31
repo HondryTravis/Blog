@@ -63,8 +63,9 @@ module.exports = {
   themeConfig: {
     docsSideNavCollapsible: true,
     hideableSidebar: true,
-    hideOnScroll: true,
     navbar: {
+      hideOnScroll: true,
+      style: 'dark',
       title: 'Better late than never',
       logo: {
         alt: 'logo',
@@ -174,5 +175,9 @@ module.exports = {
       theme: require('./code/dark/simple-dark.js'),
       darkTheme: require('./code/dark/simple-dark.js'),
     },
+    colorMode:{
+      defaultMode: 'light',
+      disableSwitch: false
+    }
   },
 };

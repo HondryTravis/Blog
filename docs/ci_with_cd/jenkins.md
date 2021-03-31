@@ -1,5 +1,5 @@
 ---
-title: Jenkins
+title: Jenkins | 自动化构建
 ---
 
 Jenkins是一个开源软件项目，是基于Java开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件的持续集成变成可能。
@@ -82,37 +82,37 @@ Starting jenkins (via systemctl):                          [  OK  ]
 
 首先根据相关提示，拿到登录密码
 
-![启动](/images/engineering/jenkins_start.png)
+![启动](/images/ci_with_cd/jenkins_start.png)
 
 插件安装，选推荐就完事了，后边可以卸载在更改
 
-> 这里如果遇到过慢的问题，查看 [过慢解决方案](engineering/jenkins.md#替换插件源，首次安装过慢)
+> 这里如果遇到过慢的问题，查看 [过慢解决方案](#替换插件源，首次安装过慢)
 
-![安装插件](/images/engineering/jenkins_install_plugin.png)
+![安装插件](/images/ci_with_cd/jenkins_install_plugin.png)
 
 更改结束设置以后，刷新浏览器，重新走到这一步，恢复安装即可
 
-![恢复安装](/images/engineering/jenkins_reinstall_plugin.png)
+![恢复安装](/images/ci_with_cd/jenkins_reinstall_plugin.png)
 
 耐心等待安装插件
 
-![安装插件](/images/engineering/jenkins_success.png)
+![安装插件](/images/ci_with_cd/jenkins_success.png)
 
 创建用户：登录用户
 
-![创建用户](/images/engineering/jenkins_create_user.png)
+![创建用户](/images/ci_with_cd/jenkins_create_user.png)
 
 配置实例地址，一般默认就好，我的打马赛克了，如果一般前边配置了端口号，这里会有默认地址
 
-![配置实例地址](/images/engineering/jenkins_instance_url.png)
+![配置实例地址](/images/ci_with_cd/jenkins_instance_url.png)
 
 别急，耐心点，还有一步
 
-![启动成功](/images/engineering/jenkins_sucess_start.png)
+![启动成功](/images/ci_with_cd/jenkins_sucess_start.png)
 
-别忘记再次在这里替换插件更新源：系统管理 > 插件管理 > 高级 #升级站点 替换掉源 [地址](engineering/jenkins.md#替换插件源，首次安装过慢)
+别忘记再次在这里替换插件更新源：系统管理 > 插件管理 > 高级 #升级站点 替换掉源 [地址](#替换插件源，首次安装过慢)
 
-![替换源](/images/engineering/jenkins_replace_plugin_url.png)
+![替换源](/images/ci_with_cd/jenkins_replace_plugin_url.png)
 
 并且提交，点击立即获取
 

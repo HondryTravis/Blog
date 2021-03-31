@@ -1,22 +1,22 @@
 ---
-title: 前端工程化 CI/CD 初探
+title: CI & CD | 前端工程化初探
 ---
 
 ## 思维导图
 
-![全景图](/images/engineering/all.png)
+![全景图](/images/ci_with_cd/all.png)
 
 ## CI/CD
 
 ### 持续集成/CI
 
-![CI](/images/engineering/ci.png)
+![CI](/images/ci_with_cd/ci.png)
 
 **持续集成(CI):** 是一个让开发人员将工作集成到共享分支中的过程，从而增强了协作开发。频繁的集成有助于解决隔离，减少每次提交的大小，以降低合并冲突的可能性。
 
 ### 持续交付和持续部署/CD
 
-![CI](/images/engineering/ci_cd.png)
+![CI](/images/ci_with_cd/ci_cd.png)
 
 **持续交付和持续部署(CD):** 是在构建持续集成的基础之上的两种策略。
 
@@ -76,7 +76,7 @@ CI/CD系统依赖自动化来生产构建并且通过流水线来迁移新的更
 
 测试套件中不同类型测试的比例应和“测试金字塔”模型相似。大多数测试应该是单元测试，因为它们拥有基本功能的同时还可以快速执行。此外，还要有较少数量的集成测试，以确保组件可以一起成功运行。最后，应在测试周期结束时包含少量回归、UI、系统和端到端测试，以确保构建满足项目的所有行为要求。可以使用像JaCoCo这样的工具来确定测试套件涵盖了多少代码库。
 
-![test](/images/engineering/test.png)
+![test](/images/ci_with_cd/test.png)
 
 ## 自动构建概述
 
@@ -100,8 +100,8 @@ CI/CD系统依赖自动化来生产构建并且通过流水线来迁移新的更
 
 记录在VCS中的每个更改都称为提交。每个提交都对代码库的更改进行编目分类，元数据也包含在其中，例如关于查看提交历史记录或合并更新的描述。
 
-![git](/images/engineering/git_version.png)
+![git](/images/ci_with_cd/git_version.png)
 
 ## 流水线
 
-![pipe](/images/engineering/pipe_line.png)
+![pipe](/images/ci_with_cd/pipe_line.png)

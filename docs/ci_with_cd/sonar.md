@@ -106,7 +106,7 @@ Started SonarQube.
 
 在本地浏览器访问 <远程地址:9000> **注意：是你本机 不是服务端**
 
-![汉化流程](/images/engineering/sonar.png)
+![汉化流程](/images/ci_with_cd/sonar.png)
 
 ## SonarScanner
 
@@ -116,27 +116,27 @@ Started SonarQube.
 
 ### 先使用 sonar 浏览器端创建项目
 
-![创建](/images/engineering/sonar_create.png)
+![创建](/images/ci_with_cd/sonar_create.png)
 
 ### 配置项目名称
 
-![创建名称](/images/engineering/project_name.png)
+![创建名称](/images/ci_with_cd/project_name.png)
 
 ### 配置项目token
 
 点击创建之后，在点击继续
 
-![创建token](/images/engineering/create_token.png)
+![创建token](/images/ci_with_cd/create_token.png)
 
 ### 配置开发机
 
-![配置开发机](/images/engineering/download_sonar_scanner.png)
+![配置开发机](/images/ci_with_cd/download_sonar_scanner.png)
 
 ### 下载SonarScanner
 
 可能后边会更换: [飞机票地址](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/)
 
-![下载](/images/engineering/unzip_sonar_scanner.png)
+![下载](/images/ci_with_cd/unzip_sonar_scanner.png)
 
 ### 配置本地环境变量(mac)
 
@@ -164,17 +164,17 @@ sonar-scanner -v
 
 我选中的 github 上的 quill
 
-![选定的项目](/images/engineering/selected_project.png)
+![选定的项目](/images/ci_with_cd/selected_project.png)
 
-然后将 [配置开发机](engineering/sonar.md#配置开发机)
+然后将 [配置开发机](ci_with_cd/sonar.md#配置开发机)
 
 第五步内容拷贝至 `sonar-project.properties` 文件下
 
-![粘贴配置](/images/engineering/paste_shell.png)
+![粘贴配置](/images/ci_with_cd/paste_shell.png)
 
 更改你要扫描测试的目录，比如 `core`
 
-![更改目录](/images/engineering/changed_source.png)
+![更改目录](/images/ci_with_cd/changed_source.png)
 
 好了，使用终端 shell(zsh/bash) 执行你的这个 `sonar-project.properties` 文件
 
@@ -183,10 +183,10 @@ sonar-scanner -v
 sh sonar-project.properties
 ```
 
-![成功](/images/engineering/success.png)
+![成功](/images/ci_with_cd/success.png)
 
 接下来刷新你的本地浏览器
 
-![成功](/images/engineering/refresh_browser.png)
+![成功](/images/ci_with_cd/refresh_browser.png)
 
 **Congratulations!** 恭喜配置完成🎉

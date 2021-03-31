@@ -48,9 +48,10 @@ const font_end = [
     type: 'category',
     label: '前端工程化',
     items: [
-      'engineering/ci_cd',
-      'engineering/sonar',
-      'engineering/jenkins',
+      'ci_with_cd/ci_cd',
+      'ci_with_cd/sonar',
+      'ci_with_cd/jenkins',
+      'ci_with_cd/workspace'
     ]
   },
   {
@@ -147,15 +148,6 @@ const thinking = [
     ]
   },
 ]
-const ci_cd = [
-  {
-    type: 'category',
-    label: '构建工具',
-    items: [
-      'ci_cd/workspace'
-    ]
-  },
-]
 const os = [
   // os
   {
@@ -180,7 +172,6 @@ module.exports = {
   docs: [
     'summary',
     ...font_end,
-    ...ci_cd,
     ...framework,
     ...os,
     ...thinking,
