@@ -17,9 +17,9 @@ module.exports = {
       '@docusaurus/plugin-content-docs',
       {
         id: 'algorithm',
-        path: 'algorithm',
+        path: './packages/algorithm',
         routeBasePath: 'algorithm',
-        sidebarPath: require.resolve('./config/sidebars_for_algorithm.js'),
+        sidebarPath: require.resolve('./packages/config/sidebars_for_algorithm.js'),
         editUrl: default_editUrl,
         showLastUpdateAuthor: false,
         showLastUpdateTime: false,
@@ -29,9 +29,9 @@ module.exports = {
       '@docusaurus/plugin-content-docs',
       {
         id: 'open_source',
-        path: 'open_source',
+        path: './packages/open_source',
         routeBasePath: 'open_source',
-        sidebarPath: require.resolve('./config/sidebars_for_open_source.js'),
+        sidebarPath: require.resolve('./packages/config/sidebars_for_open_source.js'),
         editUrl: default_editUrl,
         showLastUpdateAuthor: false,
         showLastUpdateTime: false,
@@ -46,14 +46,14 @@ module.exports = {
           customCss: require.resolve('./src/css/custom.css'),
         },
         docs: {
-          path: 'docs',
+          path: './packages/docs',
           editUrl: default_editUrl,
-          sidebarPath: require.resolve('./config/sidebars_for_docs.js'),
+          sidebarPath: require.resolve('./packages/config/sidebars_for_docs.js'),
           showLastUpdateAuthor: false,
           showLastUpdateTime: false,
         },
         blog: {
-          path: 'blog',
+          path: './packages/blog',
           editUrl: default_editUrl,
           postsPerPage: 1,
         },
@@ -172,8 +172,8 @@ module.exports = {
       copyright: `MIT Licensed | Copyright © 2020-present HondryTravis, Inc. Built with Docusaurus.`,
     },
     prism: {
-      theme: require('./code/dark/simple-dark.js'),
-      darkTheme: require('./code/dark/simple-dark.js'),
+      theme: require('./packages/code/dark/simple-dark.js'),
+      darkTheme: require('./packages/code/dark/simple-dark.js'),
     },
     colorMode:{
       defaultMode: 'light',
