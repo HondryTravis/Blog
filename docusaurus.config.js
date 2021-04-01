@@ -66,7 +66,7 @@ module.exports = {
     navbar: {
       hideOnScroll: true,
       style: 'dark',
-      title: 'Better late than never',
+      title: 'Better Late Than Never',
       logo: {
         alt: 'logo',
         src: 'images/default/Logo.png',

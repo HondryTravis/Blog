@@ -54,6 +54,7 @@ function Feature({imageUrl, title, description}) {
 function Home() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
+  console.log(styles.getStarted,)
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}

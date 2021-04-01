@@ -7,6 +7,8 @@ const font_end = [
       'typescript/javascript_high',
       'typescript/recursive_optimization',
       'typescript/javascript_workflow',
+      'typescript/u_dont_know_js',
+      'typescript/js_packing_unboxing'
     ]
   },
   {
@@ -30,7 +32,7 @@ const font_end = [
   },
   {
     type: 'category',
-    label: 'Webpack 优化',
+    label: 'Webpack',
     items: [
       'tools/webpack_until_v4',
     ]

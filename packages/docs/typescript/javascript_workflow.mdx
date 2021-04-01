@@ -2,6 +2,8 @@
 title: JS | 执行调度过程
 ---
 
+import { Red, RedInline } from '../common/index.mdx'
+
 当Javascript代码执⾏的时候会将不同的变量存于内存中的不同位置：堆（heap）和栈（stack）中来加以区分。其中，堆⾥存放着⼀些对象。⽽栈中则存放着⼀些基础类型变量以及对象的指针
 
 js 在执⾏可执⾏的脚本时，⾸先会创建⼀个全局可执⾏上下⽂ globalContext，每当执⾏到⼀个函数调⽤时都会创建⼀个可执⾏上下⽂（execution context）EC。当然可执⾏程序可能会存在很多函数调⽤，那么就会创建很多EC，所以 JavaScript 引擎创建了执⾏上下⽂栈（Execution context stack，ECS）来管理执⾏上下⽂。当函数调⽤完成，js会退出这个执⾏环境并把这个执⾏环境销毁，回到上⼀个⽅法的执⾏环境... 这个过程反复进⾏，直到执⾏栈中的代码全部执⾏完毕，如下是以上的⼏个关键词，了解一下。
@@ -161,7 +163,7 @@ VO(globalContext) === global;
 ```
 
 
-<Red color="red">VO分为 全局上下⽂的变量对象VO，函数上下⽂的变量对象VO</Red>
+<Red>VO分为 全局上下⽂的变量对象VO，函数上下⽂的变量对象VO</Red>
 
 ## 活动对象
 
@@ -173,7 +175,7 @@ VO(globalContext) === global;
 4. 以及绑定上对应的变量环境；
 5. 内部定义的变量
 
-<Red color="red">VO(functionContext) === AO</Red>
+<Red>VO(functionContext) === AO</Red>
 
 ```js
 function test(a, b) {
@@ -280,7 +282,7 @@ foo();
 - Eval code - eval 函数包含的代码块也有同样的效果
 
 
-<Red color="red">VO 函数上下⽂的链接 AO 是函数⾃身的</Red>
+<Red>VO 函数上下⽂的链接 AO 是函数⾃身的</Red>
 
 
 ```js
@@ -490,15 +492,3 @@ FunctionExectionContext = {
 [翻译文档](https://github.com/goddyZhao/Translation/tree/master/JavaScript)
 
 [Functions MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Functions)
-
-export const Red = ({children, color}) => (
-  <p style={{color: color}}>
-    {children}
-  </p>
-);
-
-export const RedInline = ({children, color}) => (
-  <span style={{color: color}}>
-    {children}
-  </span>
-);

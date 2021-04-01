@@ -1,0 +1,13 @@
+<!-- 红色块级提醒文字 -->
+export const Red = ({children, color}) => (
+  <p style={{color: color ? color : 'red'}}>
+    {children}
+  </p>
+);
+
+<!-- 红色内联提醒文字 -->
+export const RedInline = ({children, color}) => (
+  <span style={{color: color ? color : 'red'}}>
+    {children}
+  </span>
+);
