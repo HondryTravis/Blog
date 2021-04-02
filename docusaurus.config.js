@@ -1,4 +1,5 @@
 var default_editUrl = `https://github.com/HondryTravis/Blog/tree/master/`
+const showUpdateInfo = true
 module.exports = {
   title: 'TRAVIS',
   tagline: '只要开始，虽晚不迟',
@@ -21,8 +22,8 @@ module.exports = {
         routeBasePath: 'algorithm',
         sidebarPath: require.resolve('./packages/config/sidebars_for_algorithm.js'),
         editUrl: default_editUrl,
-        showLastUpdateAuthor: false,
-        showLastUpdateTime: false,
+        showLastUpdateAuthor: showUpdateInfo,
+        showLastUpdateTime: showUpdateInfo,
       },
     ],
     [
@@ -33,8 +34,8 @@ module.exports = {
         routeBasePath: 'open_source',
         sidebarPath: require.resolve('./packages/config/sidebars_for_open_source.js'),
         editUrl: default_editUrl,
-        showLastUpdateAuthor: false,
-        showLastUpdateTime: false,
+        showLastUpdateAuthor: showUpdateInfo,
+        showLastUpdateTime: showUpdateInfo,
       },
     ]
   ],
@@ -49,8 +50,8 @@ module.exports = {
           path: './packages/docs',
           editUrl: default_editUrl,
           sidebarPath: require.resolve('./packages/config/sidebars_for_docs.js'),
-          showLastUpdateAuthor: false,
-          showLastUpdateTime: false,
+          showLastUpdateAuthor: showUpdateInfo,
+          showLastUpdateTime: showUpdateInfo,
         },
         blog: {
           path: './packages/blog',
