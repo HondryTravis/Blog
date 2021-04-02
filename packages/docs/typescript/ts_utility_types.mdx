@@ -1,0 +1,134 @@
+---
+title: TS | 内置实用类型
+---
+
+import { Red } from '../common/index.mdx'
+
+## `Partial<Type>`
+
+可以将原本必要需要类型变为可选属性的类型
+
+```ts
+interface IState {
+  title: string;
+  description: string;
+}
+function test(state: IState, newState: Partial<IState>) {
+  return { ...state, ...newState };
+}
+
+const state: IState = {
+  title: "测试",
+  description: "这是一个测试"
+}
+const newState: Partial<IState> = {
+  title: "更新测试"
+}
+// 当然也可以直接修改 interface 初始定位的时候
+
+interface IState {
+  title?: string;
+  description?: string;
+}
+
+```
+
+## `Required<Type>`
+
+Required 和 Partial 相反，把之前的可选类型全部变为必要需要类型
+
+```ts
+interface Props {
+  a?: number;
+  b?: string;
+}
+const obj: Props = { a: 5 };
+const obj2: Required<Props> = { a: 5 };
+// 类型 "{ a: number; }" 中缺少属性 "b"，但类型 "Required<Props>" 中需要该属性
+```
+
+## `Readonly<Type>`
+
+构建具有只读的类型，无法修改
+
+```ts
+interface ITest {
+  id: number;
+}
+const todo: Readonly<ITest> = {
+  id: 6789,
+};
+todo.id = 434 // 无法分配到 "id" ，因为它是只读属性
+```
+## `Record<Keys,Type>`
+
+可以约束对象的 key, props 的类型
+
+```ts
+
+type IBook = 'yuwen' | 'math'
+
+interface IProp {
+  price: number;
+  page_number: number;
+  publish?: string;
+}
+
+const math: Record<IBook, IProp> = {
+  yuwen: {
+    price: 29,
+    page_number: 200
+  },
+  math: {
+    price: 49,
+    page_number: 100
+  }
+}
+math.yuwen
+```
+
+## `Pick<Type, Keys>`
+
+可以取出选择的类型声明中的几个字段生成一个新的类型
+
+```ts
+interface IBook {
+  title: string;
+  description: string;
+  price: number;
+}
+type IBuyBook = Pick<IBook, "title" | "price">;
+
+const buy: IBuyBook = {
+  title:'typescript',
+  price: 55
+}
+buy;
+```
+
+## `Omit<Type, Keys>`
+
+可以复制原有类型， 并且移出掉不需要的属性生成新的类型
+
+```ts
+interface IBook {
+  title: string;
+  description: string;
+  price: number;
+  publish: string;
+  author: string;
+}
+type IPreview = Omit<IBook, "author" | "price">
+type IPrice = Omit<IBook, "author" | "description" >
+const yuwen: IPreview = {
+  title: 'yuwen',
+  description: '语文',
+  publish: 'china'
+}
+
+const math: IPrice = {
+  title: 'yuwen',
+  price: 23,
+  publish: 'china'
+}
+```

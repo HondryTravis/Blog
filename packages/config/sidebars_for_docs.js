@@ -3,6 +3,7 @@ const font_end = [
     type: 'category',
     label: 'Typescript',
     items: [
+      'typescript/ts_utility_types',
       'typescript/implement_list',
       'typescript/javascript_high',
       'typescript/recursive_optimization',
