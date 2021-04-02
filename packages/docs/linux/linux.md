@@ -42,7 +42,7 @@ Linux，全称GNU/Linux，是一套免费使用和自由传播的类UNIX操作�
 
 ### 认识终端
 
-```sh
+```bash
   [root@travis ~]#
 ```
 
@@ -594,13 +594,13 @@ scp -r remote_username@remote_ip:remote_folder local_folder
 
 查看当前所有tcp端口
 
-```sh
+```bash
 [root@localhost ~]# netstat -ntlp
 ```
 
 查看所有8000端口使用情况
 
-```sh
+```bash
 [root@localhost ~]# netstat -ntulp | grep 8000
 ```
 
@@ -622,7 +622,7 @@ scp -r remote_username@remote_ip:remote_folder local_folder
 
 规则
 
-```sh
+```bash
 [root@localhost ~]# chown [-cfhvR] [--help] [--version] user[:group] file...
 # 常见
 [root@localhost ~]# chown -R user:group file(dir)
@@ -648,7 +648,7 @@ Linux/Unix 的文件调用权限分为三级 : 文件拥有者、群组、其他
 
 用法
 
-```sh
+```bash
 [root@localhost ~]# chmod [-cfvR] [--help] [--version] mode file...
 # 超级权限
 [root@localhost ~]# chmod 777 file(dir)

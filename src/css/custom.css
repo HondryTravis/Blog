@@ -17,7 +17,11 @@
   --ifm-code-font-size: 95%;
   /* button */
   --ifm-color-info: #00A1F1;
+  --ifm-color-success: #00E673;
+  --ifm-color-note: red;
+  --ifm-alert-color: #FFFFFF;
   /* --ifm-button-background-color: rgba(0, 161, 241, 1); */
+  /* --ifm-font-color-base-inverse:#FFFFFF; */
 }
 
 .docusaurus-highlight-code-line {

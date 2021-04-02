@@ -5,6 +5,7 @@ module.exports = {
     {
       type: 'category',
       label: '开源项目',
+      collapsed: false,
       items: [
         'cli/tscli',
         'github/indexeddb',

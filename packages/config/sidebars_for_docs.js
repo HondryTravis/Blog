@@ -135,7 +135,7 @@ const other = [
       'mac/command_line',
       'mac/homebrew',
       'mac/nvm',
-      'node/nrm'
+      'mac/nrm'
     ]
   }
 ]

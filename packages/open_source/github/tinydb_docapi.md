@@ -4,228 +4,236 @@ title: TinyDB 文档
 
 [源码地址](https://github.com/HondryTravis/TinyDB)
 
-## 快速开始
+easy to use multi-table indexeddb lib
 
-一般的我们只需要 `new TinyDB(config)` 就可以拿到这个数据表对象
+## Document
 
-```javascript
-<script src="tinydb.js">
-<script>
-  const config = {...}
-  const mydb = new TinyDB(config)
-</script>  
+[中文文档 zh-CN](https://github.com/HondryTravis/TinyDB/blob/master/docs/ApiDocument.md)
+
+[查看 demo](https://hondrytravis.github.io/TinyDB/)
+
+## 🌟 quick start dev
+
+```bash
+  # start
+  yarn 
+  # then
+  gulp
 ```
 
-## 配置指南
+## 🔨 install
 
-### 数据库配置项
-
-创建数据库
-
-| 名称 |      属性      |   类型   | 是否必须 |
-|:----:| :------------: | :------: | :------: |
-| 数据库名称 | `databaseName` | `String` |   Must   |
-| 数据表 | `tables` | `Array<Object>` |   Must   |
-
-**数据库名称**：创建的数据表名称
-
-**数据表**：一个数据表集合包含属性，可能有多个表。
-
-例子
-
-```javascript
-{
-  databaseName: 'test'
-  tables: [...{...}]
-}
+```html
+<script src="https://unpkg.com/browse/web-tinydb@0.1.8/dist/tinydb.global.js"></script>
 ```
 
-### 数据表配置项
+or
 
-创建数据库中的表，一个数据库可以有多个表，有一些表属性需要提前设定，虽然也可以动态创建表，但不建议这么做，尽量在一开始建立好
+```bash
+yarn instal -D web-tinydb
+```
 
-|名称|  属性  |   类型   | 是否必须 |
-|:---:| :----: | :------: | :------: |
-| 数据表名称 | `name` | `string` | Must |
-| keyPath | `keyPath` | `string` | Must |
-| 是否允许数据表自增(不重复) | `autoIncrement` | `Boolean` | Must |
-| 索引列表 | `indexs` | `Array<Object>` | Must |
+## Setup
 
-**数据表名称**：您要创建的数据表名称
+###  ⚙ init config
 
-**表主键**：默认为`id`，自增的一个变量，
+初始化配置
 
-**是否允许数据表自增**：默认`true`在插入一条新数据的时候，`keypath`自增1，可能的值： false
+```js
 
-**索引列表**：创建一个对该表的快速查询的索引列表，默认id
+import { TinyDB } from 'web-tinydb'
 
-### 索引配置项
-
-|     名称     |      属性       |   类型    | 是否必须 |
-| :----------: | :-------------: | :-------: | :------: |
-|    index     |     `index`     | `string`  |   Must   |
-| 相对索引名称 | `relativeIndex` | `string`  |   Must   |
-| 是否允许重复 |    `unique`     | `Boolean` |   Must   |
-
-**索引名称**：用来查询数据表中的数据的索引
-
-**相对索引名称**：对应保存数据中的某个字段
-
-**是否允许重复**：有些时候，我们需要有些数据是重复的，有些是不重复的，比如学号我们希望不是重复的，名字希望是重复的
-
-例子:
-
-```javascript
- const options = {
-      databaseName: "test",
-      tables: [
+const tables = [
+  {
+      name: "table_student",
+      primaryKey: "id",
+      autoIncrement: true,
+      indexs: [{
+          index: "id",
+          relativeIndex: "id",
+          unique: true
+        },
         {
-          name: "table_student",
-          keyPath: "id",
-          autoIncrement: true,
-          indexs: [
-            {
-              index: "id",
-              relativeIndex: "id",
-              unique: true
-            },
-            {
-              index: "name",
-              relativeIndex: "name",
-              unique: false
-            },
-            {
-              index: "school",
-              relativeIndex: "school",
-              unique: false
-            }
-          ]
+          index: "name",
+          relativeIndex: "name",
+          unique: false
+        },
+        {
+          index: "school",
+          relativeIndex: "school",
+          unique: false
         }
       ]
-    };
+    },
+  ]
 
+const test = TinyDB.of()
+
+test.setup({
+    dbName: 'test',
+    version: 1
+})
+
+async function init() {
+  const result = await test.createTable(tables)
+  console.log(result)
+}
+
+init()
 ```
 
-## API 文档
+then you can checkout you local indexeddb
 
-### Method 方法
+## insert record
 
-#### `createDateBase(databaseName<string>, version<number>):viod` 新建数据库
+插入数据
 
-`@param databaseName`: 数据库名称
-
-`@param version` 数据库版本号
-
-#### `createTable(tables:Array<Object>, version):void` 创建表
-
-`@param tables` 多个或一个表属性集合
-
-`@param version` 数据库版本
-
-#### `deleteTable(tableName:string, version:number):viod` 删除表
-
-`@param tableName` 数据库表的名字
-
-`@param version` 数据库版本号
-
-#### `createIndex(table:IDBObjectStore, option<tableIndex>):void` 创建表索引
-
-`@param table` 数据库表实例，也就是仓库
-
-`@param option` 数据表索引集合
-
-#### `connect(name?: string):Promise<IDBDatabase>`连接数据库，异步回调
-
-`@param name` 可选，默认为空值，默认打开创建的单个数据库
-
-#### `close():void` 关闭数据库
-
-#### `insert(name: string, data: any): void`
-
-`@param name` 数据库表名称
-
-`@param data` 要保持的数据，可以使对象，可以使json string，可以是blob对象
-
-#### `select(name: string, selecter: any): Promise` 查找数据库，通过匹配的selector对象来查找
-
-`@param name` 数据表名称
-
-`@param selecter` 查找的数据库对象，键值对，包含索引名称和值，example ：`{name: '李1'}
-
-#### `selectId(name: string, id: number): Promise` 通过id查找数据，匹配id
-
-`@param name` 数据表名称
-
-`@param id` id
-
-#### `some(name: string, index: any, startIndex: any, endIndex: any): Promise` 查找一定范围的数据
-
-`@param name` 数据表名称
-
-`@param index` 索引名称
-
-`@param startIndex` 开始索引位置值，不是id
-
-`@param endIndex` 结束索引位置值，不是id
-
-```javascript
-
-  const option = {...}
-  const test = new TinyDB(option)
-  test.some('test_table', 'uid', 100,200) // 查找uid 100-200的所有人
-
+```js
+async function test_insert() {
+    await test.insert('table_student', {
+      name: 'lee1',
+      school: 'Github1',
+    })
+    await test.insert('table_student', {
+      name: 'lee2',
+      school: 'Github2',
+    })
+    await test.insert('table_student', {
+      name: 'lee3',
+      school: 'Github3'
+    })
+    await test.insert('table_student', {
+      name: 'lee4',
+      school: 'Github4'
+    })
+    await test.insert('table_student', {
+      name: 'lee5',
+      school: 'Github5'
+    })
+  }
+test_insert()
 ```
 
-#### `update(name: string, data: any): Promise` 更新数据
+## getAll
 
-`@param name` 数据表名称
+获得选中表格所有数据
 
-`@param data` 更新或者添加的数据
-
-```javascript
-
-  const option = {...}
-  const test = new TinyDB(option)
-  test.update('test_table', {
-    id: 1, // 如果id重复就修改，id不重复就添加
-    name: '...',
-    uids: [...]
-  }) // 查找uid 100-200的所有人
-
+```js
+  async function test_getAll() {
+    const result = await test.getAll('table_student')
+    console.log(result)
+  }
+  // test_getAll()
 ```
 
-#### `delete(name: string, data: any): Promise` 删除数据
+## some
 
-`@param name` 数据表名称
+获取一些数据，lower <= rang <= upper
 
-`@param data` 删除的数据包含索引和索引值，键值对形式
-
-```javascript
-
-  const option = {...}
-  const test = new TinyDB(option)
-  test.delete('test_table', {name:'李四'}) // 删除name为李四的那一条数据
-
+```js
+  async function test_some() {
+    const result = await test.some('table_student', {
+      index: 'id',
+      lower: 1,
+      upper: 3
+    })
+    console.log(result)
+  }
+  // test_some()
 ```
 
-#### `selectAll(name: string): Promise` 查找所有值
+## updateRecord
 
-`@param name` 数据表名称
+更新数据
 
-```javascript
-  const option = {...}
-  const test = new TinyDB(option)
-  test.selectAll('test_table') // 查询数据表中的所有数据
+```js
+  async function test_update() {
+    const newData = {
+      name: 'lee11'
+    }
+    const result = await test.updateRecord('table_student', {
+      index: 'id',
+      value: 1
+    }, newData)
+    console.log(result)
+  }
+  // test_update()
 ```
 
-#### `clearTable(name:string):Promise` 删除某一张表数据
+## getByPrimaryKey
 
-`@param name` 表名
+通过主键检索数据
 
-```typescript
-   test.clearTable('test_table').then( res => {
-     console.log('success')
-   }).catch( err => {
-     return new Error(err)
-   })
+```js
+  async function test_getByPrimaryKey() {
+    const result = await test.getByPrimaryKey('table_student', 3)
+    console.log(result)
+  }
+  // test_getByPrimaryKey()
+```
+
+## getByIndex
+
+通过创建的索引检索数据
+
+```js
+  async function test_getByIndex() {
+    const result = await test.getByIndex('table_student', {
+      index: 'id',
+      value: 2
+    })
+    console.log(result)
+  }
+  // test_getByIndex()
+```
+
+## deleteRecord
+
+删除记录，通过创建的索引删除
+
+```js
+  async function test_deleteRecord() {
+    const result = await test.deleteRecord('table_student', {
+      index: 'id',
+      value: 6
+    })
+    console.log(result)
+  }
+  // test_deleteRecord()
+```
+
+## deleteDatabase
+
+删除数据库
+
+```js
+  async function test_deleteDatabase() {
+    const result = await test.deleteDatabase('test')
+    console.log(result)
+  }
+  // test_deleteDatabase()
+```
+
+## clearTableRecord
+
+清除表格数据
+
+```js
+  async function test_clearTableRecord() {
+    const result = await test.clearTableRecord('table_student')
+    console.log(result)
+  }
+  // test_clearTableRecord()
+```
+
+## deleteTable
+
+删除表格
+
+```js
+  async function test_deleteTable() {
+    const result = await test.setVersion(3).deleteTable('table_delete')
+    console.log(result)
+  }
+  // test_deleteTable()
 ```

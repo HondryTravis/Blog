@@ -174,6 +174,7 @@ module.exports = {
     prism: {
       theme: require('./packages/code/dark/simple-dark.js'),
       darkTheme: require('./packages/code/dark/simple-dark.js'),
+      additionalLanguages: ['csharp'],
     },
     colorMode:{
       defaultMode: 'light',

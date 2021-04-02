@@ -87,7 +87,7 @@ CSS的多核压缩 [optimize-css-assets-webpack-plugin](https://www.npmjs.com/pa
 
 集成到CI 监控⽂件的⼤⼩ <https://github.com/siddharthkp/bundlesize>
 
-```sh
+```bash
 webpack --profile --json > stats.json
 ```
 

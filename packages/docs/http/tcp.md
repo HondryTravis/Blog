@@ -125,7 +125,7 @@ url -> 添加请求头等包装 -> tcp协议进行打包 -> 继续打包 ...
 
 shell 中输入，命令更多参数参考 [netstat](linux/linux.md#netstat)
 
-```sh
+```bash
 netstat -an
 ```
 

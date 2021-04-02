@@ -123,7 +123,7 @@ JavaScript -> WebAssembly(test) -> JavaScript(document.write())
 
 使用 [emsdk](https://github.com/HondryTravis/emsdk) 构建 [参考文档](https://www.it610.com/article/1282220241333534720.htm)
 
-```sh
+```bash
 # mac 平台直接执行可执行文件  window 自行百度 or ./emsdk.bat
 ./emsdk install latest
 ./emsdk activate latest
@@ -131,7 +131,7 @@ JavaScript -> WebAssembly(test) -> JavaScript(document.write())
 
 配置环境变量
 
-```sh
+```bash
 # mac 平台， window 平台自行体会 emsdk_env.bat
 source ./emsdk_env.sh
 ```
@@ -140,7 +140,7 @@ source ./emsdk_env.sh
 
 1、可执行文件
 
-```sh
+```bash
 gcc hello.c -o hello
 # 执行
 ./hello
@@ -148,7 +148,7 @@ gcc hello.c -o hello
 
 2、编译成wasm在nodejs中执行
 
-```sh
+```bash
 emcc hello.c -o hello_node.js
 
 # 生成两个文件
@@ -161,7 +161,7 @@ node hello_node.js
 
 3、编译成wasm在浏览器中执行
 
-```sh
+```bash
 # 其中 -s WASM=1 是制定要wasm文件； -O3 优化选项 ，优化选项中优化度最低是O1，优化度最高是O3,最好推荐 O1，避免意外优化
 emcc hello.c -s WASM=1 -O3 -o hello_html.html
 
@@ -181,6 +181,6 @@ Q & A
 
 [参考链接](https://www.cnblogs.com/y-y-y-y/p/9897154.html)
 
-```sh
+```bash
 emcc math.c -Os -s WASM=1 -s SIDE_MODULE=1 -o math.wasm
 ```

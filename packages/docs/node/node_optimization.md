@@ -90,7 +90,7 @@ Wrk 属性参数
 
 执行完之后会返回信息，latency 响应时间，req/sec(qps) 每个线程每秒钟完成的请求数。
 
-```sh
+```bash
 # 用12个线程模拟100个连接、30s内。一般线程数不宜过多. 核数的2到4倍足够
 ./wrk -t12 -c400 -d30s address
 ```
@@ -199,7 +199,7 @@ global.gc();
 console.log('第四次', process.memoryUsage());
 ```
 
-```sh
+```bash
 node --expose-gc test.js
 
 第一次 {

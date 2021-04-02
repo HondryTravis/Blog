@@ -142,7 +142,7 @@ Started SonarQube.
 
 编辑本地的shell 环境变量 `.zshrc` 或者 `.bash_profile`
 
-```shell
+```bashell
 # sonar-scanner 追加bin
 
 # export SCANNER_HOME="你下载的sonar-scanner地址"

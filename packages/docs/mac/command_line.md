@@ -1,5 +1,5 @@
 ---
-title: 一些 mac 常用的命令
+title: macOS | 常用命令
 ---
 
 方便 mac 使用

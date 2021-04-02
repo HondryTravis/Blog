@@ -11,3 +11,15 @@ export const RedInline = ({children, color}) => (
     {children}
   </span>
 );
+
+export const Rect = ({url, left}) => (
+<span style={{
+  display:'inline-block',
+  height: '20px',
+  width: '20px',
+  marginLeft: `${left ? left : 0}px`,
+  background: `url(${url})`,
+  backgroundSize: 'cover'
+  }}>
+</span>
+)

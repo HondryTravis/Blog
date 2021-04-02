@@ -27,7 +27,7 @@ Jenkins功能包括
 
 ### 解压安装
 
-```sh
+```bash
 # 我是放到了 /opt 目录下
 [root@localhost opt]# ls
 jdk-14.0.1_linux-x64_bin.rpm  jenkins-2.235.2-1.1.noarch.rpm  sonarqube-8.4.0.35506  sonarqube-8.4.0.35506.zip
@@ -41,7 +41,7 @@ jdk-14.0.1_linux-x64_bin.rpm  jenkins-2.235.2-1.1.noarch.rpm  sonarqube-8.4.0.35
 
 先得到配置文件地址
 
-```sh
+```bash
 [root@localhost opt]# find / -name jenkins
 /etc/sysconfig/jenkins # 为配置文件地址
 /etc/logrotate.d/jenkins
@@ -63,7 +63,7 @@ jdk-14.0.1_linux-x64_bin.rpm  jenkins-2.235.2-1.1.noarch.rpm  sonarqube-8.4.0.35
 
 可能的名称参数: `{start|stop|status|try-restart|restart|force-reload|reload|probe}`
 
-```sh
+```bash
 [root@localhost opt]# service jenkins start
 Starting jenkins (via systemctl):                          [  OK  ]
 ```
@@ -138,7 +138,7 @@ Starting jenkins (via systemctl):                          [  OK  ]
 
 1.进入jenkins插件更新目录 `cd /var/lib/jenkins/updates`
 
-```sh
+```bash
 [root@localhost updates]# sed -i 's/http:\/\/updates.jenkins-ci.org\/download/https:\/\/mirrors.tuna.tsinghua.edu.cn\/jenkins/g' default.json && sed -i 's/http:\/\/www.google.com/https:\/\/www.baidu.com/g' default.json
 ```
 

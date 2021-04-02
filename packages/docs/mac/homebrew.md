@@ -1,5 +1,5 @@
 ---
-title: homebrew
+title: macOS | Homebrew
 ---
 
 mac 端的管理工具

@@ -1,5 +1,5 @@
 ---
-title: nvm 安装以及使用
+title: NPM | nvm 安装以及使用
 ---
 
 nvm 是你方便的 node 包管理工具
