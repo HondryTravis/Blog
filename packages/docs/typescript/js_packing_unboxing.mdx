@@ -2,7 +2,7 @@
 title: JS | 装箱和拆箱
 ---
 
-import { Red, RedInline } from '../common/index.mdx'
+import { HighLight, HighLightInline } from '../common/index.mdx'
 
 为什么?
 
@@ -18,7 +18,7 @@ JavaScript中存在两套类型系统，其一是基础类型系统（Basetypes�
 
 为了实现“一切都是对象”的目标，JavaScript在类型系统上做出了一些妥协，
 
-其结果是∶  <RedInline>为部分基础类型系统中的“值类型”设定对应的包装类；然后通过包装类，将“值类型数据”作为对象来处理。</RedInline>
+其结果是∶  <HighLightInline>为部分基础类型系统中的“值类型”设定对应的包装类；然后通过包装类，将“值类型数据”作为对象来处理。</HighLightInline>
 
 |分类|基础类型|字面量|包装类|说明|
 |:-:|:-:|:-:|:-:|:-:|
@@ -31,9 +31,9 @@ JavaScript中存在两套类型系统，其一是基础类型系统（Basetypes�
 |引用类型|object|{...}|无|**引用2**|
 
 
-**引用1**: <RedInline>undefined无论如何都不是对象—它在概念上处于“一切都是对象”之外 </RedInline>
+**引用1**: <HighLightInline>undefined无论如何都不是对象—它在概念上处于“一切都是对象”之外 </HighLightInline>
 
-**引用2**: <RedInline>基础类型function与object的数据都是对象，因此看起来“似乎”都有各自的包装类，但它们与其对应的类更多的是映射关系而并非做值转换。</RedInline>
+**引用2**: <HighLightInline>基础类型function与object的数据都是对象，因此看起来“似乎”都有各自的包装类，但它们与其对应的类更多的是映射关系而并非做值转换。</HighLightInline>
 
 这样一来，基础类型数据通过包装类转换而来的结果，和对象类型系统中的每一个实例一样，都成了理论上的“对象”。
 
@@ -204,7 +204,7 @@ a.showDataType()
 Object(a).showDataType()
 // 在 showDataType 这个栈帧执行完成之后，这个临时的包装对象就会被清理掉
 ```
-<Red>可见，在“值类型数据”方法调用其实是被一个隔离在另外一个对象中完成，我们无论修改这个新对象，都不会影响到原来的值</Red>
+<HighLight>可见，在“值类型数据”方法调用其实是被一个隔离在另外一个对象中完成，我们无论修改这个新对象，都不会影响到原来的值</HighLight>
 
 例如
 

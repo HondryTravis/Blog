@@ -2,7 +2,7 @@
 title: JS | 执行调度过程
 ---
 
-import { Red, RedInline } from '../common/index.mdx'
+import { HighLight, HighLightInline } from '../common/index.mdx'
 
 当Javascript代码执⾏的时候会将不同的变量存于内存中的不同位置：堆（heap）和栈（stack）中来加以区分。其中，堆⾥存放着⼀些对象。⽽栈中则存放着⼀些基础类型变量以及对象的指针
 
@@ -163,7 +163,7 @@ VO(globalContext) === global;
 ```
 
 
-<Red>VO分为 全局上下⽂的变量对象VO，函数上下⽂的变量对象VO</Red>
+<HighLight>VO分为 全局上下⽂的变量对象VO，函数上下⽂的变量对象VO</HighLight>
 
 ## 活动对象
 
@@ -175,7 +175,7 @@ VO(globalContext) === global;
 4. 以及绑定上对应的变量环境；
 5. 内部定义的变量
 
-<Red>VO(functionContext) === AO</Red>
+<HighLight>VO(functionContext) === AO</HighLight>
 
 ```js
 function test(a, b) {
@@ -282,7 +282,7 @@ foo();
 - Eval code - eval 函数包含的代码块也有同样的效果
 
 
-<Red>VO 函数上下⽂的链接 AO 是函数⾃身的</Red>
+<HighLight>VO 函数上下⽂的链接 AO 是函数⾃身的</HighLight>
 
 
 ```js
@@ -399,7 +399,7 @@ FunctionExectionContext = {
 
 为了继续去适配早期的 JS 的 var 等，新的规范增加了变量环境（VariableEnvironment）。变量环境也是⼀个词法环境，其环境记录器包含了由变量声明语句
 
-在ES6 中，词法环境组件和变量环境组件的区别在与前者⽤于存储函数声明和变量<RedInline color="red">（ let 和 const ）</RedInline>绑定，⽽后者仅⽤与存储变量<RedInline color="red">（ var ）</RedInline>绑定。
+在ES6 中，词法环境组件和变量环境组件的区别在与前者⽤于存储函数声明和变量<HighLightInline color="red">（ let 和 const ）</HighLightInline>绑定，⽽后者仅⽤与存储变量<HighLightInline color="red">（ var ）</HighLightInline>绑定。
 
 ```js
 let a = 20;
@@ -467,7 +467,7 @@ FunctionExectionContext = {
 
 ```
 
-以上 let 和 const 定义的变量并没有关联任何值 uninitialized(未初始化) ，但 var 定义的变量被初始化成 undefined 。这也就是造成<RedInline color="red"> TDZ(临时性死区 Temporal Dead Zone) </RedInline>的原因了。
+以上 let 和 const 定义的变量并没有关联任何值 uninitialized(未初始化) ，但 var 定义的变量被初始化成 undefined 。这也就是造成<HighLightInline color="red"> TDZ(临时性死区 Temporal Dead Zone) </HighLightInline>的原因了。
 
 接下来就是执⾏阶段，完成对所有变量的分配，最后执⾏代码。⽆论是 ES3 还是 ES5,上下⽂的⽣命周期包括三个阶段：创建阶段 -> 执⾏阶段 -> 回收阶段。
 
