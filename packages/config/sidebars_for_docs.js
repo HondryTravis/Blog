@@ -4,6 +4,7 @@ const font_end = [
     label: 'Typescript',
     items: [
       'typescript/ts_utility_types',
+      'typescript/ts_operator',
       'typescript/implement_list',
       'typescript/javascript_high',
       'typescript/recursive_optimization',
