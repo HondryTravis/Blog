@@ -17,6 +17,8 @@
   --ifm-code-font-size: 95%;
   /* button */
   --ifm-color-info: #00A1F1;
+  --ifm-color-info-dark:#303846;
+  --ifm-color-info-darker: #303846;
   --ifm-color-success: #00E673;
   --ifm-color-note: red;
   --ifm-alert-color: #FFFFFF;

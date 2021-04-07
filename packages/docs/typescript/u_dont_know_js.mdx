@@ -318,3 +318,35 @@ finally{
 var b = 20
 var str = `this book price is ${b}`
 ```
+
+## 消失的 `a`
+
+a 会是什么
+
+```js
+var x = {
+  a:100
+}
+x.a = x = 1
+// x.a: undefined
+```
+
+注意一个概念：<HighLightInline>赋值运算符（=）”的优先级低于属性存取运算符（.）</HighLightInline> 所以改一下
+
+```js
+var r = x = {
+  a:100
+}
+
+x.a = x = 1
+// x.a = (x = 1)
+// x 1
+// x.a: undefined
+// 实际上是先运行 (x = 1) ，对属性 x.a 进行了暂存，然而又对 x 进行了重写，所以，就有了消失的 a，但是我们之前缓存了这个 x。所以 r.a 得到正确的赋值
+r.a = 1
+```
+
+
+## 参考
+
+[《javascript 语言精髓与编程实战》 周爱民](https://book.douban.com/subject/35085910/)
