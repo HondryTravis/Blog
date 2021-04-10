@@ -9,21 +9,152 @@ title: LinkedList | 链表
 
 单向链表的每一个节点又包含两部分，一部分是存放数据的变量data，另一部 分是指向下一个节点的指针next。
 
+类似这样 ![](/images/algorithm/singly_linked_list.png)
+
+
+### 实现
+
+单个 node 节点
+
 ```ts
-
-interface IState {
-  data: any
-  next: INode
-}
-
 class Node {
-  public data: any
-  public next: Node
-  constructor(args: IState) {
-    const { data, next } = args
-    this.data = data
-    this.next = next || null
+  static of(data) {
+    return new Node(data)
+  }
+  constructor(data) {
+    this.data = data || null
+    this.next =  null
   }
 }
+```
+
+实现链表
+
+
+```ts
+class LinkedList {
+  constructor(node){
+    this.head = node || null
+    this.size = 0
+  }
+  append(node){
+    let current = this.head
+
+    if(!current) {
+      this.head = node
+      this.size ++
+      return this
+    }
+    while(current.next) {
+      current = current.next
+    }
+    current.next = node
+    this.size++
+  }
+
+  removeByIndex(index) {
+    if(index < 0 || index > this.size) {
+       throw console.error('超出范围了')
+    }
+
+    const that = this
+    let ret = null
+    let type = null
+
+    if((this.size - 1) === index) type = 'last'
+    if(index === 0) type = 'head'
+    if(index > -1 && index < this.size) type = 'middle'
+
+    const deleteType = {
+      head() {
+        ret = that.head
+        that.head = that.head.next
+      },
+      last() {
+        const prevNode = that.getByIndex(index - 1)
+        ret = prevNode.next
+        prevNode.next = null
+      },
+      middle() {
+        const prevNode = that.getByIndex(index - 1)
+        const nextNode = prevNode.next.next
+        ret = prevNode.next
+        prevNode.next = nextNode
+      }
+    }
+
+    deleteType[type]()
+
+    return ret
+
+  }
+  insertByIndex(index, newNode) {
+    const that = this
+    let type = 'append'
+
+    if(index < 0 || index > this.size) {
+       throw console.error('超出范围了')
+    }
+
+    if(this.size === 0) type = 'create'
+    if(this.size === index) type = 'append'
+    if(index === 0) type = 'replaceHead'
+    if(index > -1 && index < this.size) type = 'middle'
+
+    const insertType = {
+      create() {
+        that.head = newNode
+        that.last = newNode
+      },
+      replaceHead() {
+        newNode.next = that.head
+        that.head = newNode
+      },
+      middle() {
+        const current = that.getByIndex(index)
+        const prevNode = that.getByIndex(index - 1)
+
+        newNode.next = current
+        prevNode.next = newNode
+      },
+      append() {
+        that.append(newNode)
+      }
+    }
+
+    insertType[type]()
+    this.size ++
+    return this
+  }
+  getByIndex(index) {
+    if(index < 0) {
+      throw console.error('输入正确的 index');
+    }
+    let current = this.head
+    for(let i = 0, j = index; i < j; i ++) {
+      current = current.next
+    }
+    return current
+  }
+  getAll() {
+    const ret = []
+    let current = this.head
+    while( current !== null ) {
+      ret.push(current)
+      current = current.next
+    }
+    return ret
+  }
+}
+
+var link = new LinkedList
+
+link.append(Node.of('1'))
+link.append(Node.of('2'))
+
+// console.log(link.getByIndex(0))
+// console.log(link.insertByIndex(1, new Node('3')))
+// console.log(link.size)
+// console.log(link.removeByIndex(1))
 
 ```

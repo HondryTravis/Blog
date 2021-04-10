@@ -3,18 +3,18 @@ module.exports = {
     'index',
     {
       type: 'category',
+      label: '数据结构',
+      items: [
+        'data_structure/link_list',
+      ]
+    },
+    {
+      type: 'category',
       label: '数组',
       items: [
         'array/count',
         'array/bisection_method',
         'array/find_min_number'
-      ]
-    },
-    {
-      type: 'category',
-      label: '数据结构',
-      items: [
-        'data_structure/link_list',
       ]
     },
     {
