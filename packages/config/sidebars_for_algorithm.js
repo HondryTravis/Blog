@@ -1,4 +1,3 @@
-
 module.exports = {
   algorithm: [
     'index',
@@ -9,6 +8,13 @@ module.exports = {
         'array/count',
         'array/bisection_method',
         'array/find_min_number'
+      ]
+    },
+    {
+      type: 'category',
+      label: '数据结构',
+      items: [
+        'data_structure/link_list',
       ]
     },
     {
@@ -34,6 +40,6 @@ module.exports = {
         'other/cards',
         'other/range_of_motion',
       ]
-    },
+    }
   ]
 };

@@ -1,0 +1,29 @@
+---
+title: LinkedList | 链表
+---
+
+链表（linked list）是一种在物理上非连续、非顺序的数据结构，由若干节 点（node）所组成。
+
+
+## 单向链表
+
+单向链表的每一个节点又包含两部分，一部分是存放数据的变量data，另一部 分是指向下一个节点的指针next。
+
+```ts
+
+interface IState {
+  data: any
+  next: INode
+}
+
+class Node {
+  public data: any
+  public next: Node
+  constructor(args: IState) {
+    const { data, next } = args
+    this.data = data
+    this.next = next || null
+  }
+}
+
+```
