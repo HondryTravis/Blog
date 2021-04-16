@@ -5,7 +5,8 @@ module.exports = {
       type: 'category',
       label: '数据结构',
       items: [
-        'data_structure/link_list',
+        'data_structure/linked_list',
+        'data_structure/stack'
       ]
     },
     {
