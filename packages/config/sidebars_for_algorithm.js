@@ -6,7 +6,8 @@ module.exports = {
       label: '数据结构',
       items: [
         'data_structure/linked_list',
-        'data_structure/stack'
+        'data_structure/stack',
+        'data_structure/queue'
       ]
     },
     {
