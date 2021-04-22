@@ -7,7 +7,8 @@ title: LinkedList | 链表
 
 ## 单向链表
 
-单向链表的每一个节点又包含两部分，一部分是存放数据的变量data，另一部 分是指向下一个节点的指针next。
+单向链表的每一个节点主要包含一个指向下一个节点的指针 next，其他部分可以是数据，属性，方法等等，参考 react fiber
+
 
 类似这样 ![](/images/algorithm/singly_linked_list.png)
 
@@ -146,7 +147,10 @@ class LinkedList {
     return ret
   }
 }
+```
+### Q & A
 
+```js
 var link = new LinkedList
 
 link.append(Node.of('1'))
@@ -157,4 +161,286 @@ link.append(Node.of('2'))
 // console.log(link.size)
 // console.log(link.removeByIndex(1))
 
+```
+## 双向链表
+
+双向向链表的每一个节点又包含主要两个部分，一部分是指向下一个节点的指针 next， 一部分是指向上一个节点的指针 prev
+
+类似这样 ![](/images/algorithm/doubly_linked_list.png)
+
+### 实现
+
+完整实现方案
+
+```js
+/**
+ * @description 创建一个 Node 节点
+ *
+ * @class Node
+ */
+class Node {
+  static of (args) {
+    return new Node(args)
+  }
+  constructor(args) {
+    const { key, data } = args
+    this.key = key ?? null
+    this.data = data ?? null
+    this.next = null
+    this.prev = null
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null
+  }
+  /**
+   * @description 获得链表的长度
+   * @readonly
+   * @memberof LinkedList
+   */
+  get size() {
+    let current = this.head
+    let count = 0
+    while (current) {
+      count++
+      current = current.next
+    }
+    return count
+  }
+  /**
+   * @description 插入节点
+   * 如果只有一个参数 args， 那么直接添加到最后
+   * 如果存在2/3个参数，且第一个是 key，插入到指定 key 元素之后，第二个是创建的 node 需要的 args，第三个是是否内部的 key
+   * @param  {object | {key, object}} args
+   */
+  insert(...args) {
+    if (!args.length || args.length > 3) throw new Error("data format error");
+
+    switch (args.length) {
+      case 2:
+      case 3:
+        return this.insertByIndex(...args)
+      case 1:
+      default:
+        return this.append(...args)
+    }
+  }
+  /**
+   * @description 添加节点
+   * 添加到链表最后
+   * @param {*} args
+   * @return {*}
+   * @memberof LinkedList
+   */
+  append(args) {
+    let current = this.head
+    const node = Node.of(args)
+
+    if (!current) {
+      this.head = node;
+      return
+    }
+
+    while (current.next) {
+      current = current.next
+    }
+
+    node.prev = current
+    current.next = node
+    return true
+  }
+  /**
+   * @description 查找 node 节点
+   * @param { string | number } key
+   * @param {boolean} [isInternalKey=false] // 是否指定查找 node 内部的 key，默认是按链表顺序为 index 查找
+   * @memberof LinkedList
+   */
+  find(key, isInternalKey = false) {
+    if (['object', 'function', 'boolean', 'symbol', 'undefined'].includes(typeof key)) return false
+
+    switch (typeof key) {
+      case "number":
+        if (isInternalKey) {
+          return this.findNodeByInternalKey(key)
+        }
+        return this.findNodeByIndex(key)
+      case "string":
+      default:
+        return this.findNodeByInternalKey(key)
+    }
+  }
+  /**
+   * @description 找到前一个节点
+   * { string | number } key
+   * @param {boolean} [isInternalKey=false] // 是否指定查找 node 内部的 key，默认是按链表顺序为 index 查找
+   * @memberof LinkedList
+   */
+  findPrev(key, isInternalKey = false) {
+    const target = this.find(key, isInternalKey)
+    return (target && target.prev) && target.prev
+  }
+  /**
+   * @description 查找内部节点通过 key 属性
+   * @param { string | number } key
+   * @memberof LinkedList
+   */
+  findNodeByInternalKey(key) {
+    let current = this.head
+    while (current.next) {
+      if (current.key === key) break
+      current = current.next
+    }
+    return current
+  }
+  /**
+   * @description 查找节点通过链表最佳的顺序按照 index
+   * @param { string | number } key
+   * @memberof LinkedList
+   */
+  findNodeByIndex(index) {
+    if (index < 0 || index > this.size) {
+      console.error('输入正确的 index');
+      return false
+    }
+    let current = this.head
+
+    for (let i = 0, j = index; i < j; i++) {
+      current = current.next
+    }
+    return current
+  }
+  /**
+   * @description 查找节点通过链表最佳的顺序按照 index
+   * @param { string | number } key 链表的 key
+   * @param {boolean} [isInternalKey=false] // 是否指定查找 node 内部的 key，默认是按链表顺序为 index 查找
+   * @param { object } args node 的数据
+   * @memberof LinkedList
+   */
+  insertByIndex(key, args, isInternalKey = false) {
+    const targetNode = this.find(key, isInternalKey)
+    const newNode = Node.of(args)
+
+    const _internalInsert = (target, current) => {
+      current.prev = target
+      current.next = target.next
+      target.next = current
+      return true
+    }
+
+    return (targetNode && _internalInsert(targetNode, newNode)) || this.append(args)
+  }
+  /**
+   * @description 删除链表节点
+   * @param { string | number } key 删除的 key
+   * @param {boolean} [isInternalKey=false] 是否指定查找 node 内部的 key，默认是按链表顺序为 index 查找
+   * @memberof LinkedList
+   */
+  delete(key, isInternalKey = false) {
+    const current = this.find(key, isInternalKey)
+    const prev = this.findPrev(key, isInternalKey)
+
+    if (!current) {
+      console.warn('not found this node')
+      return false
+    }
+    // 可能是头部节点
+    if (!prev && isInternalKey === false && key === 0) {
+      this.head = current.next;
+      return true
+    }
+    if (current && prev) {
+      const nextNode = current.next
+      prev.next = nextNode
+      nextNode && (nextNode.prev = prev)
+    }
+    return true
+  }
+  /**
+   * @description 遍历链表
+   * @param { Function } callback
+   * @memberof LinkedList
+   */
+  forEach(callback) {
+    let current = this.head
+    let index = 0
+    while (current) {
+      typeof callback === 'function' && callback(current, index, this.head)
+      current = current.next
+      index++
+    }
+    return null
+  }
+  /**
+   * @description 展平链表至一个数组
+   * @return { Array }
+   * @memberof LinkedList
+   */
+  flat() {
+    const ret = []
+    this.forEach(item => {
+      ret.push(item)
+    })
+    return ret
+  }
+  /**
+   * @description 替换一个 Node
+   * @param { string | number} key
+   * @param { object } args 要替换的数据
+   * @param { boolean } isInternalKey 是否是内部的 key
+   * @memberof LinkedList
+   */
+  replace(key, args, isInternalKey = false) {
+    const current = this.find(key, isInternalKey)
+    const newNode = Node.of(args)
+    if(current) {
+      newNode.prev = current.prev
+      newNode.next = current.next
+      current.prev.next = newNode
+      current.next.prev = newNode
+    }
+  }
+  /**
+   * @description 清空链表
+   * @memberof LinkedList
+   */
+  clear() {
+    this.head = null
+  }
+}
+```
+### Q & A
+
+```js
+var test = new LinkedList
+
+for(let i = 0, j = 3; i < j; i ++) {
+  test.insert({key: i+1, data: i})
+}
+// 查找
+console.log(test.find(2) === test.find(3, true)) // true
+// 展平
+console.log(test.flat()) // [Node, Node, Node]
+// 直接插入
+test.insert({key:4, data: 3})
+console.log(test.flat()) // [Node, Node, Node, Node]
+
+// 指定 key插入
+test.insert(2, {key:'test', data: 4})
+console.log(test.flat())  // [Node, Node, Node, Node[这个 node 的 key 是 'test'], Node]
+
+// 指定 key 并且指定通过内部的 key 查找并插入
+test.insert('test', {key:'test1', data: 5}, true)
+console.log(test.flat())
+// [Node, Node, Node, Node[这个 node 的 key 是 'test'],Node[这个 node 的 key 是 'test1'],  Node]
+
+// 删除key 并且指定内部的
+test.delete('test', true)
+test.delete('test1', true)
+console.log(test.flat()) // [Node, Node, Node, Node]
+
+// 删除 key 不指定内部 key，使用链表默认 index
+test.delete(3)
+console.log(test.flat()) //[Node, Node, Node]
 ```
