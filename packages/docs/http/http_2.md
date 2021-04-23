@@ -88,7 +88,7 @@ CA：CA（certification authority）是数字证书的签发机构。作为权�
 
 ### SSL/TLS协议
 
-![SSL/TLS](/images/http/ssl:tls.png)
+![SSL/TLS](/images/http/ssl_tls.png)
 
 传输层安全性协议（Transport Layer Security - TLS），及其前身安全套接层（Secure Sockets Layer - SSL）是一种安全协议，目的是为互联网通信提供安全及数据完整性保障
 
