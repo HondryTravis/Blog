@@ -41,11 +41,11 @@ a.reduce((acc, cur) => {
 揭开神秘面纱系列
 
 ```js
-var _new = function() {
+var _new = function(...args) {
     var o = Object.create({})
-    var _constructor = Array.prototype.shift.call(arguments)
+    var _constructor = Array.prototype.shift.call(...args)
     o.__proto__ = _constructor.prototype
-    _constructor.apply(o, arguments)
+    _constructor.apply(o, args)
     return o
 }
 
@@ -95,10 +95,10 @@ a.map((item) => {
 
 ```js
 var _call = function(obj, ...args) {
-    obj.fn = this;
-    let res = obj.fn(...args);
-    delete obj.fn;
-    return res
+  obj.fn = this;
+  let res = obj.fn(...args);
+  delete obj.fn;
+  return res
 }
 
 Function.prototype.call = _call
@@ -122,23 +122,23 @@ console.log(test1)
 
 ```js
 var _bind = function(obj, ...args) {
-    obj.fn = this
-    return function() {
-        let arr = args.concat(arguments)
-        let res = obj.fn(...arr)
-        delete obj.fn
-        return res
-    }
+  obj.fn = this
+  return function() {
+    let arr = args.concat(arguments)
+    let res = obj.fn(...arr)
+    delete obj.fn
+    return res
+  }
 }
 
 Function.prototype.bind = _bind
 
 var test = {
-    name: '李四',
-    age: 18,
-    say() {
-        console.log(this.name, this.age)
-    }
+  name: '李四',
+  age: 18,
+  say() {
+      console.log(this.name, this.age)
+  }
 }
 
 var b = test.say
@@ -151,15 +151,15 @@ console.log(b())
 
 ```js
 var _apply = function(obj, args) {
-    let res;
-    obj.fn = this;
-    if (args && args.length) {
-        res = obj.fn(...args);
-    } else {
-        res = obj.fn();
-    }
-    delete obj.fn;
-    return res;
+  let res;
+  obj.fn = this;
+  if (args && args.length) {
+      res = obj.fn(...args);
+  } else {
+      res = obj.fn();
+  }
+  delete obj.fn;
+  return res;
 }
 
 Function.prototype.apply = _apply
@@ -187,20 +187,17 @@ console.log(test1)
 
 ```js
 // 非立即执行版
-const _debounce = function(func, wait) {
+const debounce = function(callback, wait) {
   let timer;
-  return function() {
-    let context = this;
-    let args = arguments;
-
-    if (timer) clearTimeout(timer);
-
+  return function(...args) {
+    const context = this;
+    timer && clearTimeout(timer)
     timer = setTimeout(() => {
-      func.apply(this, args)
+      callback.apply(context, args)
     }, wait)
   }
 }
-console.log(_debounce(fn, 200))
+console.log(debounce(fn, 200)())
 ```
 
 ## 实现节流 `throttle`
@@ -210,18 +207,15 @@ console.log(_debounce(fn, 200))
 > 使用场景：滚动事件 等
 
 ```js
-const _throttle = function (func, wait) {
+const throttle = function (callback, wait) {
   let timeout;
-  return function() {
-    let context = this;
-    let args = arguments;
-    if (!timeout) {
-      timeout = setTimeout(() => {
-          timeout = null;
-          func.apply(context, args)
+  return function(...args) {
+    const context = this;
+    return timeout || (timeout = true) && setTimeout(() => {
+          timeout = false;
+          callback.apply(context, args)
       }, wait)
-    }
   }
 }
-console.log(_throttle(fn, 200))
+console.log(throttle(fn, 200)())
 ```
