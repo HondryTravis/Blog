@@ -1,3 +1,38 @@
 ---
 title: stack | 栈
 ---
+
+## 有效的括号
+
+[Leet Code有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
+
+限制的括号 `[]{}()`
+
+使用栈完美解决，当匹配的括号与栈顶元素相反，或者 ASCII的差值值 `) - (` 为 1, `] - [`, `} - {` 的差值为 2.所以用栈可以简单实现
+
+
+### Q & A
+
+```js
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function(s) {
+  var stack = []
+  for(const i of s) {
+    const it = stack.length && stack.slice(-1)[0] || 0
+    const ret = i.charCodeAt() - it.charCodeAt()
+    switch(ret){
+        case 1:
+        case 2:
+          stack.pop()
+          break
+        default:
+          stack.push(i)
+          break
+    }
+  }
+  return stack.length === 0 ? true : false
+};
+```
