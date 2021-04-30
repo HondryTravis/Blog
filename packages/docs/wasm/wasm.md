@@ -175,12 +175,84 @@ emcc hello.c -s WASM=1 -O3 -o hello_html.html
 
 ```
 
-Q & A
-
 测试 Math.c 文件
 
 [参考链接](https://www.cnblogs.com/y-y-y-y/p/9897154.html)
 
+## Q & A
+
+math.c / mathcpp.cpp
+
+```c
+int add( int a, int b)
+{
+    return a + b;
+}
+
+int reducer(int a, int b) { 
+    return a - b;
+}
+
+int square(int a)
+{
+    return a * a;
+}
+```
+
+sh
+
 ```bash
+# math.c
 emcc math.c -Os -s WASM=1 -s SIDE_MODULE=1 -o math.wasm
+# mathcpp.cpp
+emcc math.cpp -Os -s WASM=1 -s SIDE_MODULE=1 -o mathcpp.wasm
+```
+
+html
+
+```html
+<script>
+    /**
+     * @param {String} path wasm 文件路径
+     * @param {Object} imports 传递到 wasm 代码中的变量
+     */
+    function loadWebAssembly(path, imports = {}) {
+      return fetch(path) // 加载文件
+        .then(response => response.arrayBuffer()) // 转成 ArrayBuffer
+        .then(buffer => WebAssembly.compile(buffer))
+        .then(module => {
+          imports.env = imports.env || {}
+
+          // 开辟内存空间
+          imports.env.memoryBase = imports.env.memoryBase || 0
+          if (!imports.env.memory) {
+            imports.env.memory = new WebAssembly.Memory({ initial: 256 })
+          }
+
+          // 创建变量映射表
+          imports.env.tableBase = imports.env.tableBase || 0
+          if (!imports.env.table) {
+            // 在 MVP 版本中 element 只能是 "anyfunc"
+            imports.env.table = new WebAssembly.Table({ initial: 0, element: 'anyfunc' })
+          }
+          console.log(module)
+          // 创建 WebAssembly 实例
+          return new WebAssembly.Instance(module, imports)
+        })
+    }
+    //调用
+    loadWebAssembly('./mathcpp.wasm')
+      .then(instance => {
+        console.log(instance.exports)
+        // const add = instance.exports.add // 取出cpp里面的方法
+        // const square = instance.exports.square // 取出cpp里面的方法
+        // const reducer = instance.exports.reducer
+
+        // console.log('10 + 20 =', add(10, 20))
+        // console.log('3*3 =', square(3))
+        // console.log('10-5 =', reducer(10, 5))
+        // console.log('(2 + 5)*2 =', square(add(2 + 5)))
+      })
+
+  </script>
 ```
