@@ -1,3 +1,70 @@
 ---
 title: double | 双指针
 ---
+
+## 快慢双指针
+
+[LeetCode 141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
+
+
+给定一个链表，判断链表中是否有环。
+
+如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。注意：pos 不作为参数进行传递，仅仅是为了标识链表的实际情况。
+
+如果链表中存在环，则返回 true 。 否则，返回 false 。
+
+
+### Q & A
+
+:::note 解法 1 思路
+使用快慢双指针，如果链表存在环，那么一定能会在环中相遇，次数根据环的大小有关，在当慢指针走完的都没有发现重复的，那么该链表不存在环
+:::
+
+```js
+var hasCycle = function(head) {
+  if(head === null || head.next === null) {
+    return false
+  }
+  var p1 = head, p2 = head.next
+  while(p1) {
+    if(p1 === p2) {
+      return true
+    }
+    p1 = p1.next || null
+    p2 = p2 && p2.next && p2.next.next || null
+  }
+  return false
+};
+```
+:::note 另外的解法1. 思路
+js 原生对象，JSON.stringify() 对数据结构中存在循环引用的数据是无法序列化的。所以
+:::
+
+```js
+var hasCycle = function(head) {
+  try{
+    JSON.stringify(head)
+  } catch(e) {
+    return true
+  }
+  return false
+}
+```
+
+:::note 另外的解法2. 思路
+修改链表的 Node，给每个 Node 节点打上 tag 访问过的标记，因为如果存在相同的 next 引用/指向，那么该链表存在环
+:::
+
+```js
+var hasCycle = function(head) {
+  var current = head
+  while(current) {
+    if(current.tag) {
+      return true
+    }
+    current.tag = true
+    current = current.next
+  }
+  return false
+}
+```
