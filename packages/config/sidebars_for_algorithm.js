@@ -35,14 +35,6 @@ module.exports = {
         'double_pointer/index',
       ]
     },
-    // 字典树
-    {
-      type: 'category',
-      label: '字典树',
-      items: [
-        'dictionary/index',
-      ]
-    },
     // 树
     {
       type: 'category',

@@ -1,3 +1,51 @@
 ---
 title: tree | 树
 ---
+
+
+## 相同的树
+
+[LeetCode 100. 相同的树](https://leetcode-cn.com/problems/same-tree/)
+
+给你两棵二叉树的根节点 p 和 q ，编写一个函数来检验这两棵树是否相同。
+
+如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。
+
+默认的每个 treeNode 节点
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+```
+
+:::note 思路 深度优先遍历
+**相同的条件**
+1. 如果比较两个树节点的子节点都不存在的时候
+2. 同时要满足已经比较过的值相等
+
+**不相同的条件**
+1. 只要两个 node 节点的值不相同即为不相等
+2. 只有两棵树有一方为 null 即不相等
+:::
+
+### Q & A
+
+```js
+/**
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {boolean}
+ */
+var isSameTree = function(p, q) {
+  if(p === null && q === null) return true;
+  if(p === null || q === null) return false;
+  if(p.val !== q.val) return false;
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+};
+```
