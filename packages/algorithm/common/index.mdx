@@ -1,0 +1,28 @@
+<!-- 红色块级提醒文字 -->
+export const HighLight = ({children, color}) => (
+  <p style={{color: color ? color : 'red'}}>
+    {children}
+  </p>
+);
+
+<!-- 红色内联提醒文字 -->
+export const HighLightInline = ({children, color}) => (
+  <span style={{color: color ? color : 'red'}}>
+    {children}
+  </span>
+);
+
+
+
+<!-- 图片 -->
+export const RectInline = ({url, left}) => (
+<span style={{
+  display:'inline-block',
+  height: '20px',
+  width: '20px',
+  marginLeft: `${left ? left : 0}px`,
+  background: `url(${url})`,
+  backgroundSize: 'cover'
+  }}>
+</span>
+)

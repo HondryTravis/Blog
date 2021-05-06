@@ -8,7 +8,8 @@ module.exports = {
       items: [
         'data_structure/linked_list',
         'data_structure/stack',
-        'data_structure/queue'
+        'data_structure/queue',
+        'data_structure/tree'
       ]
     },
     // 栈
