@@ -1,3 +1,49 @@
 ---
 title: hash | 哈希
 ---
+
+## 两数之和
+
+[LeetCode 两数之和](https://leetcode-cn.com/problems/two-sum/)
+
+给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值的那两个整数，并返回它们的数组下标。
+
+你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
+
+你可以按任意顺序返回答案。
+
+```js
+// 输入：
+nums = [2,7,11,15], target = 9
+// 输出：
+// [0,1]
+// 解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。
+```
+
+:::note 思路
+1. 对 nums 进行迭代
+2. 给访问过的数据创建 hash map
+3. 每次判断当前 target - current 的结果是否在 map 中出现过, 如果出现过，就返回，没有就继续进行遍历，如果最后未找到，返回空数组
+:::
+
+### Q & A
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+  var map = new Map()
+  var ret = null
+  for(var i=0, l = nums.length; i < l; i ++) {
+    ret = target - nums[i]
+    if(map.has(ret)) {
+      return [map.get(ret), i]
+    } else {
+      map.set(nums[i], i)
+    }
+  }
+  return []
+};
+```
