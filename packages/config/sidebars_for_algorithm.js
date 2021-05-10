@@ -73,6 +73,7 @@ module.exports = {
       type: 'category',
       label: '数组',
       items: [
+        'array/index',
         'array/count',
         'array/bisection_method',
         'array/find_min_number'
