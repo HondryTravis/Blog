@@ -1,3 +1,71 @@
 ---
 title: dynamic | 动态规划
 ---
+
+## 区域和检索
+
+[LeetCode 303. 区域和检索 - 数组不可变](https://leetcode-cn.com/problems/range-sum-query-immutable/)
+
+给定一个整数数组  nums，求出数组从索引 i 到 j（i ≤ j）范围内元素的总和，包含 i、j 两点。
+
+实现 NumArray 类：
+```cs
+NumArray(int[] nums) // 使用数组 nums 初始化对象
+// 返回数组 nums 从索引 i 到 j（i ≤ j）范围内元素的总和
+// 包含 i、j 两点（也就是 sum(nums[i], nums[i + 1], ... , nums[j])）
+int sumRange(int i, int j)
+```
+
+### Q & A
+
+:::note 思路
+1. 暴力破解
+2. 使用 while 优化，做累加
+3. 缓存为王，缓存每个之前累加的和(前缀法)，计算的时候会变成常量级别的两数相减
+:::
+
+解法 1
+```js
+var NumArray = function(nums) {
+  this.nums = nums
+};
+NumArray.prototype.sumRange = function(left, right) {
+  return this.nums.reduce(function(acc, current, index){
+     if(index >= left && index <= right) {
+       acc += current
+     }
+     return acc
+  }, 0)
+};
+```
+
+解法 2
+```js
+var NumArray = function(nums) {
+  this.nums = nums
+};
+
+NumArray.prototype.sumRange = function(left, right) {
+  let start = left
+  let ret = 0
+  while(start <= right) {
+    ret += this.nums[start]
+    start++
+  }
+
+  return ret
+};
+```
+
+解法 3
+```js
+var NumArray = function(nums) {
+  this.cache = Array.from({length: nums.length + 1}, (v, i)=>0)
+  for(let i = 0, j = nums.length; i < j; i++) {
+    this.cache[i + 1] = this.cache[i] + nums[i]
+  }
+};
+NumArray.prototype.sumRange = function(left, right) {
+  return this.cache[ right + 1 ] - this.cache[ left ]
+};
+```

@@ -39,5 +39,7 @@ function maxDeep(nums) {
   return ret
 }
 
-maxDeep([ 1, [2, [3, [4]]], [2, [3]], 7] )
+maxDeep([ 1, [2]]) // 2
+maxDeep([ 1, [2, [3]]]) // 3
+maxDeep([ 1, [2, [3, [4]]], [2, [3]], 7] ) //4
 ```
