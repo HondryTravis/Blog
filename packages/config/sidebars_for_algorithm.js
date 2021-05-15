@@ -84,6 +84,7 @@ module.exports = {
       type: 'category',
       label: '字符串',
       items: [
+        'string/index',
         'string/slide_window'
       ]
     },
