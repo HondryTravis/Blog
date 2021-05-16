@@ -51,3 +51,46 @@ function longestCommonPrefix(strs: string[]): string {
 
 longestCommonPrefix(["flower","fl1"])
 ```
+
+
+## 翻转单词顺序
+
+输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。例如输入字符串"I am a student. "，则输出"student. a am I"。
+
+[LeetCode 翻转单词顺序](https://leetcode-cn.com/problems/fan-zhuan-dan-ci-shun-xu-lcof/)
+
+
+:::note 思路
+1. 通过 空格 拆分成数组
+2. 过滤掉所有空格
+3. 对数组进行原生反转/双指针反转
+4. 通过 join(' ') 进行连接
+:::
+
+### Q & A
+
+1. 双指针反转
+
+```ts
+function reverseWords(s: string): string {
+  return reverse(s.split(' ').filter( it => it !== '')).join(' ')
+};
+
+function reverse(arr: string[]) {
+  let i = 0, j = arr.length - 1
+  while(i < j) swap(arr, i++, j--)
+  return arr
+}
+
+function swap(arr: string[], cur: number, prev: number) {
+  [arr[cur], arr[prev]] = [arr[prev], arr[cur]]
+}
+```
+
+2. 原生数组反转
+
+```ts
+function reverseWords(s: string): string {
+  return s.split(' ').filter( it => it !== '').reverse().join(' ')
+};
+```
