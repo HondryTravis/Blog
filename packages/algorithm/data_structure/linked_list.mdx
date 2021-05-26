@@ -194,6 +194,7 @@ class Node {
 class LinkedList {
   constructor() {
     this.head = null
+    this.count = 0
   }
   /**
    * @description 获得链表的长度
@@ -201,13 +202,7 @@ class LinkedList {
    * @memberof LinkedList
    */
   get size() {
-    let current = this.head
-    let count = 0
-    while (current) {
-      count++
-      current = current.next
-    }
-    return count
+    return this.count + 1
   }
   /**
    * @description 插入节点
@@ -249,6 +244,7 @@ class LinkedList {
 
     node.prev = current
     current.next = node
+    this.count ++
     return true
   }
   /**
@@ -323,9 +319,12 @@ class LinkedList {
     const newNode = Node.of(args)
 
     const _internalInsert = (target, current) => {
+
       current.prev = target
       current.next = target.next
       target.next = current
+
+      this.count ++
       return true
     }
 
@@ -348,12 +347,14 @@ class LinkedList {
     // 可能是头部节点
     if (!prev && isInternalKey === false && key === 0) {
       this.head = current.next;
+      this.count > 0 && this.count --
       return true
     }
     if (current && prev) {
       const nextNode = current.next
       prev.next = nextNode
       nextNode && (nextNode.prev = prev)
+      this.count > 0 && this.count --
     }
     return true
   }

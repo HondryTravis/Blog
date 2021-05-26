@@ -6,6 +6,9 @@ Yarn 从 1.0 版开始支持 Workspace （工作区）。
 
 Workspace 能更好的统一管理有多个项目的仓库，既可在每个项目下使用独立的 package.json 管理依赖，又可便利的享受一条 yarn 命令安装或者升级所有依赖等。更重要的是可以使多个项目共享同一个 node_modules 目录，提升开发效率和降低磁盘空间占用。好处不用多说了吧, 共用一个 node_modules.当然也有弊端，初次安装过于缓慢，跟随着项目的大小程度，可以采用 [lerna](https://github.com/lerna/lerna) (不做介绍，yarn 目前是最优选择，已踩坑，第三方依赖会存在冗余重复, yarn 更为清爽，感兴趣可以尝试) 构建。当然最好的方案还是结合使用，lerna 更新后也支持 workspace, 结合使用，效果更佳
 
+:::warning 提醒
+由于 yarn 1.x 已经停止维护了，可以参阅 [npm workspaces](https://docs.npmjs.com/cli/v7/using-npm/workspaces)
+:::
 ## 根目录配置
 
 - private 不作为根目录发，最好是 true
