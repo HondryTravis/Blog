@@ -202,7 +202,7 @@ class LinkedList {
    * @memberof LinkedList
    */
   get size() {
-    return this.count + 1
+    return this.count
   }
   /**
    * @description 插入节点
@@ -235,6 +235,7 @@ class LinkedList {
 
     if (!current) {
       this.head = node;
+      this.count ++
       return
     }
 
