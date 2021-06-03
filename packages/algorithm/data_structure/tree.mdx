@@ -180,7 +180,7 @@ import { HighLight, HighLightInline } from '../common/index.mdx'
 1. 深度优先遍历（前序遍历、中序遍历、后序遍历）。
 2. 广度优先遍历（层序遍历）。
 
-## 深度优先遍历
+## 深度优先遍历 dfs
 
 深度优先和广度优先这两个概念不止局限于二叉树，它们更是一种抽象的算法思想，决定了访问某些复杂数据结构的顺序。在访问树、图，或其他一些复杂数据结构时，这两个概念常常被使用到。
 
@@ -209,6 +209,8 @@ import { HighLight, HighLightInline } from '../common/index.mdx'
 
 到此为止，所有的节点都遍历输出完毕。
 
+[二叉树的前序遍历](/algorithm/stack/index#二叉树的前序遍历)
+
 ### 中序遍历 Inorder Traversal (LDR)
 
 二叉树的中序遍历，输出顺序是左子树、根节点、右子树。
@@ -230,6 +232,8 @@ import { HighLight, HighLightInline } from '../common/index.mdx'
 5. 由于节点3没有左孩子，所以直接输出根节点1的右孩子节点3。
 6. 最后输出节点3的右孩子节点6。
 
+[二叉树的中序遍历](/algorithm/stack/index#二叉树的中序遍历)
+
 ###  后序遍历 Postorder Traversal (LRD)
 
 二叉树的后序遍历，输出顺序是左子树、右子树、根节点。
@@ -238,7 +242,9 @@ import { HighLight, HighLightInline } from '../common/index.mdx'
 
 上图就是一个二叉树的后序遍历，每个节点左侧的序号代表该节点的输出顺序。
 
-## 广度优先遍历
+[二叉树的后序遍历](/algorithm/stack/index#二叉树的后序遍历)
+
+## 广度优先遍历 bfs
 
 深度遍历就像是上楼梯，每层楼有四个工作室，你一路之上，一头扎到顶，每一层其他工作室你都先不看，最后在回来挨个看。而层序遍历就是一层一层都看完在上去。这也就是层序遍历，**顾名思义，就是二叉树按照从根节点到叶子节点的层次关系，一层一层横向遍历各个节点**。
 
@@ -270,3 +276,5 @@ import { HighLight, HighLightInline } from '../common/index.mdx'
 <img src="/images/algorithm/binary_tree_flat_08.png" width="550" height="400" alt="tree" />
 
 到此为止，所有的节点都遍历输出完毕。
+
+[二叉树的层序遍历](/algorithm/queue/index#二叉树的层序遍历)

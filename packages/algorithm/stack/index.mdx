@@ -36,3 +36,238 @@ var isValid = function(s) {
   return stack.length === 0 ? true : false
 };
 ```
+
+## 二叉树的生成
+
+为了方便，此后的树的生成都用改方法
+
+```js
+function TreeNode(val, left, right) {
+  this.val = val === undefined ? 0 : val;
+  this.left = left === undefined ? null : left;
+  this.right = right === undefined ? null : right;
+}
+
+// 层序生成
+function createTree(arr, root, i = 0) {
+  if (i < arr.length && arr[i] !== null) {
+    let temp = new TreeNode(arr[i]);
+    root = temp;
+    // 左子树节点的下标总是 2*parent + 1, 右子树总是 2*parent + 2
+    root.left = createTree(arr, root.left, 2 * i + 1);
+    root.right = createTree(arr, root.right, 2 * i + 2);
+  }
+  return root;
+}
+```
+
+## 二叉树的前序遍历
+
+[LeetCode 144 二叉树的前序遍历](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/)
+
+给你二叉树的根节点 root ，返回它节点值的 前序 遍历。
+
+有两种方案简单的递归和优化递归
+
+二叉树的前序遍历顺序为：中 -> 左 -> 右
+
+### 简单版递归方案
+
+简易版递归写法
+
+```js
+var preorderTraversal = function(root) {
+  const ret = []
+  function dfs(node) {
+      if (node === null) return
+      ret.push(node.val)
+      dfs(node.left)
+      dfs(node.right)
+  }
+  dfs(root)
+  return ret
+};
+var root = createTree([1,2,3,4,5,6,7])
+preorderTraversal(root) // 1,2,4,5,3,6,7
+```
+
+### 统一简版写法
+
+使用 es6 的扩展运算符 reset
+
+统一综合递归写法, 只需要交换 root.val 的位置即可
+
+```js
+var preorderTraversal = function(root) {
+  return root
+      && [ root.val, ...preorderTraversal(root.left), ...preorderTraversal(root.right)]
+      || []
+};
+
+var root = createTree([1,2,3,4,5,6,7])
+preorderTraversal(root) // 1,2,4,5,3,6,7
+```
+### 迭代实现递归栈写法
+
+模拟递归的栈调度实现
+
+```js
+var preorderTraversal = function(root) {
+  const ret = []
+  if (!root) return ret
+
+  const stack = [root]
+
+  while (stack.length) {
+    const current = stack.pop()
+    ret.push(current.val)
+
+    // 先处理左边的，所以右边的先入栈
+    current.right && stack.push(current.right)
+    current.left && stack.push(current.left)
+  }
+  return ret
+};
+var root = createTree([1,2,3,4,5,6,7])
+preorderTraversal(root) // 1,2,4,5,3,6,7
+```
+
+## 二叉树的中序遍历
+
+[LeetCode 94. 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+
+给定一个二叉树的根节点 root ，返回它的 中序 遍历。
+
+二叉树的中序遍历顺序为：左 -> 中 -> 右
+
+### 简单版递归方案
+
+```js
+var inorderTraversal = function(root) {
+  const ret = []
+  function dfs(node) {
+    if (!node) return
+    dfs(node.left)
+    ret.push(node.val) //只是这里改变了位置
+    dfs(node.right)
+  }
+  dfs(root)
+  return ret
+};
+
+var root = createTree([1,2,3,4,5,6,7])
+inorderTraversal(root) // [4,2,5,1,6,3,7]
+```
+
+### 统一简版写法
+
+使用 es6 的扩展运算符 reset
+
+统一综合递归写法, 只需要交换 root.val 的位置即可
+
+```js
+var inorderTraversal = function(root) {
+  return root
+      && [...inorderTraversal(root.left), root.val, ...inorderTraversal(root.right)]
+      || []
+};
+
+var root = createTree([1,2,3,4,5,6,7])
+inorderTraversal(root) // [4,2,5,1,6,3,7]
+```
+
+### 迭代实现递归写法
+
+```js
+var inorderTraversal = function(root) {
+  const ret = []
+  if(!root) return ret
+  const stack = []
+  // 如果栈未清空就一直执行
+  while(root || stack.length) {
+    // 先处理当前左边的子节点, 直到 null 返回
+    while(root) {
+      stack.push(root)
+      // 依次找到最底层的左侧子节点
+      root = root.left
+    }
+    // 先弹出最上边左边叶子节点
+    root = stack.pop()
+    ret.push(root.val)
+    root = root.right
+  }
+  return ret
+};
+
+var root = createTree([1,2,3,4,5,6,7])
+inorderTraversal(root) // [4,2,5,1,6,3,7]
+```
+
+## 二叉树的后序遍历
+
+[LeetCode 145. 二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/)
+
+给定一个二叉树，返回它的 后序 遍历。
+
+### 简单版递归方案
+
+```js
+var postorderTraversal = function(root) {
+  const ret = []
+  function dfs(node) {
+    if (!node) return
+    dfs(node.left)
+    dfs(node.right)
+    ret.push(node.val) // ==> 注意，三种方式，只是这里改变了位置
+  }
+  dfs(root)
+  return ret
+};
+
+var root = createTree([1,2,3,4,5,6,7])
+postorderTraversal(root) // [4,5,2,6,7,3,1]
+```
+
+### 统一简版写法
+
+使用 es6 的扩展运算符 reset
+
+统一综合递归写法, 只需要交换 root.val 的位置即可
+
+```js
+var postorderTraversal = function(root) {
+  return root
+      && [...postorderTraversal(root.left), ...postorderTraversal(root.right), root.val]
+      || []
+};
+
+var root = createTree([1,2,3,4,5,6,7])
+postorderTraversal(root) // [4,5,2,6,7,3,1]
+```
+
+### 迭代实现递归写法
+
+```js
+var postorderTraversal = function(root) {
+  const ret = []
+  if(!root) return ret
+  const stack = [root]
+  while(stack.length) {
+    const current = stack.pop()
+    if(current == null) {
+      ret.push(stack.pop().val);
+    }else {
+      stack.push(current)
+
+      // 在这里切分支
+      stack.push(null)
+      current.right && stack.push(current.right);
+      current.left && stack.push(current.left);
+    }
+  }
+  return ret
+};
+
+var root = createTree([1,2,3,4,5,6,7])
+postorderTraversal(root) // [4,5,2,6,7,3,1]
+```

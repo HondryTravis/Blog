@@ -4,7 +4,7 @@ title: queue | 队列
 
 ## 最近的请求次数
 
-[933.最近请求次数](https://leetcode-cn.com/problems/number-of-recent-calls/)
+[LeetCode 933.最近请求次数](https://leetcode-cn.com/problems/number-of-recent-calls/)
 
 写一个 RecentCounter 类来计算特定时间范围内最近的请求。
 
@@ -35,4 +35,42 @@ RecentCounter.prototype.ping = function(t) {
   }
   return this.queue.length
 };
+```
+
+## 二叉树的层序遍历
+
+[LeetCode 102. 二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
+
+给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
+
+使用队列遍历
+
+其中 [createTree 是层序生成树](/algorithm/stack/index#二叉树的生成)
+
+```js
+var levelOrder = function(root) {
+  const ret = []
+  if (!root) return ret
+  const queue = [root]
+
+  while (queue.length) {
+    let len = queue.length
+    const child = []
+
+    // 处理当前层
+    while(len --) {
+      const current = queue.shift()
+      child.push(current.val) // 分层 push
+
+      current.left && queue.push(current.left)
+      current.right && queue.push(current.right)
+    }
+    ret.push(child)
+  }
+  return ret
+};
+
+var root = createTree([1,2,3,4,5,6,7])
+levelOrder(root) // [[1],[2,3],[4,5,6,7]]
+levelOrder(root).flat() // [1,2,3,4,5,6,7]
 ```
