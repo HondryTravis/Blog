@@ -16,11 +16,11 @@
   --ifm-color-primary-lightest: #80aaef;
   --ifm-code-font-size: 95%;
   /* button */
-  --ifm-color-info: #00A1F1;
+  --ifm-color-info: #24466c;
   --ifm-color-info-dark:#303846;
   --ifm-color-info-darker: #303846;
-  --ifm-color-success: #00E673;
-  --ifm-color-note: red;
+  --ifm-color-success: #75ABE0;
+  --ifm-color-note: #ae2127;
   --ifm-alert-color: #FFFFFF;
   /* --ifm-button-background-color: rgba(0, 161, 241, 1); */
   /* --ifm-font-color-base-inverse:#FFFFFF; */
