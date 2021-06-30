@@ -2,16 +2,10 @@
 title: 运动范围
 ---
 
-**问题**：地上有一个 m 行 n 列的方格：从坐标 [0, 0] 到坐标 [m-l, n-l]。一个机器人从坐标 [0, 0] 的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能逬入行坐标和列坐标的每个数位之和大于k的格子。例如，当 k 为 18 时, 机器人能够逬入方格 [35, 37] ,因为 3+5+3+7=18。但它不能进入方格 [35, 38], 因为 3+5+3+8=19。请问该机器人能够到达多少个格子？
+[LeetCode 机器人的运动范围](https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/)
 
-**提示**:
+**问题** 地上有一个m行n列的方格，从坐标 [0,0] 到坐标 [m-1,n-1] 。一个机器人从坐标 [0, 0] 的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子。例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7=18。但它不能进入方格 [35, 38]，因为3+5+3+8=19。请问该机器人能够到达多少个格子？
 
-1 <= n,m <= 100
-
-0 <= k <= 20
-
-参考答案：
-题目提到了数字的数位之和，这个利用取余运算即可，并将其单独封装函数。代码如下：
 
 ```js
 function bitSum(n) {
@@ -24,107 +18,74 @@ function bitSum(n) {
 }
 ```
 
-**要注意的是**：能满足数位之和的要求的坐标，不一定能达到。因为题目提到了机器人的移动是每次可以向上下左右4个方向移动一格，并且开始的坐标是（0, 0)。
+:::note 解法: 广度优先遍历BFS
 
-> 例如当 m=36, n=15, k=9 时，由于只能向合法坐标移动 1 格，从（18，0)并不能到达(20, 0)，即使（20，0) 满足数位之和的条件。
-
-这就需要使用深度优先遍历（DFS) 或者广度优先遍历（BFS)，而不是直接检查每个元素。
-
-:::note 解法1: 广度优先遍历（推荐)
-和普通 BFS 相比,有两点不同：
-
-需要调用 bitSum 来检查数位之和
-
-因为从左上角开始遍历，因此只需要遍历「右」和「下」这两个方向
+1. 使用队列
+2. 因为从左上角开始遍历，因此只需要遍历「右」和「下」这两个方向 
+3. 每次判断当前坐标是否在范围内，然后使 step ++
+4. 然后校验下一个坐标是否满足要求，满足就推入队列
 
 :::
 
 代码如下:
 
 ```js
+/**
+ * @param {number} m
+ * @param {number} n
+ * @param {number} k
+ * @return {number}
+ */
 
-var movingCount = function(m, n, k) {
-  let res = 0;
-  const directions =[
-          [ 1 , 0 ],
-          [ 0 , 1 ]
-        ]
-  const queue = [[0，0]];
-  const visited = {
-          "0-0": true
-        }; //标记（x，y)是否被访问过
+const sum = (x) => {
+  let ret = 0
+  while (x) {
+    ret += x % 10
+    x = Math.floor(x / 10)
+  }
+  return ret
+}
+var movingCount = function (m, n, k) {
+  let step = 0
+
+  let directions = [
+    [1, 0], // 向右
+    [0, 1] // 向下
+  ]
+
+  const queue = [[0, 0]];
+
+  // set 表示当前坐标是否访问过
+  const visitedSet = new Set();
+  visitedSet.add('0-0')
 
   while (queue.length) {
-    const [x，y] = queue.shift();
-    // (x, y)的数位之和不符合要求
-    //题目要求节点每次只能走1格, 所以无法从当前坐标继续出发
-    if (bitSum(x) + bitSum(y) > k) {
-      continue;
-    }
+    const [x, y] = queue.shift();
+    if (sum(x) + sum(y) > k) continue;
+    step ++
 
-    ++res
-
+    // 遍历每个方向上的坐标，并且打上标记，是否访问过
     for (const direction of directions) {
+      // 每次移动一个新的格子
       const newx = direction[0] + x;
       const newy = direction[1] + y;
-      if(
-        !visited[`${newx}-${newy}`] &&
-        newx >= 0 &&
-        newy >= 0 &&
-        newx < m &&
-        newy < n
-      ){
+
+      const point = `${newx}-${newy}`
+      
+      if (!visitedSet.has(point)
+      && newx >= 0
+      && newy >= 0
+      && newx < m
+      && newy < n
+      ) {
         queue.push([newx, newy]);
-        visited[`${newx} - ${newy}`] = true;
+        visitedSet.add(point)
       }
     }
   }
-  return res;
-}
+
+  return step
+};
 ```
 
 > 时间复杂度是 O(N), 空间复杂度是 O(N)。
-
-:::note 解法2:深度优先遍历
-DFS不如BFS，除了递归调用外，还要尝试4个方向（BFS只要2个）。
-:::
-
-代码实现如下:
-
-```js
-var movingCount = function(m, n, k) {
-  let res = 0;
-  const directions =[
-          [ -1 , 0],
-          [ 1 , 0 ],
-          [ 0 , -1],
-          [ 0 , 1 ]
-        ];
-  const visited = {};
-  dfs(0, 0);
-  return res;
-
-function dfs(x, y) {
-  visited[`${x}-${y}`] = true;
-  if (bitSum(x) + bitSum(y) > k) {
-    return;
-  }
-  ++res
-
-  for (const direction of directions) {
-    const newx = direction[0] + x;
-    const newy = direction[1] + y;
-    if (
-      !visited[`${newx}-${newy}`] &&
-      newx >= 0 &&
-      newy >= 0 &&
-      newx < m &&
-      newy < n
-    ){
-      dfs(newx, newy);
-    }
-  }
-}
-```
-
-> 时间复杂度是O(N)，空间复杂度是0(N)。
