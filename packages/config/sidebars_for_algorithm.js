@@ -1,6 +1,14 @@
 module.exports = {
   algorithm: [
     'index',
+    // books,
+    {
+      type: 'category',
+      label: '算法导论',
+      items: [
+        'books/IntroductionToAlgorithm'
+      ]
+    },
     // 数据结构
     {
       type: 'category',
