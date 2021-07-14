@@ -219,3 +219,45 @@ const throttle = function (callback, wait) {
 }
 console.log(throttle(fn, 200)())
 ```
+
+## 实现 Promise
+
+首先看看 Promise 语法
+
+包裹内容中不存在异步
+```js title="noasync.js"
+const promise = new Promise((resolve, reject) => {
+  resolve('resolved');
+});
+promise.then( res => {
+  console.log(res) // resolved
+})
+```
+
+包裹内容中存在异步
+```js title="async.js"
+const promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('resolved');
+  }, 1000);
+});
+promise.then( res => {
+  console.log(res) // resolved
+})
+```
+
+返回一个Promise 被函数包裹的
+```js title="beWrapped.js"
+const getPromise = function() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('resolve');
+    }, 1000);
+  });
+};
+
+getPromise().then((res) => {
+    console.log(res); // resolve
+});
+```
+
