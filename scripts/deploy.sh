@@ -13,7 +13,7 @@ cd build
 
 git init
 git add -A
-git commit -m 'deploy note ✨, 🍺'
+git commit -m 'Deploy HondryTravis/HondryTravis.github.io to github.com/HondryTravis/HondryTravis.github.io.git:master'
 
 
 git push -f git@github.com:HondryTravis/HondryTravis.github.io master
