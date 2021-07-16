@@ -56,7 +56,8 @@ const font_end = [
       'ci_with_cd/sonar',
       'ci_with_cd/jenkins',
       'ci_with_cd/workspace',
-      'ci_with_cd/husky'
+      'ci_with_cd/husky',
+      'ci_with_cd/gulp'
     ]
   },
   {
