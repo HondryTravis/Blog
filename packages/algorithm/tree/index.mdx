@@ -49,3 +49,66 @@ var isSameTree = function(p, q) {
   return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
 };
 ```
+
+## 自动补位推荐
+
+标题 输入电话号码时自动推荐出下一位合法的数字集
+描述信息
+公司有10万名员工，每名员工都有一个座机号码。现在要在网页上实现一个“自动补位推荐” 的功能，问如何实现？
+
+解释：
+“自动补位推荐” 功能：有一个输入框，用户每输入一个数字，立马推荐出下一位合法的数字集合。
+比如只有 5789234、5623786、5633678三个电话号码，当第一位输入5时，立马推荐下一位有效数字集合[ 7, 6 ]，
+如果第二位输入6时，下一位有效数字集合为[2，3]....
+
+
+### 方法1
+
+构建字典树
+
+```js
+const Trie = function () {
+  this.children = {}
+}
+
+Trie.prototype.setup = function (phones) {
+  for (const phone of phones) this.insert(phone)
+}
+
+Trie.prototype.insert = function (phone) {
+  let node = this.children
+  for (const n of phone) {
+    node[n] || (node[n] = {})
+    node = node[n]
+  }
+  node.isEnd = true
+}
+
+Trie.prototype.searchWithSuggestion = function (prefix) {
+  let node = this.children
+  for (const n of prefix) {
+    if (!node[n]) return false
+    node = node[n]
+  }
+  return Reflect.ownKeys(node)
+}
+
+var trie = new Trie()
+trie.setup(['5789234', '5623786', '5633678'])
+
+console.log(trie.searchWithSuggestion('56')) // [2,3]
+
+```
+
+### 方法2
+
+通过 set
+
+```js
+function suggestion(index, phones) {
+  let i = 0, len = phones.length
+  const set = new Set()
+  while (i < len) (set.add(phones[i][index]), i ++)
+  return [...set]
+}
+```
