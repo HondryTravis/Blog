@@ -170,7 +170,7 @@ module.exports = {
           ]
         },
       ],
-      copyright: `MIT Licensed | Copyright © 2020-present HondryTravis, Inc. Built with Docusaurus.`,
+      copyright: `AGPL-3.0 Licensed | Copyright © 2020-present HondryTravis, Inc. Built with Docusaurus.`,
     },
     prism: {
       theme: require('./packages/code/dark/simple-dark.js'),
