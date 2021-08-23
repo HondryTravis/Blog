@@ -130,6 +130,27 @@ var preorderTraversal = function(root) {
 };
 var root = createTree([1,2,3,4,5,6,7])
 preorderTraversal(root) // 1,2,4,5,3,6,7
+
+// 记忆版
+var preorderTraversal = function(root) {
+  const ret = []
+  if (!root) return ret
+
+  const stack = []
+
+  while (root || stack.length) {
+    // 找到最左侧叶子节点
+    while (root) {
+      ret.push(root.val)
+      stack.push(root);
+      root = root.left;
+    }
+
+    // 节点的左子节点为null，跳出while循环,继续遍历右子节点
+    root = stack.pop().right;
+  }
+  return ret
+};
 ```
 
 ## 二叉树的中序遍历
@@ -201,6 +222,27 @@ var inorderTraversal = function(root) {
 
 var root = createTree([1,2,3,4,5,6,7])
 inorderTraversal(root) // [4,2,5,1,6,3,7]
+
+// 记忆版
+var inorderTraversal = function(root) {
+  const ret = []
+  if(!root) return ret
+  const stack = []
+
+  while(root || stack.length) {
+    // 找到最左侧叶子节点
+    while(root) {
+      stack.push(root)
+      root = root.left
+    }
+
+    // 取出当前节点
+    let current = stack.pop()
+    ret.push(current.val)
+    root = current.right
+  }
+  return ret
+};
 ```
 
 ## 二叉树的后序遍历
@@ -270,6 +312,34 @@ var postorderTraversal = function(root) {
 
 var root = createTree([1,2,3,4,5,6,7])
 postorderTraversal(root) // [4,5,2,6,7,3,1]
+
+// 记忆版
+var postorderTraversal = function(root) {
+  const ret = []
+  if(!root) return ret
+
+  const stack = []
+  let visited = null
+
+  while(root || stack.length) {
+    // 一直查找到最左边的叶子节点
+    while(root) {
+      stack.push(root)
+      root = root.left
+    }
+
+    const current = stack.pop()
+    // 当当前节节点的右叶子节点为空 | 被访问过
+    if (current.right === null || current.right === visited) {
+      ret.push(current.val)
+      visited = current
+    } else {
+      stack.push(current)
+      root = current.right
+    }
+  }
+  return ret
+}
 ```
 
 
