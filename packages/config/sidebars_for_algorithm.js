@@ -74,6 +74,7 @@ module.exports = {
       label: '动态规划',
       items: [
         'dynamic/index',
+        'dynamic/subsequence'
       ]
     },
     // 数组
