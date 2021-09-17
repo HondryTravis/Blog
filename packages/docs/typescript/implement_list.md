@@ -185,19 +185,29 @@ console.log(test1)
 
 > 使用场景：疯狂click刷页 等
 
-```js
+```ts
 // 非立即执行版
-const debounce = function(callback, wait) {
-  let timer;
-  return function(...args) {
-    const context = this;
-    timer && clearTimeout(timer)
-    timer = setTimeout(() => {
-      callback.apply(context, args)
-    }, wait)
-  }
+export function debounce(callback: Function, wait: number = 400) {
+    let timer: NodeJS.Timeout, context: Function;
+
+    const internalTimeoutCallback = function (...args: any[]) {
+        clearTimeout(timer);
+        context = this
+        timer = setTimeout(() => {
+            callback.apply(context, args);
+            context = null;
+        }, wait);
+    }
+
+    internalTimeoutCallback.cancel = function () {
+        clearTimeout(timer)
+        context = timer = null;
+    }
+
+    return internalTimeoutCallback
 }
-console.log(debounce(fn, 200)())
+console.log(callback())
+console.log(callback.cancel())
 ```
 
 ## 实现节流 `throttle`
@@ -206,18 +216,32 @@ console.log(debounce(fn, 200)())
 
 > 使用场景：滚动事件 等
 
-```js
-const throttle = function (callback, wait) {
-  let timeout;
-  return function(...args) {
-    const context = this;
-    return timeout || (timeout = true) && setTimeout(() => {
-          timeout = false;
-          callback.apply(context, args)
-      }, wait)
-  }
+```ts
+export function throttle(callback: Function, wait: number = 400) {
+    let timer: NodeJS.Timeout, context: Function;
+
+    const internalTimeoutCallback = function (...args: any[]) {
+        context = this
+        if (timer) return false;
+        timer = setTimeout(() => {
+            callback.apply(context, args);
+            clearTimeout(timer);
+            context = timer = null;
+        }, wait)
+    }
+
+    internalTimeoutCallback.cancel = function () {
+        clearTimeout(timer)
+        context = timer = null;
+    }
+
+    return internalTimeoutCallback
 }
-console.log(throttle(fn, 200)())
+
+const callback = throttle(fn, 200)
+
+console.log(callback())
+console.log(callback.cancel())
 ```
 
 ## 实现 Promise

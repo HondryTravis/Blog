@@ -36,6 +36,14 @@ module.exports = {
         'queue/index',
       ]
     },
+    // 链表
+    {
+      type: 'category',
+      label: '链表',
+      items: [
+        'linked_list/index'
+      ]
+    },
     // 双指针
     {
       type: 'category',
@@ -103,8 +111,7 @@ module.exports = {
       label: '排序',
       items: [
         'sort/queue',
-        'sort/linked_list',
-        'linked_list/find_key',
+        'sort/linked_list'
       ]
     },
     // 位运算

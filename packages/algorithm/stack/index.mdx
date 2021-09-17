@@ -386,3 +386,238 @@ CQueue.prototype.deleteHead = function() {
   return this.outStack.length && this.outStack.pop() || -1
 };
 ```
+
+## 设计一个支持增量操作的栈
+
+[LeetCode 剑指 Offer 10. 设计一个支持增量操作的栈](https://leetcode-cn.com/problems/design-a-stack-with-increment-operation/)
+
+请你设计一个支持下述操作的栈。
+
+实现自定义栈类 CustomStack ：
+
+CustomStack(int maxSize)：用 maxSize 初始化对象，maxSize 是栈中最多能容纳的元素数量，栈在增长到 maxSize 之后则不支持 push 操作。
+
+void push(int x)：如果栈还未增长到 maxSize ，就将 x 添加到栈顶。
+
+int pop()：弹出栈顶元素，并返回栈顶的值，或栈为空时返回 -1 。
+
+void inc(int k, int val)：栈底的 k 个元素的值都增加 val 。如果栈中元素总数小于 k ，则栈中的所有元素都增加 val 。
+
+```txt
+示例：
+输入：
+["CustomStack","push","push","pop","push","push","push","increment","increment","pop","pop","pop","pop"]
+[[3],[1],[2],[],[2],[3],[4],[5,100],[2,100],[],[],[],[]]
+输出：
+[null,null,null,2,null,null,null,null,null,103,202,201,-1]
+解释：
+CustomStack customStack = new CustomStack(3); // 栈是空的 []
+customStack.push(1);                          // 栈变为 [1]
+customStack.push(2);                          // 栈变为 [1, 2]
+customStack.pop();                            // 返回 2 --> 返回栈顶值 2，栈变为 [1]
+customStack.push(2);                          // 栈变为 [1, 2]
+customStack.push(3);                          // 栈变为 [1, 2, 3]
+customStack.push(4);                          // 栈仍然是 [1, 2, 3]，不能添加其他元素使栈大小变为 4
+customStack.increment(5, 100);                // 栈变为 [101, 102, 103]
+customStack.increment(2, 100);                // 栈变为 [201, 202, 103]
+customStack.pop();                            // 返回 103 --> 返回栈顶值 103，栈变为 [201, 202]
+customStack.pop();                            // 返回 202 --> 返回栈顶值 202，栈变为 [201]
+customStack.pop();                            // 返回 201 --> 返回栈顶值 201，栈变为 []
+customStack.pop();                            // 返回 -1 --> 栈为空，返回 -1
+
+提示：
+
+1 <= maxSize <= 1000
+1 <= x <= 1000
+1 <= k <= 1000
+0 <= val <= 100
+每种方法 increment，push 以及 pop 分别最多调用 1000 次
+```
+### 思路
+
+使用数组模拟
+
+1. push: 当数组长度 >= maxSize 时不push否则添加
+2. pop: 只需要关心当前数组长度即可
+3. increment: 只需要关心当前数组长度和k的关系
+
+### 代码
+
+```js
+var CustomStack = function(maxSize) {
+    this.stack = []
+    this.maxSize = maxSize || 0
+};
+
+CustomStack.prototype.push = function(x) {
+    if (this.stack.length >= this.maxSize) return false
+    this.stack.push(x)
+};
+
+CustomStack.prototype.pop = function() {
+    return this.stack.length
+        && this.stack.pop()
+        || -1
+};
+
+CustomStack.prototype.increment = function(k, val) {
+    const length = Math.min(k, this.stack.length)
+    for (let i = 0; i < length; i++) this.stack[i] += val
+}
+```
+
+### 复杂度分析
+
+时间复杂度: [push, pop] 为O(1) increment 为 O(n)
+
+空间复杂度: O(n)
+
+## 用栈实现队列
+
+[LeetCode 232. 用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/)
+
+
+:::info
+请你仅使用两个栈实现先入先出队列。队列应当支持一般队列支持的所有操作（push、pop、peek、empty）：
+
+实现 MyQueue 类：
+
+void push(int x) 将元素 x 推到队列的末尾
+
+int pop() 从队列的开头移除并返回元素
+
+int peek() 返回队列开头的元素
+
+boolean empty() 如果队列为空，返回 true ；否则，返回 false
+
+**说明**
+
+你只能使用标准的栈操作 —— 也就是只有 push to top, peek/pop from top, size, 和 is empty 操作是合法的。
+你所使用的语言也许不支持栈。你可以使用 list 或者 deque（双端队列）来模拟一个栈，只要是标准的栈操作即可。
+
+**进阶**
+
+你能否实现每个操作均摊时间复杂度为 O(1) 的队列？换句话说，执行 n 个操作的总时间复杂度为 O(n) ，即使其中一个操作可能花费较长时间。
+
+:::
+
+### 思路
+
+使用两个栈，`in` 和 `out`
+
+1. `in` 用来输入，push 或者判空
+2. `out` 用来输出，只有当 out 为空的时候，才需要转置 in 栈，因为 out 里存的一直都是队列的头部
+
+### 代码
+
+```js
+var MyQueue = function() {
+  this.in = []
+  this.out = []
+};
+
+MyQueue.prototype.push = function(x) {
+  this.in.push(x)
+};
+
+MyQueue.prototype.pop = function() {
+  if (this.out.length) return this.out.pop()
+  else this.transpose()
+
+  return this.out.pop()
+};
+
+MyQueue.prototype.transpose = function() {
+  while (this.in.length) this.out.push(this.in.pop())
+}
+
+MyQueue.prototype.peek = function() {
+  if (this.out.length) return this.out[this.out.length - 1]
+  else this.transpose()
+
+  return this.out[this.out.length - 1]
+};
+
+MyQueue.prototype.empty = function() {
+  if (this.in.length | this.out.length) return false
+  else return true
+};
+```
+
+### 复杂度分析
+
+- 时间复杂度: O(1)
+- 空间复杂度: O(n)
+
+## 最多能完成排序的块 II
+
+[LeetCode 768. 最多能完成排序的块 II](https://leetcode-cn.com/problems/max-chunks-to-make-sorted-ii/)
+
+
+:::info
+这个问题和“最多能完成排序的块”相似，但给定数组中的元素可以重复，输入数组最大长度为2000，其中的元素最大为10**8。
+
+arr是一个可能包含重复元素的整数数组，我们将这个数组分割成几个“块”，并将这些块分别进行排序。之后再连接起来，使得连接的结果和按升序排序后的原数组相同。
+
+我们最多能将数组分成多少块？
+:::
+
+```txt
+
+示例 1:
+输入: arr = [5,4,3,2,1]
+输出: 1
+解释:
+将数组分成2块或者更多块，都无法得到所需的结果。
+例如，分成 [5, 4], [3, 2, 1] 的结果是 [4, 5, 1, 2, 3]，这不是有序的数组。
+
+示例 2:
+输入: arr = [2,1,3,4,4]
+输出: 4
+解释:
+我们可以把它分成两块，例如 [2, 1], [3, 4, 4]。
+然而，分成 [2, 1], [3], [4], [4] 可以得到最多的块数。
+
+注意:
+arr的长度在[1, 2000]之间。
+arr[i]的大小在[0, 10**8]之间。
+```
+
+### 思路
+
+单调栈
+
+1. 栈顶记录最大值
+2. 遍历每个元素
+    1. 如果当前元素大于等于栈顶元素，入栈
+    2. 如果小于当前栈顶元素，循环出栈，直到当前元素大于等于栈顶元素
+    3. 重新更新 max
+
+### 代码
+
+```js
+var maxChunksToSorted = function (arr) {
+  const stack = []
+  const peek = array => array.length >= 1 ? array[array.length - 1] : 0
+
+  for (const n of arr) {
+    const max = peek(stack)
+
+    if (stack.length && n < max) {
+      // 循环出栈
+      while (stack.length && n < peek(stack)) stack.pop()
+
+      // 更新 max
+      stack.push(max)
+    } else stack.push(n)
+  }
+  // 返回高度
+  return stack.length
+};
+```
+
+### 复杂度分析
+
+时间复杂度: O(n)
+
+空间复杂度: O(n)
