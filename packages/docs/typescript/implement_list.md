@@ -285,3 +285,172 @@ getPromise().then((res) => {
 });
 ```
 
+### 看看完整版手写 promise
+
+```js
+
+const PROMISE_STATE = {
+    PENDING: 'pending',
+    FULFILLED: 'fulfilled',
+    REJECTED: 'rejected'
+}
+
+class NativePromise {
+    constructor(executor) {
+        // 创建时
+        this.state = undefined;
+        this.value = undefined;
+        this.reason = undefined;
+
+        // 订阅执行器的任务
+        this.onFulfilledCallbacks = [];
+        this.onRejectedCallbacks = [];
+        // 初始化
+        this.initialized(executor);
+    }
+
+    initialized(executor) {
+        this.state = PROMISE_STATE.PENDING
+        const that = this
+
+        const resolve = function resolve(value) {
+            setTimeout(() => {
+                if (that.state === PROMISE_STATE.PENDING) {
+                    that.state = PROMISE_STATE.FULFILLED
+                    that.value = value
+
+                    that.onFulfilledCallbacks.forEach((cb) => {
+                        cb(that.value)
+                    });
+                }
+            })
+
+        }
+
+        const reject = function reject(reason) {
+            setTimeout(() => {
+                if (that.state === PROMISE_STATE.PENDING) {
+                    that.state = PROMISE_STATE.REJECTED
+                    that.reason = reason
+                    that.onRejectedCallbacks.forEach((cb) => cb(that.reason));
+                }
+            })
+        }
+
+        try {
+            executor(resolve, reject)
+        } catch (err) {
+            reject(err)
+        }
+    }
+
+    then(onFulfilled, onRejected) {
+        console.trace()
+        const that = this;
+        if (typeof onFulfilled !== 'function') {
+            onFulfilled = function onFulfilled(value) { return value }
+        }
+
+        if (typeof onRejected !== 'function') {
+            onRejected = function onRejected(reason) { throw reason }
+        }
+
+        if (this.state === PROMISE_STATE.PENDING) {
+            const pendingPromise = new NativePromise((resolve, reject) => {
+                that.onFulfilledCallbacks.push((value) => {
+                    try {
+                        console.log('Fulfilled', onFulfilled)
+                        let x = onFulfilled(value);
+                        resolvePromise(pendingPromise, x, resolve, reject);
+                    } catch (e) {
+                        reject(e);
+                    }
+                });
+                that.onRejectedCallbacks.push((reason) => {
+                    try {
+                        let x = onRejected(reason);
+                        resolvePromise(pendingPromise, x, resolve, reject);
+                    } catch (e) {
+                        reject(e);
+                    }
+                });
+            })
+
+            return pendingPromise
+        }
+
+        if (this.state === PROMISE_STATE.FULFILLED) {
+            const fulfilledPromise = new NativePromise((resolve, reject) => {
+                setTimeout(() => {
+                    try {
+                        let x = onFulfilled(that.value)
+                        resolvePromise(fulfilledPromise, x, resolve, reject);
+                    } catch (err) {
+                        reject(err)
+                    }
+                })
+            })
+            return fulfilledPromise
+        }
+
+        if (this.state === PROMISE_STATE.REJECTED) {
+            const rejectPromise = new NativePromise((resolve, reject) => {
+                setTimeout(() => {
+                    try {
+                        let x = onFulfilled(that.reason)
+                        resolvePromise(rejectPromise, x, resolve, reject);
+                    } catch (err) {
+                        reject(err)
+                    }
+                })
+            })
+            return rejectPromise
+        }
+
+    }
+
+}
+
+function resolvePromise(promise, x, resolve, reject) {
+    if (promise === x) throw reject(new TypeError("循环引用"));
+
+    if ((typeof x === 'object' && x !== null) || typeof x === 'function') {
+        let called;
+        try {
+            let then = x.then;
+            if (typeof then === 'function') {
+                then.call(
+                    x,
+                    (y) => {
+                        if (called) return;
+                        called = true;
+                        resolvePromise(promise, y, resolve, reject);
+                    },
+                    (r) => {
+                        if (called) return;
+                        called = true;
+                        reject(r);
+                    }
+                );
+            } else {
+                resolve(x)
+            }
+        } catch (err) {
+            if (called) return;
+            called = true;
+            reject(e);
+        }
+    } else {
+        resolve(x)
+    }
+}
+
+window.$p1 = new NativePromise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('成功');
+    }, 1000);
+
+}).then(v => console.log(v), e => console.log(e)).then( v2 => console.log(v2))
+
+
+```
