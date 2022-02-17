@@ -346,6 +346,32 @@ x.a = x = 1
 r.a = 1
 ```
 
+## 关于 new 的问题
+
+问题
+
+```js
+function Foo() {
+
+}
+Foo.getName = function() { return 1 }
+Foo.prototype.getName = function() { return 2 }
+
+new Foo.getName(); // ?
+new new Foo().getName(); // ?
+
+```
+
+解释
+
+```js
+// 1,
+// 因为 js 中 点的运算符会很高（17），而 new 在函数没有参数是，优先级是(17), 如果存在参数会变成(18), 从左自右执行
+// 所以会变成 new (Foo.getName())
+// 2
+// 所以这一步可以变成 new (new (Foo().getName())) // 2
+```
+
 
 ## 参考
 

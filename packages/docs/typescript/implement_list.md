@@ -16,11 +16,11 @@ title: JS | 手写系列
 var _reduce = function(callback, accumulator) {
     const self = this
     let idx = null
-    if(!accumulator) {
+    if (!accumulator) {
         accumulator = self[0]
         idx = 1
     }
-    for(let i = idx; i < self.length; i ++) {
+    for (let i = idx; i < self.length; i ++) {
         accumulator = callback(accumulator, self[i], i, self)  
     }
     return accumulator
@@ -43,9 +43,9 @@ a.reduce((acc, cur) => {
 ```js
 var _new = function(...args) {
     var o = Object.create({})
-    var _constructor = Array.prototype.shift.call(...args)
-    o.__proto__ = _constructor.prototype
-    _constructor.apply(o, args)
+    var ctor = Array.prototype.shift.apply(args)
+    o.__proto__ = ctor.prototype
+    ctor.apply(o, args)
     return o
 }
 
