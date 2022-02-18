@@ -148,6 +148,10 @@ if ((t = performance.memory)) {
 }
 ```
 
+### Google 官方提供的优化学习方案
+
+google 官方提供 [web.dev](https://web.dev/learn/)
+
 ### 通过第三方库获取
 
 NPM: [web-vitals](https://www.npmjs.com/package/web-vitals);
