@@ -151,6 +151,34 @@ var preorderTraversal = function(root) {
   }
   return ret
 };
+
+// 双色标记法
+var preorderTraversal = function(root) {
+  const COLOR = {
+    WHITE: 0, // 没有访问过
+    GRAY: 1 // 已经访问过
+  }
+
+  const ret = []
+  const stack = [[COLOR.WHITE, root]]
+
+  while(stack.length) {
+    const [color, node] = stack.pop();
+
+    if (!node) continue;
+
+    if (color === COLOR.WHITE) {
+      stack.push([COLOR.WHITE, node.right])
+      stack.push([COLOR.WHITE, node.left])
+      // 改动这里的推入顺序
+      stack.push([COLOR.GRAY, node])
+    } else {
+      ret.push(node.val)
+    }
+  }
+
+  return ret
+};
 ```
 
 ## 二叉树的中序遍历
@@ -241,6 +269,34 @@ var inorderTraversal = function(root) {
     ret.push(current.val)
     root = current.right
   }
+  return ret
+};
+
+// 双色标记法
+var inorderTraversal = function(root) {
+  const COLOR = {
+    WHITE: 0, // 没有访问过
+    GRAY: 1 // 已经访问过
+  }
+
+  const ret = []
+  const stack = [[COLOR.WHITE, root]]
+
+  while(stack.length) {
+    const [color, node] = stack.pop();
+
+    if (!node) continue;
+
+    if (color === COLOR.WHITE) {
+      stack.push([COLOR.WHITE, node.right])
+      // 改动这里的推入顺序
+      stack.push([COLOR.GRAY, node])
+      stack.push([COLOR.WHITE, node.left])
+    } else {
+      ret.push(node.val)
+    }
+  }
+
   return ret
 };
 ```
@@ -340,6 +396,33 @@ var postorderTraversal = function(root) {
   }
   return ret
 }
+// 双色标记法
+var postorderTraversal = function(root) {
+  const COLOR = {
+    WHITE: 0, // 没有访问过
+    GRAY: 1 // 已经访问过
+  }
+
+  const ret = []
+  const stack = [[COLOR.WHITE, root]]
+
+  while(stack.length) {
+    const [color, node] = stack.pop();
+
+    if (!node) continue;
+
+    if (color === COLOR.WHITE) {
+      // 改动这里的推入顺序
+      stack.push([COLOR.GRAY, node])
+      stack.push([COLOR.WHITE, node.right])
+      stack.push([COLOR.WHITE, node.left])
+    } else {
+      ret.push(node.val)
+    }
+  }
+
+  return ret
+};
 ```
 
 
