@@ -12,6 +12,7 @@ mac 端的管理工具
 
 如果速度过慢请参考 [brew 安装教程](https://blog.csdn.net/WizardtoH/article/details/104744008)
 
+最新的地址参考这个 [brew 国内镜像源](https://www.jianshu.com/p/fdf7e316f096)
 ## 常用命令
 
 ```bash

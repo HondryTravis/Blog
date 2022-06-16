@@ -63,3 +63,7 @@ brew install mysql
 ```
 
 用下面的命令来检查表的创建是否成功:  `show tables`;
+
+## 8.x 版本
+
+[mysql 修改密码流程](https://blog.51cto.com/u_13567403/5057428)
